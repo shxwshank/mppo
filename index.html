@@ -6,17 +6,17 @@
 <title>MPPO Arcade</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
 <style>
 :root{
   --bg:#EEF1EC; --surface:#FFFFFF; --surface-2:#F6F8F4; --ink:#16202B; --muted:#5B6672; --line:#D4DAD2;
   --accent:#0E6E66; --accent-ink:#FFFFFF; --accent-soft:#D8ECE8; --xp:#C9851C; --xp-soft:#F6E7C8;
   --good:#1F8A4C; --good-soft:#DDF1E4; --bad:#C2410C; --bad-soft:#FBE3D6;
-  --sky-top:#CFE3DE; --sky-bot:#EEF1EC; --city:#BFD3CD; --city-2:#A9C2BB; --ground:#2E4743; --ground-top:#0E6E66; --plat:#5E7D77;
-  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
-  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  --radius:14px;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --lore-title:"Cinzel",Georgia,serif; --lore:"EB Garamond",Georgia,serif;
+  --radius:14px; --wacc:#8ff0dc;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -24,7 +24,6 @@
     --bg:#0F1519; --surface:#172027; --surface-2:#1C272F; --ink:#E6ECEA; --muted:#93A1A6; --line:#2A3840;
     --accent:#3CC2B2; --accent-ink:#06201D; --accent-soft:#16332F; --xp:#F0B44A; --xp-soft:#3A2E17;
     --good:#4ADE80; --good-soft:#15301F; --bad:#F47B55; --bad-soft:#3A1E14;
-    --sky-top:#0B1417; --sky-bot:#16242A; --city:#1C2E34; --city-2:#23393F; --ground:#22332F; --ground-top:#3CC2B2; --plat:#3C5550;
   }
 }
 :root[data-theme="dark"]{
@@ -32,47 +31,52 @@
   --bg:#0F1519; --surface:#172027; --surface-2:#1C272F; --ink:#E6ECEA; --muted:#93A1A6; --line:#2A3840;
   --accent:#3CC2B2; --accent-ink:#06201D; --accent-soft:#16332F; --xp:#F0B44A; --xp-soft:#3A2E17;
   --good:#4ADE80; --good-soft:#15301F; --bad:#F47B55; --bad-soft:#3A1E14;
-  --sky-top:#0B1417; --sky-bot:#16242A; --city:#1C2E34; --city-2:#23393F; --ground:#22332F; --ground-top:#3CC2B2; --plat:#3C5550;
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;margin:0}
-.wrap{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:16px;padding-block:0 48px}
 h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.01em}
 button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
-
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-.bar-in{max-width:980px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.bar-in{max-width:1000px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .brand{font-family:var(--display);font-weight:800;font-size:20px;background:none;border:0;padding:0}
 .brand span{color:var(--accent)}
 .rank{display:flex;align-items:center;gap:10px;margin-left:auto;min-width:0}
 .rank-name{font-weight:700;font-size:14px;white-space:nowrap}
 .xpbar{width:120px;height:8px;border-radius:99px;background:var(--xp-soft);overflow:hidden}
 .xpbar i{display:block;height:100%;background:var(--xp);width:0;transition:width .4s}
-@media (max-width:480px){.xpbar{width:70px}}
+@media (max-width:480px){.xpbar{width:64px}}
 
-.hero{padding-block:32px 8px;display:grid;gap:10px}
-.hero h1{font-size:clamp(32px,6.5vw,54px);line-height:1.03;font-weight:800}
+.hero{padding-block:30px 6px;display:grid;gap:10px}
+.hero h1{font-size:clamp(32px,6.4vw,54px);line-height:1.03;font-weight:800}
 .hero h1 em{font-style:normal;color:var(--accent)}
-.hero p{max-width:62ch;color:var(--muted);margin:0}
-.howto{display:flex;flex-wrap:wrap;gap:8px}
-.howto span{font-family:var(--mono);font-size:13px;padding:4px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--line)}
-
-.map{margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-@media (max-width:760px){.map{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:460px){.map{grid-template-columns:1fr}}
-.world{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;display:grid;gap:6px;align-content:start;transition:transform .15s,border-color .15s}
+.hero p{max-width:64ch;color:var(--muted);margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-family:var(--mono);font-size:12.5px;padding:4px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--line)}
+.tabs{display:inline-flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;margin-top:18px;background:var(--surface)}
+.tabs button{border:0;background:none;padding:9px 18px;font-weight:700}
+.tabs button.on{background:var(--ink);color:var(--bg)}
+.map{margin-top:16px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:780px){.map{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.map{grid-template-columns:1fr}}
+.world{position:relative;text-align:left;border:1px solid var(--line);border-radius:var(--radius);padding:16px;display:grid;gap:6px;align-content:start;background:var(--surface);transition:transform .15s,border-color .15s;overflow:hidden}
 .world:hover{transform:translateY(-2px);border-color:var(--accent)}
 .world .num{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent)}
 .world h3{font-size:20px;font-weight:700}
 .world p{margin:0;color:var(--muted);font-size:14px}
+.world.story{background:linear-gradient(160deg,var(--c1),var(--c2));border-color:transparent;color:#EDEAE2}
+.world.story .num{color:var(--c3)}
+.world.story h3{font-family:var(--lore-title);font-weight:700;letter-spacing:.02em;font-size:19px}
+.world.story p{color:#C9C6BD;font-family:var(--lore);font-size:16px}
+.world.story .done{font-family:var(--mono);font-size:12px;color:var(--c3)}
 .stars{display:flex;gap:4px;margin-top:4px}
 .stars i{width:16px;height:16px;display:block;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);background:var(--line)}
 .stars i.on{background:var(--xp)}
 .world.boss{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.world.boss p,.world.boss .num{color:var(--accent-ink);opacity:.9}
+.world.boss p,.world.boss .num{color:var(--accent-ink);opacity:.92}
 .section{margin-top:30px;display:grid;gap:12px}
 .section-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
 .section-head h2{font-size:22px}
@@ -83,34 +87,57 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .m-pct{font-family:var(--mono);font-size:13px;color:var(--muted)}
 .m-track{grid-column:1/-1;height:6px;border-radius:99px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden}
 .m-track i{display:block;height:100%;background:var(--accent)}
+.powers-legend{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+@media (max-width:780px){.powers-legend{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pw{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--surface);display:grid;gap:2px}
+.pw b{font-family:var(--display);font-size:15px}
+.pw span{font-size:13px;color:var(--muted)}
+.pw i{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:700}
 .link{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:13px;padding:0}
 
-.game{padding-block:18px;display:grid;gap:10px}
-.hud{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+/* game */
+.game{padding-block:14px;display:grid;gap:10px}
+.hud{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .hud .spacer{flex:1}
-.pill{font-family:var(--mono);font-size:13px;font-weight:700;padding:4px 10px;border-radius:8px;background:var(--surface);border:1px solid var(--line);white-space:nowrap}
+.pill{font-family:var(--mono);font-size:12.5px;font-weight:700;padding:4px 9px;border-radius:8px;background:var(--surface);border:1px solid var(--line);white-space:nowrap}
 .pill.warn{background:var(--bad-soft);border-color:var(--bad)}
-.hearts{display:flex;gap:5px}
-.hearts i{width:16px;height:15px;display:block;background:var(--bad);clip-path:path("M8 15 L1.5 8.2 C-0.8 5.8 0.2 1.5 3.8 1 C5.8 0.8 7.2 2 8 3.3 C8.8 2 10.2 0.8 12.2 1 C15.8 1.5 16.8 5.8 14.5 8.2 Z")}
+.hearts{display:flex;gap:4px}
+.hearts i{width:14px;height:17px;display:block;background:var(--ink);clip-path:polygon(50% 0,100% 30%,85% 100%,15% 100%,0 30%)}
 .hearts i.lost{background:var(--line)}
+.hearts i.shield{background:var(--accent)}
+.pchips{display:flex;gap:4px}
+.pchips b{font-family:var(--mono);font-size:10.5px;padding:3px 6px;border-radius:6px;border:1px dashed var(--line);color:var(--muted);font-weight:700}
+.pchips b.on{border:1px solid var(--accent);background:var(--accent-soft);color:var(--ink)}
 .btn{border:1.5px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 16px;font-weight:700}
 .btn.go{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .btn:hover{border-color:var(--accent)}
-.stage{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--sky-bot)}
+.stage{position:relative;border-radius:var(--radius);overflow:hidden;background:#05070a;border:1px solid #1d2530}
 canvas{display:block;width:100%;height:auto;touch-action:none}
-.pad{display:none;justify-content:space-between;gap:12px;user-select:none;-webkit-user-select:none}
-.pad .grp{display:flex;gap:10px}
-.pad button{width:64px;height:56px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);font-family:var(--mono);font-weight:700;font-size:18px;touch-action:none}
-.pad button.jump{width:96px;background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-size:15px}
-@media (hover:none),(max-width:760px){.pad{display:flex}}
+.dlg{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:min(760px,calc(100% - 28px));max-height:72%;overflow:auto;background:rgba(6,8,12,.9);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:16px 20px;color:#ECE9E1;cursor:pointer;box-shadow:0 0 0 1px rgba(0,0,0,.4),0 18px 50px rgba(0,0,0,.5)}
+.dlg .dh{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.dlg .dt{font-family:var(--lore-title);font-weight:700;letter-spacing:.08em;font-size:14px;color:var(--wacc);text-transform:uppercase}
+.dlg .ds{font-family:var(--lore);font-style:italic;color:#A9A59B;font-size:15px}
+.dlg p{margin:0;font-family:var(--lore);font-size:clamp(17px,2.2vw,20px);line-height:1.45}
+.dlg p strong{color:var(--wacc);font-weight:500}
+.dlg .df{margin-top:10px;font-family:var(--mono);font-size:11px;color:#8C887F;display:flex;justify-content:space-between;gap:8px}
+.banner{position:absolute;left:50%;top:18px;transform:translateX(-50%);text-align:center;pointer-events:none;background:rgba(6,8,12,.82);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:10px 18px;color:#ECE9E1;max-width:calc(100% - 28px);animation:bin .3s ease-out}
+.banner .bt{font-family:var(--lore-title);font-weight:700;letter-spacing:.1em;font-size:13px;color:var(--wacc);text-transform:uppercase}
+.banner .bs{font-family:var(--lore);font-size:17px}
+@keyframes bin{from{opacity:0;transform:translate(-50%,-8px)}to{opacity:1;transform:translate(-50%,0)}}
+@media (max-width:640px){.dlg{position:static;transform:none;width:auto;max-height:none;border-radius:0 0 12px 12px;border-left:0;border-right:0;border-bottom:0}}
+.pad{display:none;justify-content:space-between;gap:10px;user-select:none;-webkit-user-select:none}
+.pad .grp{display:flex;gap:8px}
+.pad button{min-width:58px;height:56px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);font-family:var(--mono);font-weight:700;font-size:14px;touch-action:none;padding:0 12px}
+.pad button.j{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+@media (hover:none),(max-width:780px){.pad{display:flex}}
 .kbd{font-family:var(--mono);font-size:12px;color:var(--muted)}
 
-.modal{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:16px;background:color-mix(in srgb,var(--bg) 55%,transparent);backdrop-filter:blur(3px)}
-.qbox{width:100%;max-width:660px;max-height:calc(100% - 8px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:grid;gap:14px;box-shadow:0 20px 50px -20px rgba(0,0,0,.35)}
+.modal{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:16px;background:rgba(4,6,9,.55);backdrop-filter:blur(3px)}
+.qbox{width:100%;max-width:680px;max-height:calc(100% - 8px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:grid;gap:14px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5)}
 .q-topic{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .q-text{font-family:var(--display);font-size:clamp(18px,3vw,22px);font-weight:600;line-height:1.32}
 .opts{display:grid;gap:9px}
-.opt{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;text-align:left;background:var(--surface-2);border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;font-size:15.5px;transition:border-color .12s,background .12s}
+.opt{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;text-align:left;background:var(--surface-2);border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;font-size:15.5px}
 .opt:hover:not([disabled]){border-color:var(--accent)}
 .opt .k{font-family:var(--mono);font-size:13px;font-weight:700;width:26px;height:26px;border-radius:6px;display:grid;place-items:center;border:1px solid var(--line);background:var(--surface)}
 .opt[disabled]{cursor:default}
@@ -119,27 +146,31 @@ canvas{display:block;width:100%;height:auto;touch-action:none}
 .explain{border-left:4px solid var(--accent);padding:10px 14px;background:var(--surface-2);border-radius:0 10px 10px 0;font-size:15px}
 .explain b{font-family:var(--display)}
 .explain.good{border-color:var(--good)} .explain.bad{border-color:var(--bad)}
+.stakes{font-size:13px;color:var(--muted)}
 .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 .shake{animation:shake .35s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-@media (prefers-reduced-motion:reduce){.shake{animation:none}.world,.xpbar i{transition:none}}
-
+@media (prefers-reduced-motion:reduce){.shake,.banner{animation:none}.world,.xpbar i{transition:none}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:grid;gap:12px}
 .score-big{font-family:var(--display);font-size:clamp(52px,12vw,88px);font-weight:800;line-height:1}
 .score-big small{font-size:.35em;color:var(--muted);font-weight:600}
 .verdict{font-size:18px;font-weight:700}
+.statrow{display:flex;flex-wrap:wrap;gap:8px}
 .review{display:grid;gap:10px}
 .rv{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--surface-2);display:grid;gap:4px;font-size:15px}
 .rv .mark{font-family:var(--mono);font-weight:700;font-size:12px;color:var(--bad)}
 .rv .qq{font-weight:700}
 .rv .aa{color:var(--muted)}
+.lorecard{background:#0A0D12;color:#E9E6DE;border-radius:var(--radius);padding:22px;display:grid;gap:8px}
+.lorecard .dt{font-family:var(--lore-title);letter-spacing:.1em;color:var(--wacc);font-weight:700;font-size:14px;text-transform:uppercase}
+.lorecard p{margin:0;font-family:var(--lore);font-size:19px;line-height:1.45}
 </style>
 </head>
 <body>
 
 <header class="bar">
   <div class="bar-in">
-    <button class="brand" id="homeBtn" aria-label="Back to world map">MPPO<span>Arcade</span></button>
+    <button class="brand" id="homeBtn" aria-label="Back to the map">MPPO<span>Arcade</span></button>
     <div class="rank">
       <span class="rank-name" id="rankName">Intern</span>
       <div class="xpbar" title="XP to next rank"><i id="xpFill"></i></div>
@@ -151,105 +182,303 @@ canvas{display:block;width:100%;height:auto;touch-action:none}
 <div id="modalRoot"></div>
 
 <script>
-/* ================= WORLDS & QUESTIONS ================= */
+/* =====================================================================
+   CONTENT: five regions, each with five lessons (lore + gate questions)
+   Question format: [scenario, [options; first is correct], explanation]
+   ===================================================================== */
 const WORLDS = [
-  {id:"P", n:"World 1", name:"The Perception Plains", sub:"Attribution, perceptual shortcuts, expectations", gates:8},
-  {id:"D", n:"World 2", name:"Bias Bridges", sub:"Problem types, bounded rationality, the 12 biases, debiasing", gates:8},
-  {id:"T", n:"World 3", name:"Trait Towers", sub:"Big Five, MBTI, Dark Triad, situation strength, testing", gates:8},
-  {id:"E", n:"World 4", name:"Emotion Canyon", sub:"Emotions vs moods, EI, emotional labour, regulation", gates:8},
-  {id:"C", n:"World 5", name:"Listening Lane", sub:"Rogers & Roethlisberger, Lewin, context, why managers fail", gates:8},
+{ id:"P", num:"I", name:"The Mirrored Marsh", topic:"Perception & attribution",
+  pal:{top:"#06141a",bot:"#0f2c2c",far:"#0b2225",near:"#0f3230",tile:"#070f11",edge:"#4f9c90",acc:"#8ff0dc",fog:"143,240,220"},
+  card:["#0d2a2b","#07161a","#8ff0dc"],
+  enemies:["Halo","Horn","Stereotype","Contrast","Blame"],
+  intro:[
+    "So. Another lantern-bearer. The halls of Organa went dark when its people stopped seeing one another truly.",
+    "Five beacons remain unlit. Each lies beyond sealed gates, and the gates here yield only to understanding, never to force.",
+    "Read the stones along the way. Answer a gate at its first asking and an old art will wake in you: a second jump, a dash, and more. Hesitate, and the path stays hard.",
+    "This first marsh mirrors the one who looks into it. What you see says as much about you as about the world. Go."],
+  outro:"The first beacon burns. Remember: perception is neither right nor wrong. It is simply the reality each of us acts upon.",
+  lessons:[
+   {title:"The Clouded Eye", lore:[
+     "<strong>Perception</strong> is how we organise and interpret what our senses bring in, to give meaning to the world. We do not see things as they are. We see them as we are.",
+     "Three forces shape what is seen. <strong>The perceiver</strong>: attitudes, motives, interests, past experience, expectations.",
+     "<strong>The target</strong>: novelty, motion, sound, size, background, proximity, similarity. The loud, the near and the new draw the eye.",
+     "<strong>The situation</strong>: time, work setting, social setting. The same act reads differently at a party and in a boardroom."],
+    qs:[
+     ["Vikram, newly promoted over his former peer Rohan, reads Rohan's Slack jokes as a challenge to his authority. Which perception factors are doing the most work here?",["Factors in the perceiver: Vikram's expectations and new-role insecurity","Factors in the target: novelty and motion","Factors in the situation: time of day","None: the perception is objective"],"Vikram's changed role colours how he reads the same behaviour, so it's the perceiver factors."],
+     ["In town halls, the people who speak loudest and sit closest to the CEO are the ones noticed and remembered. Which perception factors explain this?",["Target factors: sound and proximity","Perceiver factors: motives","Situation factors: time","Attribution: high consensus"],"Traits of the target (loudness, closeness) make them stand out."],
+     ["Two managers watch the same pitch. The one who was let down by this presenter last year rates it far lower. The main driver is…",["The perceiver's past experience","The target's novelty","The social setting","High distinctiveness"],"Past experience is a perceiver factor. The pitch itself is identical."]]},
+   {title:"The Three Questions", lore:[
+     "When we see someone act, we ask: was it them (<strong>internal</strong>) or their circumstances (<strong>external</strong>)? Three cues decide.",
+     "<strong>Distinctiveness</strong>: do they act this way only in this situation? High means external. Low, where they do it everywhere, means internal.",
+     "<strong>Consensus</strong>: do others act the same way? High means external. Low, where only they do it, means internal.",
+     "<strong>Consistency</strong>: do they act this way over time? Here the rule flips. High means <strong>internal</strong>. Low, a one-off, means external.",
+     "Low distinctiveness, low consensus and high consistency point to the person. The mirror pattern points to the situation. If a cue is unknown, find it before you judge."],
+    qs:[
+     ["Riya is late to every meeting she attends, nobody else on the team is late, and she has been late all quarter. What will her manager most likely conclude?",["The cause is internal: something about Riya","The cause is external: the meeting schedule","It's a mix; no conclusion is possible","The team culture is at fault"],"Low distinctiveness + low consensus + high consistency = internal."],
+     ["Kabir's code this sprint had many bugs. His past work is clean, the whole team's code broke after a forced framework switch, and it has never happened to him before. Attribution?",["External: the situation caused it","Internal: Kabir got careless","Internal, because the bugs are in his code","Can't tell without his personality profile"],"High distinctiveness + high consensus + low consistency all point outward."],
+     ["A manager only knows that Tara has missed her last five deadlines. Before blaming Tara, which question adds the most information?",["Are others on the team missing the same deadlines?","Has Tara missed deadlines repeatedly?","Does Tara seem stressed?","Is Tara a high performer on paper?"],"Consistency is already known. Consensus is the missing cue: if everyone misses, look at the situation."],
+     ["All branch staff get more complaints after a buggy app launch, and Sneha's ratings fall too. Her manager puts her on a performance plan. What went wrong?",["He ignored high consensus, which points to an external cause","He correctly used consistency","He applied the halo effect","He used the Pygmalion effect"],"When everyone shows the same drop, the app is the likely cause."]]},
+   {title:"The Easy Blame", lore:[
+     "The mind takes shortcuts when judging. The <strong>fundamental attribution error</strong>: when judging others, we underrate the situation and overrate their character.",
+     "<strong>Self-serving bias</strong>: our own successes we credit to ourselves; our failures we blame on circumstance.",
+     "Together they set a trap. The same late report is 'IT trouble' when it's mine and 'she's disorganised' when it's hers."],
+    qs:[
+     ["When his own report is late, Arun blames an IT outage. When his analyst's report is late the same week, he calls her disorganised. His judgement of the analyst shows…",["Fundamental attribution error","Contrast effect","Halo effect","Pygmalion effect"],"He overweights internal causes for her and ignores the same outage."],
+     ["After a hit launch, the product head credits his own vision. After a flop, he blames the market. This is…",["Self-serving bias","Fundamental attribution error","Horn effect","Groupthink"],"Successes are credited internally; failures externally."],
+     ["A new hire struggles in her first month. Her manager decides she 'lacks ability', never noticing she got no onboarding or system access. This is…",["Fundamental attribution error","Self-serving bias","Stereotyping","Contrast effect"],"Situational causes are ignored when judging someone else."]]},
+   {title:"Borrowed Light", lore:[
+     "<strong>Contrast effect</strong>: we judge a person against whoever we saw just before, or the team we came from, not against a fixed standard.",
+     "<strong>Halo effect</strong>: one shining trait lights up every judgement. <strong>Horn effect</strong>: one flaw darkens them all.",
+     "<strong>Stereotyping</strong>: judging a person by what we believe about their group.",
+     "The remedies: score people independently against fixed criteria before discussing them, and blind resumes to hide irrelevant cues."],
+    qs:[
+     ["In appraisals, a solid performer gets 'meets expectations' mainly because he sits next to the team's star. Which fix targets this bias best?",["Rate each person against fixed criteria independently before any group calibration","Let the star help rate peers","Rank everyone against each other","Rate in joining order"],"Contrast effect. Independent scoring against a fixed standard removes the comparison."],
+     ["Impressed by a candidate's IIM degree and polished English, an interviewer rates her highly on analytical skills that were never tested. This is…",["Halo effect","Stereotyping","Contrast effect","Self-serving bias"],"One positive feature spills into unrelated judgements."],
+     ["'No point training the Gen Z hires; they'll leave in a year anyway.' This reasoning is…",["Stereotyping","Contrast effect","Self-serving bias","Halo effect"],"It's a judgement based on beliefs about a group."],
+     ["After one missed deadline, a manager starts calling an employee unreliable, unpolished and 'not leadership material'. This is…",["The horn effect","The halo effect","The Golem effect","Consensus bias"],"One negative trait colours everything."],
+     ["A team lead who spent years in a star unit joins an average one and rates everyone lower than her peers do. The main risk in her ratings is…",["A contrast effect from her old team","Self-serving bias","Stereotyping","High consistency"],"Her old team is her reference point."]]},
+   {title:"The Spoken Future", lore:[
+     "Expectations become reality. The <strong>Pygmalion effect</strong>: high expectations, backed by support, lift performance. The <strong>Golem effect</strong>: low expectations drag it down, then seem to prove themselves right.",
+     "Guard against it: pair expectations with coaching and resources, and ask whether your expectations rest on evidence.",
+     "As a leader, check how you are seen with <strong>360° feedback</strong>, and share the reasons behind your decisions.",
+     "When perceptions clash, as Vikram's and Rohan's did, begin by <strong>listening to understand, not to evaluate</strong>. Ask how they see it, and say it back before you judge."],
+    qs:[
+     ["A manager decides a new hire is 'weak', gives him only routine tasks and little feedback. Six months later he is underperforming, and the manager feels proven right. This is…",["The Golem effect","The Pygmalion effect","Fundamental attribution error","The horn effect only"],"The low expectations fulfilled themselves."],
+     ["A leader tells a new analyst, 'I picked you because I think you can lead this', and backs it with weekly coaching. She outperforms. This is…",["The Pygmalion effect","The halo effect","Self-serving bias","The contrast effect"],"High expectations plus support lifted her performance."],
+     ["Vikram wants to fix things with Rohan. Which first move best reflects this region's teaching?",["Ask how Rohan sees the situation and restate it before sharing his own concerns","Issue a formal warning","Give Rohan fewer responsibilities","Discuss Rohan's attitude with the team"],"Listen with understanding before evaluating. Keep it impersonal and involve Rohan."]]}
+  ]},
+{ id:"D", num:"II", name:"Hall of Crooked Scales", topic:"Decisions & biases",
+  pal:{top:"#120c06",bot:"#2b1e0e",far:"#1f160b",near:"#2c2112",tile:"#0d0905",edge:"#a8834a",acc:"#ffc566",fog:"255,197,102"},
+  card:["#2d1f0e","#120c06","#ffc566"],
+  enemies:["Anchor","Availability","Groupthink","Sunk Cost","Overconfidence","Confirmation","Loss Aversion"],
+  intro:[
+    "The Hall of Crooked Scales. The old council weighed every choice here, and every scale was bent.",
+    "They believed they were rational. They were not. Nobody is. The skill is knowing how the scales bend.",
+    "Tread carefully. The crawlers here are named for the biases that brought the council down."],
+  outro:"The second beacon burns. No decision is free of bias. Good leaders check the team's biases, and their own, before the big call.",
+  lessons:[
+   {title:"Three Kinds of Problem", lore:[
+     "<strong>Simple</strong> problems, like a recipe, are repeatable: solve them with routine. <strong>Complicated</strong> problems, like a moon rocket, need experts: break them into parts and reassemble.",
+     "<strong>Complex</strong> problems, like raising a child, are uncertain and unique. They need partnerships, shared principles, real-time feedback and an eye for non-linear effects.",
+     "The rational model assumes full information, every option known, no bias and a wish to optimise. Real minds have <strong>bounded rationality</strong>, so we <strong>satisfice</strong>: we take the first option that is good enough.",
+     "<strong>Intuition</strong> is judgement without deliberate analysis, 'unconscious intelligence', and it is built from experience. Trust it most in familiar, repeated situations and least in novel ones. <strong>System 1</strong> is fast and automatic; <strong>System 2</strong> is slow and deliberate."],
+    qs:[
+     ["Your firm is entering a country where regulation keeps shifting and consumer behaviour is unknown. Which approach fits the problem type?",["Run small pilots with local partners and adjust using real-time feedback","Hire one top expert to design the whole plan upfront","Copy the home-market playbook","Break it into parts and solve each in isolation"],"It's a complex problem: partnerships, principles, feedback loops."],
+     ["Building a data centre is hard but well understood: it needs several expert teams to coordinate, and the outcome is predictable. The problem is…",["Complicated: decompose it and bring in experts","Simple: follow a checklist","Complex: experiment and iterate","Chaotic: act first"],"It's the moon-rocket category."],
+     ["A hiring manager must fill a role by Friday, so she takes the first candidate who clears the minimum bar. This is…",["Satisficing under bounded rationality","The endowment effect","Anchoring","Groupthink"],"Limits of time and information lead to 'good enough'."],
+     ["In which situation is a manager's intuition most defensible?",["A seasoned plant manager diagnosing a machine fault she has seen hundreds of times","A first-time founder valuing a startup","Any high-stakes, one-off decision","When the data contradicts the gut"],"Intuition comes from repeated experience of familiar patterns."]]},
+   {title:"Echoes and Anchors", lore:[
+     "<strong>Anchoring</strong>: the first number heard pulls every later estimate toward it. Ask where the number came from.",
+     "<strong>Availability</strong>: what comes easily to mind, because it is recent or vivid, feels more common and more important than it is.",
+     "<strong>Saliency</strong>: one memorable past success becomes the analogy for everything, even when the cases differ."],
+    qs:[
+     ["A candidate opens at ₹40L. The band is ₹25–30L, yet the final offer lands at ₹34L. The recruiter was most affected by…",["Anchoring","Availability","Loss aversion","The halo effect"],"The first number pulled the outcome toward it."],
+     ["After one fraud case hits the headlines, the audit team moves almost all its effort to that fraud type and neglects larger routine risks. Bias?",["Availability bias","Endowment effect","Overconfidence","Self-interest"],"The vivid, recent event is overweighted."],
+     ["'This turnaround is exactly like how we fixed Unit X in 2019,' says the team, though Unit X was a very different business. Bias?",["Saliency bias","Endowment effect","Affect heuristic","Groupthink"],"A memorable success is used as a false analogy."]]},
+   {title:"The Council's Blind Spots", lore:[
+     "<strong>Confirmation bias</strong>: seeking only evidence that agrees with us. Remedy: look for what would prove you wrong.",
+     "<strong>Groupthink</strong>: the wish to agree silences dissent. Remedy: collect views independently first, and appoint a devil's advocate.",
+     "<strong>Self-interest</strong>: does the person recommending this gain from it? This is the reviewer's first question.",
+     "<strong>Affect heuristic</strong>: a team in love with its idea stops seeing the costs. <strong>Halo effect</strong>: success in one domain is assumed to carry over to another."],
+    qs:[
+     ["The CEO tells the strategy team: 'Find me data proving the market is growing.' The biggest risk in their report is…",["Confirmation bias","Disaster neglect","Loss aversion","Contrast effect"],"The brief asks only for confirming evidence."],
+     ["Everyone agrees with the MD in meetings, and doubts surface only in the corridor afterwards. Which intervention helps most?",["Collect written views independently before discussion and appoint a devil's advocate","Let the MD speak first","Shorten meetings","Invite only supporters"],"This is groupthink. Independent input brings the hidden doubts out."],
+     ["A regional head recommends an expansion that would also double the size of his own division. As the reviewer, the first bias to check is…",["Self-interest bias","Availability","Anchoring","Loss aversion"],"Ask whether there's any reason to suspect motivated errors."],
+     ["The product team is visibly in love with its vision and brushes past the cost risks. You'd flag…",["The affect heuristic","Anchoring","Availability","Loss aversion"],"Liking the option is driving the judgement."],
+     ["'She fixed our supply chain, so she'll obviously turn around marketing too.' As a reviewer you'd flag the…",["Halo effect","Saliency bias","Anchoring","Disaster neglect"],"Success in one domain is assumed to transfer."]]},
+   {title:"The Future Unseen", lore:[
+     "<strong>Sunk cost and the endowment effect</strong>: overvaluing what we already own or have spent. Past money should not drive a forward-looking choice.",
+     "<strong>Loss aversion</strong>: a loss hurts more than an equal gain pleases, so teams reject good bets. Ask: are we being too cautious?",
+     "<strong>Overconfidence</strong> produces rosy base cases. Remedy: the <strong>outside view</strong>. How did similar projects actually go?",
+     "<strong>Disaster neglect</strong> leaves the worst case not bad enough. Remedy: the <strong>premortem</strong>. Imagine the plan has already failed, and write down why."],
+    qs:[
+     ["₹50 crore has gone into a failing ERP rollout. The committee adds ₹20 crore 'so the earlier money isn't wasted'. Bias?",["Sunk cost / endowment effect","Anchoring","Availability","Saliency"],"Past spend is driving a forward-looking decision."],
+     ["A project has a 70% chance of gaining ₹10 crore and a 30% chance of losing ₹3 crore. The team rejects it as 'too risky'. Most likely bias?",["Loss aversion","Overconfidence","Disaster neglect","Halo effect"],"The expected value is strongly positive, but the loss looms larger."],
+     ["A team estimates a migration at 6 months. Similar migrations across the industry took 14 months on average. Which technique would have caught this?",["The outside view (reference-class forecast)","Joint evaluation","One expert's opinion","Cycling through objectives"],"That's overconfidence. Anchor the estimate on how similar projects went."],
+     ["'Imagine it's a year from now and this launch has flopped. Write down why.' What does this mainly counter?",["Disaster neglect and overconfidence (a premortem)","Loss aversion","Anchoring","Self-interest"],"A premortem legitimises imagining failure."]]},
+   {title:"Wider Choices", lore:[
+     "On options: <strong>joint evaluation</strong> compares them side by side. The <strong>vanishing options test</strong> asks: if none of these were available, what would we do? It uncovers alternatives nobody considered.",
+     "On objectives: seek advice, and cycle through your objectives. On the future: make three estimates (low, medium and high).",
+     "<strong>Nudging</strong> changes how a choice is set up, such as its defaults, so the good behaviour becomes the easy one, without forbidding anything.",
+     "Beware the new scales too. An AI trained on years of biased human decisions learns those biases, as a hiring tool once learned to penalise women's CVs."],
+    qs:[
+     ["A manager is stuck between Vendor A and Vendor B. A colleague asks, 'If neither were available, what would you do?' The value of this question is that it…",["Generates alternatives nobody had considered","Anchors the team on A","Forces a quick choice","Tests for self-interest"],"This is the vanishing options test."],
+     ["A company makes pension enrolment the default, with the option to opt out. Participation jumps from 40% to 90%. This is…",["A nudge","Satisficing","Anchoring employees","Loss aversion by HR"],"The choice architecture changed; no option was removed."],
+     ["An AI screening tool trained on 10 years of past hiring decisions starts downgrading women's CVs. The key managerial lesson is…",["Algorithms trained on past human decisions can reproduce those decisions' biases","AI is inherently sexist","More data always removes bias","Only humans should screen"],"Bias in the historical data became bias in the model."]]}
+  ]},
+{ id:"T", num:"III", name:"The Mask Archive", topic:"Personality",
+  pal:{top:"#0e0a18",bot:"#221737",far:"#191128",near:"#241a3a",tile:"#0a0711",edge:"#7f6cc0",acc:"#c9b8ff",fog:"201,184,255"},
+  card:["#241a3a","#0e0a18","#c9b8ff"],
+  enemies:["Fixed Mindset","Typecast","Narcissus","Machiavel","Labeler"],
+  intro:[
+    "The Mask Archive. Every citizen of Organa once kept a mask here, a record of who they were.",
+    "The archivists argued forever. Are masks carved at birth, or shaped by the life that wears them?",
+    "Learn the old taxonomies. And learn when a mask matters, and when the room decides for you."],
+  outro:"The third beacon burns. No trait is good or bad in itself. What matters is how, and where, it is used.",
+  lessons:[
+   {title:"Clay and Kiln", lore:[
+     "<strong>Personality</strong> is the sum of the ways a person reacts to and interacts with others: characteristic patterns of thinking, feeling and behaving.",
+     "Nature or nurture? The modern answer is both. <strong>Epigenetics</strong> shows that environment and behaviour change how genes are expressed. It is an interactionist view.",
+     "Mindset matters. A <strong>growth mindset</strong> treats mistakes as lessons and ability as something you develop. A <strong>fixed mindset</strong> says 'I'll never be good at this.'"],
+    qs:[
+     ["Identical twins raised apart show similar extraversion but differ in openness, depending on how enriching their homes were. This supports…",["An interactionist view: genes and environment shape each other","Pure nature","Pure nurture","Situation strength theory"],"Genes act in context."],
+     ["After a failed pitch, which response is most likely to build a growth mindset?",["'What did we learn, and what will we try differently next time?'","'Some people just aren't cut out for pitching.'","'Don't worry, you're naturally talented.'","'Let's avoid pitches for now.'"],"Mistakes are treated as learning."],
+     ["Which statement reflects a fixed mindset?",["'I'm just not a numbers person, so there's no point practising.'","'I'll ask for feedback on my model.'","'This is hard, so I'll break it down.'","'I'll learn from how Priya did it.'"],"It treats ability as unchangeable."]]},
+   {title:"The Five Currents", lore:[
+     "The <strong>Big Five</strong>: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism. It is a taxonomy of how people describe themselves and others, not a theory, and it is the model research trusts most.",
+     "<strong>Conscientiousness</strong> (dependable, organised, persistent) is the most consistent predictor of job performance across roles.",
+     "<strong>Neuroticism</strong> is the opposite of emotional stability. It matters most under pressure.",
+     "No score is simply good or bad. High agreeableness builds harmony but can fail you in hard negotiations or tough feedback. Teams work best when traits complement one another."],
+    qs:[
+     ["You are hiring for dozens of different roles and can measure only one Big Five trait. Which is the best general predictor of performance?",["Conscientiousness","Extraversion","Openness","Agreeableness"],"Conscientiousness predicts performance across most jobs."],
+     ["A candidate for a high-pressure trading desk scores very high on neuroticism. The most relevant concern is…",["How well they stay emotionally stable under stress","Whether they're creative enough","Whether they're too sociable","Whether they follow rules"],"Neuroticism is low emotional stability."],
+     ["A team made up entirely of high-openness, low-conscientiousness people generates brilliant ideas but misses every deadline. The best composition fix is to…",["Add members high in conscientiousness","Add more high-openness members","Remove anyone low in agreeableness","Run an MBTI workshop"],"Complementary traits cover the gap."],
+     ["A highly agreeable manager is praised for team harmony. Where is this trait most likely to become a liability?",["Delivering tough feedback or negotiating hard with a supplier","Onboarding new hires","Resolving minor conflicts","Building client rapport"],"No trait is good or bad; it depends on the situation."]]},
+   {title:"The Measuring", lore:[
+     "Personality testing began with the US Army in the First World War. Today it is a large industry, and not without controversy.",
+     "<strong>MBTI</strong> sorts people into 16 types. It is popular, but more than half of those who retake it get a different type, and types don't predict performance. Even its foundation warns against using it for hiring. <strong>Big Five-based tests do predict performance.</strong>",
+     "Strengths-based tests such as StrengthsFinder come from positive psychology. But criticism and realistic self-assessment also drive growth.",
+     "Two traps. Blaming conflict on 'difficult personalities' can hide the manager's own role in creating the right conditions. And bespoke tests built on proprietary methods are hard to validate."],
+    qs:[
+     ["HR proposes shortlisting candidates by MBTI type. The strongest objection is…",["Many people get a different type on retesting, and types don't predict performance","MBTI has too few types","MBTI measures IQ","MBTI is illegal"],"It has low reliability and weak prediction."],
+     ["A company uses only strengths assessments and discourages critical feedback. The risk is…",["Criticism and realistic self-assessment also drive improvement, and they get lost","Strengths tests are illegal","Engagement falls","It takes too long"],"Focusing only on positives isn't the best way to improve."],
+     ["A team keeps fighting, so the manager orders personality tests to find the 'difficult people'. The warning is that this can make managers…",["Overlook their own role in creating conditions for the team to succeed","Hire too many introverts","Over-invest in training","Break privacy law"],"Personality isn't the only lever. The conditions the manager creates matter too."],
+     ["A firm profiles its top sellers and rewrites the job description around their traits using a proprietary test. Why are academics sceptical?",["The methods are proprietary and hard to validate","Top performers can't be identified","Traits never predict sales","It's too cheap"],"Proprietary methods resist scrutiny."]]},
+   {title:"The Dark Three", lore:[
+     "<strong>Machiavellianism</strong>: manipulative and self-interested, playing people against each other.",
+     "<strong>Narcissism</strong>: grandiose, entitled, hungry for admiration. Every story returns to 'I'.",
+     "<strong>Psychopathy</strong>: impulsive, emotionally cold, without remorse."],
+    qs:[
+     ["A manager charms senior leaders, quietly takes credit for others' work, and plays colleagues against each other to get ahead. Which Dark Triad trait fits best?",["Machiavellianism","Narcissism","Psychopathy","Neuroticism"],"Manipulative and self-interested."],
+     ["A leader constantly needs admiration, feels entitled to special treatment, and turns every conversation back to himself. Which trait?",["Narcissism","Machiavellianism","Psychopathy","Openness"],"Grandiose and entitled."],
+     ["A manager acts on impulse, humiliates a junior in public, and shows no remorse afterwards, seeming emotionally cold. Which trait?",["Psychopathy","Narcissism","Machiavellianism","Agreeableness"],"Impulsive, cold and remorseless."]]},
+   {title:"Strong Rooms", lore:[
+     "<strong>Situation strength</strong>: strong situations, high in Clarity, Consistency, Constraints and Consequences, make everyone behave alike, so personality predicts little. Weak situations let personality show.",
+     "<strong>Trait activation</strong>: some situations call a trait forward. Handling angry customers activates agreeableness and extraversion; creative work activates openness."],
+    qs:[
+     ["In the compliance team, with scripted processes and strict penalties, everyone behaves alike. In the innovation lab, behaviour varies hugely. Best explanation?",["Situation strength: strong situations suppress personality differences","Trait activation","Epigenetics","Random variation"],"The compliance team works in a strong situation."],
+     ["Which job would most strongly activate agreeableness and extraversion as predictors of success?",["Handling angry customers at a service desk","Archiving documents alone","Data entry to fixed rules","Night-shift monitoring"],"Dealing with upset people activates these traits."],
+     ["A firm introduces a detailed SOP with clear rules and penalties for every step. You'd expect personality tests to predict employee behaviour…",["Less well than before","Better than before","Exactly as before","Only for extraverts"],"The situation has become strong, so personality matters less."]]}
+  ]},
+{ id:"E", num:"IV", name:"Ember Hollow", topic:"Emotions & EI",
+  pal:{top:"#150707",bot:"#33110c",far:"#240d0a",near:"#341510",tile:"#0f0505",edge:"#b85a3e",acc:"#ff9468",fog:"255,148,104"},
+  card:["#3a150f","#150707","#ff9468"],
+  enemies:["Hijack","Rumination","Suppression","Dissonance","Outburst"],
+  intro:[
+    "Ember Hollow. The fires here never went out. The people only stopped understanding them.",
+    "Emotions are not the enemy of good work. Unexamined emotions are."],
+  outro:"The fourth beacon burns. Emotions plus knowledge make behaviour. Know your emotions, regulate them, and be empathetic to the emotions of others.",
+  lessons:[
+   {title:"Sparks and Smoke", lore:[
+     "<strong>Affect</strong> is the broad range of feelings. It comes as <strong>emotions</strong> or <strong>moods</strong>.",
+     "<strong>Emotions</strong> have a specific cause and are brief (seconds to minutes), action-oriented, with distinct facial expressions. <strong>Moods</strong> have a general or unclear cause, last hours or days, and are cognitive, with no distinct expression.",
+     "Ekman found <strong>seven universal emotions</strong> whose faces are read across cultures: anger, contempt, disgust, enjoyment, fear, sadness, surprise.",
+     "Anger climbs a ladder: annoyance, frustration, exasperation, argumentativeness, bitterness, vengefulness, fury. Deal with it while it is still small."],
+    qs:[
+     ["Priya has felt flat and unfocused all week and can't point to any reason. She is experiencing…",["A mood","An emotion","An amygdala hijack","Emotional labour"],"It has an unclear cause and is lasting days: a mood."],
+     ["An Indian manager in Brazil correctly reads a colleague's expression of disgust without speaking the language. This is best explained by…",["Universal basic emotions (Ekman)","Cultural distance","Emotional labour","Trait activation"],"Basic emotional expressions are recognised across cultures."],
+     ["An employee's mild annoyance at being interrupted in meetings is never addressed. Months later it has become bitterness. The lesson is…",["Anger escalates along a continuum, so address it while it's mild","Moods fix themselves","Only intense emotions matter","This is an amygdala hijack"],"Annoyance turns into bitterness over time."]]},
+   {title:"The Three Brains", lore:[
+     "The <strong>neocortex</strong> thinks. The <strong>limbic brain</strong> feels. The <strong>reptilian brain</strong> reacts.",
+     "An <strong>amygdala hijack</strong> has three signs: a strong emotional reaction, a sudden onset, and realising afterwards that it was inappropriate. The first defence is a pause, so the thinking brain can catch up.",
+     "<strong>Emotions + Knowledge = Behaviour.</strong> Emotion decides whether we act on what we know, or ignore it."],
+    qs:[
+     ["A manager hears a blunt critique in a review, instantly shouts at the presenter, and ten minutes later regrets it. The best label is…",["An amygdala hijack","Deep acting","A negative mood","Low conscientiousness"],"A strong reaction, a sudden onset, and regret afterwards."],
+     ["A manager knows the fair disciplinary process but, while furious, fires someone on the spot. Which idea explains this?",["Emotions + Knowledge = Behaviour: the emotion overrode what he knew","He lacked knowledge","It was a strong situation","He is low in openness"],"Emotion decided whether he used what he knew."],
+     ["Mid-negotiation, you feel a sudden surge of anger at an insulting offer. What's the best response?",["Pause and buy time before replying, so the thinking brain catches up","Reply immediately while the point is fresh","Suppress it and smile","Walk out"],"The first defence against a hijack is a pause."]]},
+   {title:"The Five Lights", lore:[
+     "<strong>Emotional intelligence</strong> means being self-aware, detecting emotions in others, and managing emotional cues. Goleman names five parts.",
+     "<strong>Self-awareness</strong>: knowing your emotions and their effects, and assessing yourself realistically. <strong>Self-regulation</strong>: keeping impulses in check, comfort with ambiguity, openness to change.",
+     "<strong>Motivation</strong>: a drive to achieve, and optimism even in failure.",
+     "<strong>Empathy</strong>: sensing others' feelings and taking an active interest in them. <strong>Social skill</strong>: persuading, leading change, building teams."],
+    qs:[
+     ["During uncertain merger talks, a leader stays calm, avoids snap reactions to rumours, and is open to changes in the plan. Which component is this?",["Self-regulation","Empathy","Social skill","Motivation"],"Impulse control, comfort with ambiguity, openness to change."],
+     ["A leader notices a usually talkative team member has gone quiet after a meeting and checks in privately. Which component?",["Empathy","Self-awareness","Self-regulation","Motivation"],"Sensing and caring about others' feelings."],
+     ["A manager knows she gets impatient when tired, so she schedules hard conversations for mornings. Which component?",["Self-awareness","Empathy","Social skill","Motivation"],"She knows her emotions and their effects."],
+     ["A leader builds a coalition across three departments and persuades sceptics one by one to push through a restructuring. Which component?",["Social skill","Self-regulation","Self-awareness","Empathy"],"Persuasion and leading change."],
+     ["After losing a major client, a sales head stays optimistic, sets new targets and pushes on. Which component?",["Motivation","Social skill","Empathy","Self-awareness"],"A drive to achieve and optimism in failure."]]},
+   {title:"The Painted Smile", lore:[
+     "<strong>Emotional labour</strong> is displaying the emotions a job requires. When felt and displayed emotions differ, the gap is <strong>emotional dissonance</strong>, and over time it exhausts.",
+     "<strong>Surface acting</strong> fakes the display. <strong>Deep acting</strong> tries to genuinely feel the required emotion, for example by taking the other person's perspective. Deep acting drains less over time."],
+    qs:[
+     ["A call-centre agent tries to see an angry caller's perspective so that she genuinely feels sympathy rather than just sounding sympathetic. This is…",["Deep acting, which tends to drain less over time","Surface acting, which drains less","Emotional suppression","An amygdala hijack"],"She is changing the felt emotion, not just the display."],
+     ["A receptionist must smile all day while feeling contempt for rude guests. The biggest long-term risk is…",["Emotional dissonance leading to exhaustion","Higher EI","Better moods","Higher agreeableness"],"A persistent felt-versus-displayed gap wears people down."],
+     ["Which employee is most at risk of emotional dissonance?",["A nurse required to appear cheerful while privately exhausted and grieving","A coder working alone on a task she enjoys","An analyst who is openly frustrated with a bug","A manager celebrating a genuine win"],"The gap between felt and displayed emotion is widest for the nurse."]]},
+   {title:"Cooling the Embers", lore:[
+     "Weaker strategies: <strong>suppression, rumination, avoidance</strong>. Stronger ones: <strong>cognitive reappraisal</strong> (reframing what the situation means), mindfulness, social sharing.",
+     "The <strong>CBT</strong> chain runs thoughts and beliefs → physical feelings → emotions → behaviour. 'I'm bad at this' leads to threat, then anxiety, then avoidance. Change the thought, and the chain changes.",
+     "Signs of low emotional intelligence: being argumentative, not listening, blaming others, emotional outbursts."],
+    qs:[
+     ["After a proposal is rejected, a manager tells herself, 'This is feedback that'll make the next pitch stronger.' Which strategy is this?",["Cognitive reappraisal","Suppression","Rumination","Avoidance"],"She reframed what the situation means."],
+     ["An analyst believes 'I'm bad at presenting', so he avoids presentations, never practises, and stays bad at them. Using CBT, where should coaching start?",["Challenging the belief itself","Assigning him many presentations at once","Teaching slide design","Removing presentations from his role"],"The chain begins with thoughts and beliefs."],
+     ["In a quarterly review, a manager publicly blames his team for a missed target and cuts people off when they explain. Which signs of low EI does he show?",["Blaming others and not listening","Being argumentative only","None: he's just being direct","Emotional outbursts only"],"He shows two of the classic signs at once."]]}
+  ]},
+{ id:"C", num:"V", name:"The Quiet Bridge", topic:"Listening & context",
+  pal:{top:"#070c17",bot:"#152139",far:"#0e172a",near:"#16223b",tile:"#060a12",edge:"#6286c0",acc:"#a8ccff",fog:"168,204,255"},
+  card:["#16223b","#070c17","#a8ccff"],
+  enemies:["Evaluation","Smith","Defensiveness","One-Way Empathy","Monologue"],
+  intro:[
+    "The Quiet Bridge, and the last beacon. Organa did not fall silent from shouting. It fell silent because no one truly listened.",
+    "Everyone spoke. Everyone explained. No one understood."],
+  outro:"The fifth beacon burns, and Organa's halls glow again. Human behaviour is a science, not a random act. Understand it and you can predict it; predict it and you can lead. Your quiz awaits.",
+  lessons:[
+   {title:"Person and Place", lore:[
+     "Lewin: <strong>B = f(P, E)</strong>. Behaviour is a function of the Person and their Environment. When behaviour changes, look at both.",
+     "<strong>Sociomateriality</strong>: technology is not a passive tool. Its design shapes behaviour, culture and power, as when a raise-hand queue on a video call decides who speaks next."],
+    qs:[
+     ["A star performer's output collapses after he moves to a team with a hostile manager. What does Lewin's equation suggest you examine?",["The environment, not just the person","Only his motivation","Only his personality","Nothing: performance is random"],"The person didn't change; the environment did."],
+     ["After the company adopts a chat tool that shows everyone's online status, people start staying 'green' late into the night. This illustrates…",["Sociomateriality: technology's design shapes behaviour and culture","Bounded rationality","The contrast effect","Deep acting"],"The tool's design created a new norm."],
+     ["A usually punctual team becomes chronically late after the office moves far from public transport. The best first explanation is…",["A change in environment (E in B = f(P, E))","A sudden drop in conscientiousness","Groupthink","Self-serving bias"],"Look at what changed: the environment."]]},
+   {title:"Distant Shores", lore:[
+     "Ghemawat: the world is <strong>semi-globalised</strong>. Differences across borders still matter.",
+     "The <strong>CAGE</strong> distances: <strong>Cultural</strong> (language, norms), <strong>Administrative</strong> (laws, institutions), <strong>Geographic</strong>, <strong>Economic</strong>. Wise managers engage with them strategically and tactically, instead of using one playbook everywhere."],
+    qs:[
+     ["An Indian firm entering Brazil struggles with unfamiliar labour laws and permit rules. On the CAGE framework, this is mainly…",["Administrative distance","Cultural distance","Geographic distance","Economic distance"],"Laws and institutions are administrative."],
+     ["A manager runs one identical playbook for teams in Bengaluru, São Paulo and Warsaw and is surprised by the uneven results. He ignored…",["Semi-globalisation: differences across borders still matter","Bounded rationality","Situation strength","The halo effect"],"Engage with CAGE distances; don't assume a flat world."],
+     ["An Indian manager is confused that her Tokyo team rarely disagrees openly in meetings, then raises concerns privately. This is mainly…",["Cultural distance","Administrative distance","Economic distance","Geographic distance"],"Communication norms are cultural."]]},
+   {title:"Fallen Leaders", lore:[
+     "Why managers fail (HBR, 2024): they <strong>lack self-awareness</strong>; their <strong>empathy is a one-way street</strong>; their <strong>relationships with employees are unproductive</strong>; their employees' <strong>work doesn't align with goals</strong>."],
+    qs:[
+     ["A manager expects his team to understand the pressures he's under but never asks about theirs. Why is he likely to fail?",["Empathy is a one-way street","He lacks technical skill","Work isn't aligned with goals","He is too self-aware"],"Empathy must flow both ways."],
+     ["A technically brilliant manager doesn't realise his sarcasm in reviews demotivates the team. Which failure reason fits?",["Lack of self-awareness","One-way empathy","Goal misalignment","Unproductive relationships"],"He is blind to his own effect on others."],
+     ["A team works long hours on projects that leadership doesn't value or even track. Which failure reason fits?",["Employees' work doesn't align with goals","Lack of self-awareness","One-way empathy","Too much empathy"],"The effort is disconnected from what matters."]]},
+   {title:"The Listener", lore:[
+     "Carl Rogers: the major barrier to communication is our <strong>tendency to evaluate</strong>, to judge, approve or disapprove from our own frame of reference. It grows stronger as emotions rise.",
+     "The gateway is <strong>listening with understanding</strong>: seeing the idea from the other person's frame of reference. It means understanding <em>with</em> a person, not <em>about</em> them.",
+     "The test: you may speak only after you have restated the other person's ideas <strong>and feelings</strong> to their satisfaction.",
+     "The obstacles: it takes <strong>courage</strong>, because you risk being changed yourself; <strong>heightened emotions</strong> make it hardest, though a neutral third party can help; it is proven only in small <strong>groups</strong>; and society lacks faith in the social sciences."],
+    qs:[
+     ["An employee says, 'This new appraisal system is unfair.' Which response shows listening with understanding?",["'You feel it doesn't capture the work you do. Tell me more.'","'It's data-driven, so it can't be unfair.'","'Everyone else seems fine with it.'","'Let's not get emotional.'"],"It reflects the speaker's ideas and feelings without evaluating them."],
+     ["Two colleagues are arguing about a plan. Under Rogers' rule, what must each do before stating their own view?",["Restate the other's ideas and feelings accurately, to their satisfaction","Present evidence for their own view","Take equal turns","Agree to disagree"],"This takes the heat out and narrows the differences."],
+     ["Union and management are deadlocked, and emotions are high. Rogers would suggest…",["A neutral third party who listens to each side with understanding","A quick vote","Going to the courts","Replacing the negotiators"],"A neutral catalyst restores communication."],
+     ["Why might a manager avoid truly understanding a militant union leader's view, even knowing it would help?",["It takes courage, because she risks being changed","It takes too long","It's against policy","Understanding means agreeing"],"Entering another's frame of reference can change you."]]},
+   {title:"Smith and Jones", lore:[
+     "The boss says: 'I think this is the best way to do your job.' Bill replies: 'Oh yeah!'",
+     "<strong>Smith</strong> explains harder. He assumes the conversation is <strong>logical</strong>, that words mean something by themselves, and that the goal is to make Bill agree. Bill hears the attitude, not the logic, and grows defensive.",
+     "<strong>Jones</strong> listens. He assumes the conversation is an interaction of <strong>sentiments</strong>, that <em>Bill</em>, not his words, means something, and that the goal is to let Bill express his differences. To Jones, 'Oh yeah!' is indeterminate: a chance to find out more.",
+     "Jones has a better map of how communication works. Listening like him takes self-awareness and practised skill, an emotional achievement as well as an intellectual one. There are too many Smiths and too few Joneses."],
+    qs:[
+     ["Boss: 'I think this is the best way to do your job.' Employee: 'Oh yeah!' Which reply is most like Jones?",["'Sounds like you see it differently. What's on your mind?'","'Let me explain again why this works.'","'I'm the manager, so let's go with it.'","'You'll understand once you try it.'"],"Jones invites Bill to express his differences."],
+     ["A manager re-explains his logic in simpler and simpler words, and the employee grows more defensive each time. What is he missing?",["The exchange is about feelings; the employee hears his attitude more than his logic","He needs better slides","The employee lacks intelligence","He should talk more slowly"],"This is Smith's error."],
+     ["In Roethlisberger's second school of thought, 'Oh yeah!' should be treated as…",["Indeterminate: a chance to find out what the employee means","Proof of poor communication","Agreement","Insubordination"],"The first school explains harder; the second listens."],
+     ["Why is listening like Jones more than an intellectual exercise?",["It needs self-awareness and practised face-to-face skill, which is an emotional achievement too","It requires a psychology degree","It only works in writing","It depends on seniority"],"There are too many Smiths and too few Joneses."]]}
+  ]}
 ];
-// [world, scenario question, options (first = correct), explanation]
-const BANK = [
-// ---------- P: Perception & attribution
-["P","Riya is late to every meeting she attends, nobody else in the team is late, and she has been late all quarter. What will her manager most likely conclude?",["The cause is internal: something about Riya","The cause is external: the meeting schedule","It's a mix; no conclusion is possible","The team culture is at fault"],"Low distinctiveness (late everywhere) + low consensus (only her) + high consistency (all quarter) = internal attribution."],
-["P","Kabir's code this sprint had many bugs, but his past work is clean, the whole team's code broke after a forced framework switch, and it's never happened to him before. Attribution?",["External: the situation caused it","Internal: Kabir got careless","Internal, because the bugs are in his code","Can't tell without his personality profile"],"High distinctiveness + high consensus + low consistency all point outward, to the situation."],
-["P","A manager only knows that Tara has missed her last five deadlines. Before concluding it's Tara's fault, which question adds the most information?",["Are others on the team missing the same deadlines?","Has Tara missed deadlines repeatedly?","Does Tara seem stressed?","Is Tara a high performer on paper?"],"Consistency is already known (five in a row). Consensus is the missing cue: if everyone is missing them, the cause is likely external."],
-["P","When his own report is late, Arun blames an IT outage. When his analyst's report is late the same week, he calls her disorganised. His judgement of the analyst shows…",["Fundamental attribution error","Contrast effect","Halo effect","Pygmalion effect"],"When judging others, he overweights internal causes and ignores the same external factor (the outage). Excusing himself is self-serving bias."],
-["P","In appraisals, a solid performer gets 'meets expectations' mainly because he sits next to the team's star. Which fix targets this bias best?",["Rate each person against fixed criteria independently before any group calibration","Let the star help rate peers","Rank everyone against each other","Rate in the order people joined"],"This is the contrast effect. Independent scoring against a fixed standard removes the comparison."],
-["P","An interviewer, impressed by a candidate's IIM degree and polished English, rates her highly on analytical skills that were never tested. This is…",["Halo effect","Stereotyping","Contrast effect","Self-serving bias"],"One positive feature spills over into unrelated judgements. Blind resumes and structured scoring help."],
-["P","A manager decides a new hire is 'weak', gives him only routine tasks and little feedback. Six months later he is underperforming, and the manager feels proven right. This best illustrates…",["The Golem effect","The Pygmalion effect","Fundamental attribution error","The horn effect only"],"Low expectations became self-fulfilling. The slides' fix: pair expectations with coaching and resources, and check they're evidence-based."],
-["P","'No point training the Gen Z hires; they'll leave in a year anyway.' This reasoning is an example of…",["Stereotyping","Contrast effect","Self-serving bias","Halo effect"],"The judgement comes from beliefs about a group, not evidence about these individuals."],
-["P","Vikram, newly promoted over his former peer Rohan, reads Rohan's Slack jokes as a challenge to his authority. Which set of perception factors is doing the most work here?",["Factors in the perceiver (Vikram's expectations and new-role insecurity)","Factors in the target (novelty, motion)","Factors in the situation (time of day)","None: the perception is objective"],"Vikram's changed role colours how he interprets the same behaviour, so the perceiver factors dominate."],
-["P","In town halls, the people who speak loudest and sit closest to the CEO get noticed and remembered most. Which perception factors explain this?",["Target factors: sound and proximity","Perceiver factors: motives","Situation factors: time","Attribution: high consensus"],"Characteristics of the target (loudness, proximity) make them stand out to the perceiver."],
-["P","After one missed deadline, a manager starts describing an employee as unreliable, unpolished and 'not leadership material'. This is…",["The horn effect","The halo effect","The Golem effect","Consensus bias"],"One negative characteristic creates a generally negative impression."],
-["P","Vikram wants to fix things with Rohan. Which first move best reflects the session's learning?",["Ask how Rohan sees the situation and restate it back before sharing his own concerns","Issue a formal warning to set clear expectations","Assign Rohan fewer responsibilities","Discuss Rohan's attitude with the rest of the team"],"This is listening with understanding instead of the tendency to evaluate. Keep it impersonal, set team norms, and involve Rohan."],
-["P","A team lead has mostly worked in a high-performing unit. She joins an average one and rates everyone lower than her peers do. The main risk in her ratings is…",["A contrast effect from her previous team","Self-serving bias","Stereotyping by department","High consistency"],"Her reference point is the old star team, so everyone suffers by comparison."],
-["P","Customer complaints spike for all branch staff after a new app launch, and Sneha's ratings fall too. Her manager puts her on a performance plan. What went wrong?",["He ignored high consensus, which points to an external cause","He correctly used consistency","He applied the halo effect","He used the Pygmalion effect"],"When everyone shows the same drop, the situation (the app) is the likely cause. Blaming Sneha is the fundamental attribution error."],
-// ---------- D: Decisions & biases
-["D","Your firm is entering a new country where regulation is shifting and consumer behaviour is unknown. Which approach fits the problem type?",["Run small pilots with local partners and adjust using real-time feedback","Hire one top expert to design the full plan upfront","Copy the home-market playbook exactly","Break it into parts and solve each in isolation"],"This is a complex problem with unique conditions and uncertain outcomes. It needs partnerships, shared principles, feedback loops and attention to non-linear effects."],
-["D","Setting up a new data centre is hard but well understood: it needs several expert teams to coordinate, and the outcome is predictable once designed. The problem is…",["Complicated: decompose it and bring in experts","Simple: follow a checklist","Complex: experiment and iterate","Chaotic: act first"],"The rocket-to-the-moon category. It's hard but predictable, and it yields to decomposition and expertise."],
-["D","A hiring manager must fill a role by Friday, so she picks the first candidate who clears the minimum bar without seeing the rest. This is…",["Satisficing under bounded rationality","The endowment effect","Anchoring","Groupthink"],"Limited time and information lead to 'good enough' instead of optimal."],
-["D","In a salary negotiation, the candidate opens at ₹40L. Although the band is ₹25–30L, the final offer lands at ₹34L. The recruiter was most affected by…",["Anchoring","Availability","Loss aversion","Halo effect"],"The first number pulled the adjustment toward it."],
-["D","After a fraud case makes headlines, the audit team shifts almost all its effort to that one fraud type, ignoring larger routine risks. Bias?",["Availability bias","Endowment effect","Overconfidence","Self-interest"],"The vivid, recent event is overweighted because it comes easily to mind."],
-["D","The CEO tells the strategy team: 'Find me data proving the market is growing.' The biggest risk in the resulting report is…",["Confirmation bias","Disaster neglect","Loss aversion","Contrast effect"],"The brief asks for confirming evidence only. The fix is to look actively for disconfirming information."],
-["D","In meetings everyone quickly agrees with the MD, and doubts surface only in the corridor afterwards. Which intervention best counters this?",["Collect written views independently before discussion and appoint a devil's advocate","Let the MD speak first to set direction","Shorten meetings to force quick decisions","Only invite people who agree"],"That's groupthink. Independent input and structured dissent bring out doubts that would otherwise stay hidden."],
-["D","₹50 crore has gone into a failing ERP rollout. The steering committee votes to add ₹20 crore 'so the earlier money isn't wasted'. Bias?",["Sunk cost / endowment effect","Anchoring","Availability","Saliency"],"Past investment shouldn't drive a forward-looking decision. Ask what you'd do if starting fresh."],
-["D","A project has a 70% chance of gaining ₹10 crore and a 30% chance of losing ₹3 crore. The team rejects it as 'too risky'. Which bias is most likely at play?",["Loss aversion","Overconfidence","Disaster neglect","Halo effect"],"The expected value is strongly positive, but the possible loss feels bigger than an equal gain."],
-["D","A team estimates a system migration at 6 months. Similar migrations across the industry averaged 14 months. Which technique would have caught the gap?",["Taking the outside view (a reference-class forecast)","Joint evaluation","Seeking a single expert's opinion","Cycling through objectives"],"This is overconfidence. The outside view anchors the estimate on how similar projects actually went."],
-["D","Before launch, the product head asks: 'Imagine it's a year from now and this launch has flopped. Write down why.' Which bias is this mainly designed to counter?",["Disaster neglect and overconfidence (premortem)","Loss aversion","Anchoring","Self-interest"],"A premortem legitimises imagining failure and exposes worst cases the plan ignored."],
-["D","'This turnaround is exactly like how we fixed Unit X in 2019,' says the team. Unit X was a very different business. Bias?",["Saliency bias","Endowment effect","Affect heuristic","Groupthink"],"A memorable past success is used as an analogy that doesn't really fit."],
-["D","A regional head recommends a big expansion that would also double the size of his own division. As the reviewer, the first bias to check is…",["Self-interest bias","Availability","Anchoring","Loss aversion"],"Kahneman et al.'s first question: is there any reason to suspect motivated errors?"],
-["D","'She fixed our supply chain brilliantly, so she'll obviously turn around marketing too.' As a decision reviewer, you'd flag the…",["Halo effect","Saliency bias","Anchoring","Disaster neglect"],"Success in one domain is assumed to transfer to an unrelated one."],
-["D","A manager can't choose between Vendor A and Vendor B. A colleague asks: 'If neither were available, what would you do?' The value of this question is that it…",["Generates new alternatives the team hadn't considered","Anchors the team on A","Forces a quick satisficing choice","Tests for self-interest"],"This is the vanishing options test. It breaks narrow framing between two options."],
-["D","In which situation is a manager's intuition most defensible?",["A seasoned plant manager judging a familiar machine fault she has seen hundreds of times","A first-time founder valuing a startup","Any high-stakes, one-off decision","When the data contradicts the gut"],"Intuition ('unconscious intelligence') is built from experience with repeated, familiar patterns. It's weakest in novel, one-off situations."],
-["D","A company makes pension enrolment the default, with the option to opt out. Participation jumps from 40% to 90%. This is…",["A nudge","Satisficing","Anchoring the employees","Loss aversion by HR"],"Nudging changes how the choice is set up without removing options."],
-["D","An AI screening tool trained on 10 years of past hiring decisions starts downgrading women's CVs. The key managerial lesson is…",["Algorithms trained on past human decisions can reproduce those decisions' biases","AI is inherently sexist","More data always removes bias","Only humans should screen"],"The Amazon case: bias in the historical data became bias in the model."],
-["D","The team presenting a new product is visibly in love with its vision and brushes past the cost risks. As a reviewer, you'd flag…",["The affect heuristic","Anchoring","Availability","Loss aversion"],"When liking an option drives the judgement, check that costs and risks were really assessed."],
-// ---------- T: Personality
-["T","You are hiring for dozens of different roles and can measure only one Big Five trait. Which is the best general predictor of job performance?",["Conscientiousness","Extraversion","Openness","Agreeableness"],"Conscientiousness (dependable, organised, persistent) predicts performance across most jobs."],
-["T","A candidate for a high-pressure trading desk scores very high on neuroticism. What's the most relevant concern?",["How well they handle stress and stay emotionally stable under pressure","Whether they are creative enough","Whether they are too sociable","Whether they will follow rules"],"Neuroticism is the opposite of emotional stability, and it matters most in high-pressure roles."],
-["T","HR proposes shortlisting candidates by MBTI type. The strongest objection is that…",["Many people get a different type on retesting, and types don't predict job performance","MBTI has too few types","MBTI measures intelligence, not personality","MBTI is illegal in India"],"Low test-retest reliability and weak prediction. Even the Myers-Briggs Foundation advises against using it for hiring. Big Five-based tools do predict performance."],
-["T","In the compliance team, with scripted processes and strict penalties, everyone behaves alike. In the innovation lab, behaviour varies hugely. Best explanation?",["Situation strength: strong situations suppress personality differences","Trait activation: compliance activates conscientiousness","Epigenetics","Random variation"],"Clarity, consistency, constraints and consequences make the compliance setting a strong situation."],
-["T","Which job would most strongly activate agreeableness and extraversion as predictors of success?",["Handling angry customers at a service desk","Archiving documents alone","Data entry to fixed rules","Night-shift security monitoring"],"Trait activation theory: dealing with people, especially upset ones, makes these traits relevant."],
-["T","A manager charms senior leaders, quietly takes credit for others' work, and strategically plays colleagues against each other to get ahead. Which Dark Triad trait fits best?",["Machiavellianism","Narcissism","Psychopathy","Neuroticism"],"Manipulative, self-interested and domineering is the Machiavellian profile."],
-["T","A leader constantly needs admiration, feels entitled to special treatment, and turns every conversation back to himself. Dark Triad trait?",["Narcissism","Machiavellianism","Psychopathy","Openness"],"Grandiosity, perceived superiority and entitlement. The typical body language is heavy use of 'I'."],
-["T","Identical twins raised apart show similar extraversion but differ in openness, depending on how enriching their homes were. This supports…",["An interactionist view: genes and environment shape each other","Pure nature","Pure nurture","Situation strength theory"],"Epigenetics: genes act in context, and environment affects how they're expressed."],
-["T","After a failed pitch, which manager response is most likely to build a growth mindset?",["'What did we learn, and what will we try differently next time?'","'Some people just aren't cut out for pitching.'","'Don't worry, you're naturally talented.'","'Let's avoid pitches for now.'"],"A growth mindset treats mistakes as learning and ability as something you develop."],
-["T","A team made up entirely of high-openness, low-conscientiousness members produces brilliant ideas but misses every deadline. The best composition fix is to…",["Add members high in conscientiousness","Add more high-openness members","Remove everyone low in agreeableness","Run an MBTI workshop"],"Personality informs team design, and complementary traits cover gaps."],
-["T","A highly agreeable manager is praised for team harmony. In which situation is this trait most likely to become a liability?",["Delivering tough feedback or negotiating hard with a supplier","Onboarding new hires","Resolving minor team conflicts","Building client rapport"],"No trait is good or bad. It depends on the situation."],
-["T","A company uses only strengths assessments and discourages critical feedback. Based on Harrell's article, the risk is that…",["Realistic self-assessment and criticism also drive improvement, and they get lost","Strengths tests are illegal","Employees become less engaged","It takes too long"],"Focusing only on positives isn't the best way to improve performance."],
-["T","A team is constantly fighting, so the manager orders personality tests to find the 'difficult people'. Harrell warns this can make managers…",["Overlook their own role in creating the conditions for teams to succeed","Hire too many introverts","Over-invest in training","Break data-privacy law"],"Treating personality as the main source of conflict ignores what the manager controls."],
-["T","A firm profiles its top sales performers and rewrites the sales job description around their traits. This is the bespoke-test trend. Why are academics sceptical?",["The firms' methods are proprietary and hard to validate","Top performers can't be identified","Traits never predict sales","It's too cheap"],"There's promise in neuroscience and analytics, but proprietary methods resist scrutiny."],
-// ---------- E: Emotions & EI
-["E","Priya has felt flat and unfocused all week and can't point to any reason. She is experiencing…",["A mood","An emotion","An amygdala hijack","Emotional labour"],"Moods have a general or unclear cause and last hours or days. Emotions are brief reactions to a specific event."],
-["E","A manager hears a blunt critique in a review, instantly shouts at the presenter, and ten minutes later regrets it. The most useful label for what happened is…",["An amygdala hijack","Deep acting","A negative mood","Low conscientiousness"],"Strong reaction, sudden onset, and realising afterwards it was inappropriate: the three signs."],
-["E","During uncertain merger talks, a leader stays calm, avoids snap reactions to rumours, and is open to changes in the plan. Which EI component is she showing?",["Self-regulation","Empathy","Social skill","Motivation"],"Keeping disruptive impulses in check, comfort with ambiguity, openness to change."],
-["E","A leader notices a usually talkative team member has gone quiet after a meeting and checks in with her privately. Component?",["Empathy","Self-awareness","Self-regulation","Motivation"],"Sensing others' feelings and taking an active interest in their concerns."],
-["E","A manager knows she gets impatient when tired, so she schedules difficult conversations for mornings. Component?",["Self-awareness","Empathy","Social skill","Motivation"],"Knowing your own emotions and their effect on your performance, and acting on it."],
-["E","A leader builds a coalition across three departments to push through a restructuring and persuades sceptics one by one. Component?",["Social skill","Self-regulation","Self-awareness","Empathy"],"Leading change, persuasiveness, building networks and teams."],
-["E","After losing a major client, a sales head stays optimistic, sets new targets and pushes on. Component?",["Motivation","Social skill","Empathy","Self-awareness"],"Drive to achieve, and optimism even in failure."],
-["E","A call-centre agent tries to see an angry caller's perspective so that she genuinely feels sympathy, rather than just sounding sympathetic. This is…",["Deep acting, which tends to be less draining over time","Surface acting, which is less draining","Emotional suppression","An amygdala hijack"],"Deep acting changes the felt emotion. Surface acting only fakes the display, which creates more dissonance."],
-["E","A hotel receptionist has to smile all day while feeling contempt for rude guests. The biggest long-term risk is…",["Emotional dissonance leading to exhaustion or burnout","Improved EI","Better moods","Higher agreeableness"],"A persistent gap between felt and displayed emotions wears people down."],
-["E","After a proposal is rejected, a manager tells herself: 'This is feedback that'll make the next pitch stronger.' Which regulation strategy is this?",["Cognitive reappraisal","Suppression","Rumination","Avoidance"],"Reframing changes the emotional impact of the situation. It's more effective than suppressing or dwelling."],
-["E","An analyst believes 'I'm bad at presenting', so he avoids presentations, never practises, and stays bad at them. Using the CBT chain, where should coaching start?",["Challenging the belief itself","Giving him more presentations immediately","Teaching slide design","Removing presentations from his role"],"The chain runs thoughts and beliefs → physical feelings → emotions → behaviour. Change the thought and the chain changes."],
-["E","A manager knows the fair disciplinary process but, while furious, fires an employee on the spot. The session's lens explains this as…",["Emotions + Knowledge = Behaviour: emotion overrode what he knew","A lack of knowledge","A strong situation","Low openness"],"Emotions shape whether we act on what we know or ignore it."],
-["E","In a quarterly review, a manager publicly blames his team for missing the target and cuts people off when they explain. Which signs of low EI does he show?",["Blaming others and not listening","Being argumentative only","None: he's being direct","Emotional outbursts only"],"Low-EI signs: argumentative, not listening, blaming others, emotional outbursts."],
-["E","An employee's mild annoyance at being interrupted in meetings is never addressed. Months later it has turned into bitterness. The lesson is…",["Anger escalates along a continuum, so address it while it's still mild","Moods fix themselves","Only intense emotions matter","This is an amygdala hijack"],"The anger spectrum runs annoyance → frustration → … → bitterness → vengefulness → fury."],
-["E","An Indian manager in Brazil correctly reads a colleague's expression of disgust without knowing the language. This is best explained by…",["Universal basic emotions (Ekman)","Cultural distance","Emotional labour","Trait activation"],"Ekman's seven basic emotions have facial expressions recognised across cultures."],
-// ---------- C: Communication & context
-["C","Boss: 'I think this is the best way to do your job.' Employee: 'Oh yeah!' Which reply is most like Jones?",["'Sounds like you see it differently. What's on your mind?'","'Let me explain again why this works.'","'I'm the manager, so let's just go with it.'","'You'll understand once you try it.'"],"Jones assumes he doesn't know what Bill means, so he listens and invites Bill to express his differences."],
-["C","An employee says, 'This new appraisal system is unfair.' Which response shows listening with understanding?",["'You feel it doesn't capture the work you do. Tell me more.'","'It's data-driven, so it can't be unfair.'","'Everyone else seems fine with it.'","'Let's not get emotional about it.'"],"It reflects the speaker's ideas and feelings from their frame of reference instead of evaluating them."],
-["C","Two colleagues are arguing about a project plan. Using Rogers' rule, what must each do before stating their own view?",["Restate the other's ideas and feelings accurately, to the other's satisfaction","Present evidence for their own position","Take turns of equal length","Agree to disagree"],"It's hard to do, but it takes the heat out of the argument and narrows the differences to rational ones."],
-["C","Union and management are deadlocked, and emotions are running high. Rogers would suggest…",["A neutral third party who listens to each side with understanding and clarifies their views","A quick vote","Leaving it to the courts","Replacing the negotiators"],"When emotions block direct understanding, a neutral 'catalyst' can restore mutual communication."],
-["C","A manager keeps re-explaining his logic in simpler and simpler words, and the employee grows more defensive each time. What is the manager missing?",["The exchange is about feelings; the employee hears his attitude more than his logic","He needs better slides","The employee lacks intelligence","He should explain more slowly"],"That's Smith's error: assuming communication is logical and words carry meaning by themselves."],
-["C","Why might a manager avoid truly understanding a militant union leader's point of view, even if she knows it would help?",["It takes courage, because she risks being changed by what she hears","It takes too long","It's against company policy","Understanding means agreeing"],"Rogers: entering another's frame of reference means you might come to see it their way."],
-["C","A star performer's output collapses after he moves to a new team with a hostile manager. What does Lewin's equation suggest you examine?",["The environment, not just the person","Only his motivation","Only his personality","Nothing: performance is random"],"B = f(P, E). The person didn't change; the environment did."],
-["C","After a company adopts a chat tool that shows everyone's online status, people start staying 'green' late into the night. This illustrates…",["Sociomateriality: technology's design shapes behaviour and culture","Bounded rationality","The contrast effect","Deep acting"],"Technology isn't a neutral tool; it co-creates norms and power dynamics."],
-["C","An Indian firm entering Brazil struggles with unfamiliar labour laws and permit rules. On the CAGE framework, this is mainly which distance?",["Administrative","Cultural","Geographic","Economic"],"Administrative distance covers laws, regulations and institutions. Language and norms would be cultural."],
-["C","A manager expects his team to understand the pressures he's under but never asks about theirs. From the HBR list, why is he likely to fail?",["Empathy is a one-way street","He lacks technical skill","His work isn't aligned with goals","He is too self-aware"],"Empathy has to flow both ways."],
-["C","A technically brilliant manager doesn't realise his sarcasm in reviews demotivates the team. Which reason for manager failure fits best?",["Lack of self-awareness","One-way empathy","Goal misalignment","Unproductive relationships"],"He's blind to his own effect on others."],
-["C","In Roethlisberger's second school of thought, the reply 'Oh yeah!' should be treated as…",["Indeterminate: an opportunity to find out what the employee means","Proof of poor communication","Agreement","Insubordination"],"The first school sees it as failure and explains harder. The second listens to find out."],
-["C","A team is spread across Bengaluru, São Paulo and Warsaw. The manager uses one identical playbook everywhere and is surprised by the uneven results. Ghemawat would say he ignored…",["Semi-globalization: differences across borders still matter","Bounded rationality","Situation strength","The halo effect"],"Smart managers recognise CAGE distances and engage with them strategically and tactically."],
-["C","Roethlisberger argues that listening like Jones is more than an intellectual exercise. Why?",["It needs self-awareness and practised face-to-face skill, which is an emotional achievement too","It requires a psychology degree","It only works in writing","It depends on seniority"],"Universities train people to be logical and clear, not to listen skilfully: 'too many Smiths, too few Joneses'."],
+const POWERS=[
+  {id:"double",short:"2×JUMP",name:"Second Look",how:"Double jump: press jump again in mid-air."},
+  {id:"dash",short:"DASH",name:"Intuition",how:"Dash: press X or Shift. Dashing through a crawler destroys it."},
+  {id:"speed",short:"SPEED",name:"Momentum",how:"Run 35% faster."},
+  {id:"shield",short:"SHIELD",name:"Composure",how:"A shield that absorbs one hit. Recharges at benches."},
+  {id:"glide",short:"GLIDE",name:"Outside View",how:"Hold jump while falling to glide."}
 ];
+const FINAL_PAL={top:"#0b0b10",bot:"#1d1a14",far:"#16140f",near:"#211d15",tile:"#08080a",edge:"#b9a16a",acc:"#f0dca0",fog:"240,220,160"};
 
-/* ================= STATE ================= */
-const RANKS=[["Intern",0],["Associate",120],["Team Lead",300],["Manager",550],["Senior Manager",900],["Director",1350],["CHRO",1900]];
-let S={xp:0,stars:{},stats:{},bestFinal:null};
-try{const raw=localStorage.getItem("mppo-arcade-v2"); if(raw) S=Object.assign(S,JSON.parse(raw));}catch(e){}
+/* ============================ STATE ============================ */
+const RANKS=[["Intern",0],["Associate",150],["Team Lead",400],["Manager",750],["Senior Manager",1200],["Director",1800],["CHRO",2600]];
+let S={xp:0,stars:{},story:{},stats:{},bestFinal:null};
+try{const raw=localStorage.getItem("mppo-arcade-v3"); if(raw) S=Object.assign(S,JSON.parse(raw));}catch(e){}
 WORLDS.forEach(w=>{ if(!S.stats[w.id]) S.stats[w.id]={a:0,c:0}; });
-function save(){ try{localStorage.setItem("mppo-arcade-v2",JSON.stringify(S));}catch(e){} }
+function save(){ try{localStorage.setItem("mppo-arcade-v3",JSON.stringify(S));}catch(e){} }
 const $=s=>document.querySelector(s);
 const app=$("#app"), modalRoot=$("#modalRoot");
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -258,164 +487,338 @@ function rankOf(xp){let r=RANKS[0],n=null;for(let i=0;i<RANKS.length;i++){if(xp>
 function renderBar(){const {r,n}=rankOf(S.xp);$("#rankName").textContent=r[0];$("#xpText").textContent=S.xp+" XP";$("#xpFill").style.width=n?Math.round((S.xp-r[1])/(n[1]-r[1])*100)+"%":"100%";}
 function gain(n){S.xp+=n;save();renderBar();}
 const mastery=w=>{const s=S.stats[w];return s.a?Math.round(s.c/s.a*100):0;};
+let homeTab="story";
 
-/* ================= MAP ================= */
+/* ============================ HOME ============================ */
 function home(){
-  stopGame(); closeModal();
+  stopGame(); modalRoot.innerHTML="";
+  const done=WORLDS.filter(w=>S.story[w.id]).length;
   const starRow=n=>`<div class="stars">${[0,1,2].map(k=>`<i class="${k<n?"on":""}"></i>`).join("")}</div>`;
   app.innerHTML=`
   <section class="hero">
     <span class="label">MPPO · Quiz 1 · Sessions 1–5 + readings</span>
-    <h1>Run the course. <em>Answer to cross.</em></h1>
-    <p>Every chasm has a gate. Walk up to it and you get a scenario question. Answer correctly and a bridge appears so you can move on. A wrong answer costs a heart, shows you why, and gives you a different question for the same gate. Lose all three hearts and you burn out and restart the world.</p>
-    <div class="howto"><span>← → or A D to move</span><span>Space / ↑ to jump</span><span>1–4 to answer</span><span>Coins = bonus XP</span></div>
+    <h1>Relight Organa. <em>Understanding opens every gate.</em></h1>
+    <p>A platformer about the course. Story mode teaches through lore stones along the path; each gate then asks a scenario question on what the stone taught. Answer on the first try and you awaken a power that makes the rest of the level easier. Trials drop the lore and test you cold.</p>
+    <div class="chips"><span>← → / A D move</span><span>Space / W / Z jump</span><span>X / Shift dash</span><span>E / ↓ read · talk</span><span>1–4 answer</span></div>
   </section>
-  <div class="map">
-    ${WORLDS.map(w=>`<button class="world" data-w="${w.id}"><span class="num">${w.n} · ${w.gates} gates</span><h3>${esc(w.name)}</h3><p>${esc(w.sub)}</p>${starRow(S.stars[w.id]||0)}</button>`).join("")}
-    <button class="world boss" data-w="FINAL"><span class="num">FINAL · 10 gates · 15:00</span><h3>The Quiz 1 Run</h3><p>Mixed questions from every world against the real exam clock. Your score counts first-try answers only.${S.bestFinal!=null?` Best: ${S.bestFinal}/10.`:""}</p></button>
+  <div class="tabs" role="tablist"><button role="tab" id="tStory" class="${homeTab==="story"?"on":""}">Story · ${done}/5</button><button role="tab" id="tTrial" class="${homeTab==="trial"?"on":""}">Trials</button></div>
+  <div class="map">${homeTab==="story"
+    ? WORLDS.map(w=>`<button class="world story" data-s="${w.id}" style="--c1:${w.card[0]};--c2:${w.card[1]};--c3:${w.card[2]}"><span class="num">CHAPTER ${w.num} · ${esc(w.topic)}</span><h3>${esc(w.name)}</h3><p>${esc(w.intro[0])}</p><span class="done">${S.story[w.id]?"Beacon lit":"5 stones · 5 gates"}</span></button>`).join("")
+      + (done===5?`<div class="lorecard" style="--wacc:#f0dca0"><span class="dt">Epilogue</span><p>Every beacon burns. The halls of Organa remember how to see, decide, know themselves, feel and listen. Now take the Quiz 1 Run in Trials.</p></div>`:"")
+    : WORLDS.map(w=>`<button class="world" data-t="${w.id}"><span class="num">TRIAL ${w.num} · 5 gates</span><h3>${esc(w.name)}</h3><p>${esc(w.topic)}. No lore; harder terrain.</p>${starRow(S.stars[w.id]||0)}</button>`).join("")
+      + `<button class="world boss" data-t="FINAL"><span class="num">FINAL · 10 gates · 15:00</span><h3>The Quiz 1 Run</h3><p>Mixed questions from every region against the real exam clock. Only first-try answers count.${S.bestFinal!=null?` Best: ${S.bestFinal}/10.`:""}</p></button>`}
   </div>
   <section class="section">
-    <div class="section-head"><h2>Accuracy by world</h2><span class="label">first attempts and retries</span></div>
-    <div class="mastery">${WORLDS.map(w=>`<div class="m-row"><span class="m-name">${esc(w.name)}</span><span class="m-pct">${mastery(w.id)}% · ${S.stats[w.id].a} answered</span><span class="m-track"><i style="width:${mastery(w.id)}%"></i></span></div>`).join("")}</div>
+    <div class="section-head"><h2>Powers</h2><span class="label">earned in order, one per first-try answer · reset each level</span></div>
+    <div class="powers-legend">${POWERS.map((p,i)=>`<div class="pw"><i>GATE ${i+1}</i><b>${p.name}</b><span>${p.how}</span></div>`).join("")}</div>
+  </section>
+  <section class="section">
+    <div class="section-head"><h2>Accuracy by region</h2><span class="label">all attempts</span></div>
+    <div class="mastery">${WORLDS.map(w=>`<div class="m-row"><span class="m-name">${esc(w.name)} · ${esc(w.topic)}</span><span class="m-pct">${mastery(w.id)}% · ${S.stats[w.id].a}</span><span class="m-track"><i style="width:${mastery(w.id)}%"></i></span></div>`).join("")}</div>
     <div><button class="link" id="reset">Reset my progress</button> <span class="kbd" id="resetMsg"></span></div>
   </section>`;
-  app.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>startGame(b.dataset.w));
+  $("#tStory").onclick=()=>{homeTab="story";home();};
+  $("#tTrial").onclick=()=>{homeTab="trial";home();};
+  app.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>startGame(b.dataset.s,true));
+  app.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>startGame(b.dataset.t,false));
   let armed=false;
-  $("#reset").onclick=()=>{if(!armed){armed=true;$("#resetMsg").textContent="Click again to confirm.";return;}S={xp:0,stars:{},stats:{},bestFinal:null};WORLDS.forEach(w=>S.stats[w.id]={a:0,c:0});save();renderBar();home();};
+  $("#reset").onclick=()=>{if(!armed){armed=true;$("#resetMsg").textContent="Click again to confirm.";return;}S={xp:0,stars:{},story:{},stats:{},bestFinal:null};WORLDS.forEach(w=>S.stats[w.id]={a:0,c:0});save();renderBar();home();};
   window.scrollTo(0,0);
 }
 
-/* ================= GAME ================= */
-const W=960,H=400,GY=330;
-let G=null, raf=null, timerId=null;
-const keys={left:false,right:false,jump:false};
-
-function stopGame(){ if(raf) cancelAnimationFrame(raf); raf=null; if(timerId) clearInterval(timerId); timerId=null; G=null; document.onkeydown=null; document.onkeyup=null; keys.left=keys.right=keys.jump=false; }
-
-function buildLevel(n){
-  const solids=[],doors=[],coins=[],chasms=[];
-  let x=0, flagX=0;
-  for(let i=0;i<=n;i++){
-    const L=i===0?560:520+Math.floor(Math.random()*140);
-    solids.push({x,y:GY,w:L,h:H-GY,t:"ground"});
-    const px=x+Math.round(L*(i===0?0.45:0.32)), py=GY-(80+Math.floor(Math.random()*30));
-    solids.push({x:px,y:py,w:110,h:16,t:"plat"});
-    for(let c=0;c<3;c++) coins.push({x:px+22+c*33,y:py-26,got:false});
-    if(i%2===1){ const sx=x+Math.round(L*0.62); solids.push({x:sx,y:GY-34,w:48,h:34,t:"step"}); coins.push({x:sx+24,y:GY-70,got:false}); }
-    if(i<n){
-      const d={x:x+L-30,y:GY-230,w:30,h:230,t:"door",gate:i,solved:false};
-      solids.push(d); doors.push(d);
-      chasms.push({x:x+L,w:150,gate:i,bridge:0});
-      x+=L+150;
-    } else { flagX=x+L-110; x+=L; }
+/* ============================ LEVEL CHUNKS ============================ */
+const TS=30, ROWS=18, VW=960, VH=540;
+function mk(w){
+  const g=Array.from({length:ROWS},()=>Array(w).fill("."));
+  const c={w,g,ents:[],
+    r(x0,y0,x1,y1,ch="#"){for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)g[y][x]=ch;return c;},
+    gnd(x0,x1){return c.r(x0,15,x1,17,"#");},
+    e(type,x,y,o={}){c.ents.push(Object.assign({type,x,y},o));return c;}};
+  return c;
+}
+const CH={
+  start:(story)=>{const c=mk(24).gnd(0,23).e("spawn",2,14).e("bench",6,14); if(story) c.e("npc",12,14); return c;},
+  lore:(k)=>mk(12).gnd(0,11).e("stone",6,14,{k}),
+  gate:(k)=>mk(13).gnd(0,12).e("bench",2,14).e("gate",9,14,{k}),
+  end:()=>mk(18).gnd(0,17).e("flag",10,14),
+};
+const CHALL=[
+  // tier 1
+  {t:1,f:()=>mk(26).gnd(0,4).gnd(9,12).gnd(18,25).e("shard",6,12).e("shard",7,11).e("shard",15,11).e("shard",16,12).e("shard",11,3)},
+  {t:1,f:()=>mk(26).gnd(0,25).r(12,13,14,14).e("enemy",7,14,{range:2.5}).e("enemy",19,14,{range:2.5}).e("shard",13,11).e("shard",13,5)},
+  {t:1,f:()=>mk(28).gnd(0,27).r(6,14,21,14,"^").r(5,12,8,12,"=").r(11,10,14,10,"=").r(17,12,20,12,"=").e("shard",12,8).e("shard",13,8).e("shard",12,3).e("shard",13,3)},
+  // tier 2
+  {t:2,f:()=>mk(22).gnd(0,13).r(14,7,21,17).r(7,14,13,14,"^").r(3,12,6,12,"=").r(8,9,11,9,"=").e("shard",9,7).e("shard",18,5).e("shard",5,4)},
+  {t:2,f:()=>mk(28).gnd(0,4).gnd(23,27).e("mplat",7,13,{axis:"x",range:4,spd:1.25}).e("mplat",17,11,{axis:"x",range:3,spd:1.5,ph:1.6}).e("shard",12,9).e("shard",13,9).e("shard",13,4)},
+  {t:2,f:()=>mk(30).r(0,15,3,17).r(4,13,7,17).r(10,11,13,17).r(16,9,19,17).r(22,15,29,17).e("enemy",26,14,{range:2}).e("shard",8,8).e("shard",14,6).e("shard",18,3)},
+  {t:2,f:()=>mk(24).gnd(0,6).r(11,13,13,17).gnd(19,23).e("shard",9,9).e("shard",16,9).e("shard",12,4).e("enemy",21,14,{range:1.2})},
+  // tier 3
+  {t:3,f:()=>mk(26).gnd(0,25).r(6,0,19,9).r(6,10,19,10,"v").e("spike1",9,14).e("spike1",16,14).e("enemy",12,14,{range:1.3}).e("shard",13,12)},
+  {t:3,f:()=>mk(28).gnd(0,27).r(4,14,23,14,"^").r(4,12,8,12).r(12,10,16,10).r(20,12,24,12).e("enemy",6,11,{range:1.4}).e("enemy",22,11,{range:1.4}).e("shard",14,8).e("shard",14,3)},
+  {t:3,f:()=>mk(24).gnd(0,5).r(13,9,15,9,"=").r(18,11,23,17).e("mplat",9,12,{axis:"y",range:3,spd:1.4}).e("shard",14,7).e("shard",14,2)},
+  {t:3,f:()=>mk(30).gnd(0,3).r(12,12,16,17).gnd(26,29).e("mplat",7,12,{axis:"x",range:3,spd:1.35}).e("enemy",14,11,{range:1.4}).e("mplat",21,10,{axis:"x",range:3,spd:1.6,ph:2}).e("shard",14,7).e("shard",21,5)},
+  {t:3,f:()=>mk(30).gnd(0,4).r(8,12,9,17).r(14,10,15,17).r(20,12,21,17).gnd(25,29).r(10,17,13,17,"^").r(16,17,19,17,"^").e("shard",11,8).e("shard",17,7).e("enemy",27,14,{range:1.5})},
+];
+function pickChunk(t,avoid){
+  const pool=CHALL.filter(c=>c.t===t && c!==avoid);
+  return pool[Math.floor(Math.random()*pool.length)];
+}
+function buildLevel(wi,story,final){
+  const parts=[CH.start(story)];
+  const nG=final?10:5; let last=null;
+  for(let k=0;k<nG;k++){
+    if(story) parts.push(CH.lore(k));
+    const tier=final?(k<3?2:3):Math.min(3,1+Math.floor((k+wi+(story?0:1))/2));
+    const n=final?1:2;
+    for(let j=0;j<n;j++){ const t=j===0?tier:Math.max(1,tier-1); const c=pickChunk(t,last); last=c; parts.push(c.f()); }
+    parts.push(CH.gate(k));
   }
-  return {solids,doors,coins,chasms,flagX,len:x};
+  const fin=pickChunk(3,last); parts.push(fin.f()); parts.push(CH.end());
+  const cols=parts.reduce((a,c)=>a+c.w,0);
+  const grid=Array.from({length:ROWS},()=>[]);
+  const L={cols,grid,spawn:{x:60,y:450},benches:[],stones:[],gates:[],enemies:[],mplats:[],shards:[],npc:null,flag:null};
+  let off=0;
+  for(const c of parts){
+    for(let y=0;y<ROWS;y++) grid[y].push(...c.g[y]);
+    for(const e of c.ents){
+      const X=(off+e.x)*TS, Y=e.y*TS;
+      switch(e.type){
+        case "spawn": L.spawn={x:X,y:Y+TS}; break;
+        case "bench": L.benches.push({x:X,y:Y+10,w:60,h:20,used:false}); break;
+        case "npc": L.npc={x:X,y:Y+TS}; break;
+        case "stone": L.stones.push({x:X,y:Y+TS,k:e.k,read:false}); break;
+        case "gate": L.gates.push({x:X,y:0,w:TS,h:Y+TS,k:e.k,open:false,openT:0}); break;
+        case "flag": L.flag={x:X,y:Y+TS}; break;
+        case "spike1": grid[e.y][off+e.x]="^"; break;
+        case "enemy": { const ex=X+4; L.enemies.push({x:ex,y:Y+TS-22,w:22,h:22,vx:1,minX:ex-e.range*TS,maxX:ex+e.range*TS,alive:true,dieT:0}); break; }
+        case "mplat": { const bx=X+15-45; L.mplats.push({bx,by:Y,x:bx,y:Y,w:90,h:14,axis:e.axis,range:e.range*TS,spd:e.spd,ph:e.ph||0,dx:0,dy:0}); break; }
+        case "shard": L.shards.push({x:X+15,y:Y+15,got:false}); break;
+      }
+    }
+    off+=c.w;
+  }
+  return L;
 }
 
-function startGame(wid){
-  stopGame(); closeModal();
-  const isFinal=wid==="FINAL";
-  const world=isFinal?{id:"FINAL",name:"The Quiz 1 Run",gates:10}:WORLDS.find(w=>w.id===wid);
-  const lvl=buildLevel(world.gates);
-  let pool;
-  if(isFinal){
-    const by={}; WORLDS.forEach(w=>by[w.id]=shuffle(BANK.filter(q=>q[0]===w.id)));
-    const order=shuffle(["P","P","D","D","D","T","T","E","E","C","C","P","D","E","C","T"]);
-    pool=[]; order.forEach(k=>{const q=by[k].shift(); if(q) pool.push(q);});
-    WORLDS.forEach(w=>pool.push(...by[w.id]));
-  } else pool=shuffle(BANK.filter(q=>q[0]===wid));
-  G={world,isFinal,...lvl,pool,qi:0,hearts:3,firstTry:0,answered:0,missed:[],coinsGot:0,
-     p:{x:60,y:GY-44,w:28,h:44,vx:0,vy:0,on:false,face:1,walk:0},cam:0,paused:false,done:false,
-     gatesCleared:0,end:isFinal?Date.now()+15*60*1000:null,parts:[],t:0,firstAttempt:true};
+/* ============================ GAME ============================ */
+let G=null, raf=null, timerId=null;
+const keys={left:false,right:false,jump:false,dash:false,act:false};
+function clearKeys(){ for(const k in keys) keys[k]=false; if(G){G.jp=G.jr=G.dp=G.ap=false;} }
+function stopGame(){ if(raf) cancelAnimationFrame(raf); raf=null; if(timerId) clearInterval(timerId); timerId=null; G=null; document.onkeydown=null; document.onkeyup=null; for(const k in keys) keys[k]=false; }
+const has=id=>G&&G.powers.includes(id);
+
+function startGame(id,story){
+  stopGame(); modalRoot.innerHTML="";
+  const final=id==="FINAL";
+  const wi=final?4:WORLDS.findIndex(w=>w.id===id);
+  const world=final?{id:"FINAL",name:"The Quiz 1 Run",num:"",pal:FINAL_PAL,enemies:["Anchor","Halo","Hijack","Groupthink","Smith","Typecast","Blame"]}:WORLDS[wi];
+  const L=buildLevel(wi,story,final);
+  let pool=[], lessonPools=null;
+  const qobj=(w,lk,q)=>({w,lk,text:q[0],opts:q[1],exp:q[2]});
+  if(final){
+    const by=WORLDS.map(w=>shuffle(w.lessons.flatMap((l,lk)=>l.qs.map(q=>qobj(w.id,lk,q)))));
+    for(let r=0;r<6;r++) by.forEach(a=>{ if(a.length) pool.push(a.shift()); });
+    pool=shuffle(pool.slice(0,10)).concat(shuffle(by.flat()));
+  } else if(story){
+    lessonPools=world.lessons.map((l,lk)=>shuffle(l.qs.map(q=>qobj(world.id,lk,q))));
+  } else {
+    pool=shuffle(world.lessons.flatMap((l,lk)=>l.qs.map(q=>qobj(world.id,lk,q))));
+  }
+  const pal=world.pal;
+  G={world,story,final,wi,pal,L,pool,qi:0,lessonPools,
+     p:{x:L.spawn.x,y:L.spawn.y-35,w:20,h:34,vx:0,vy:0,on:false,face:1,coyote:0,buf:0,jumps:0,dashT:0,dashUsed:false,inv:0,kbT:0,kbVx:0,plat:null,cut:false,gliding:false},
+     cp:{x:L.spawn.x,y:L.spawn.y},cam:0,t:0,hearts:5,maxHearts:5,shieldUp:false,powers:[],shards:0,
+     firstTry:0,answered:0,missed:[],gatesCleared:0,deaths:0,done:false,dlg:null,cur:null,
+     parts:[],trail:[],motes:Array.from({length:46},()=>({x:Math.random()*VW,y:Math.random()*VH,r:Math.random()*1.8+.4,s:Math.random()*14+6,a:Math.random()*.5+.15})),
+     shake:0,start:performance.now(),end:final?Date.now()+15*60*1000:null,banner:null,jp:false,jr:false,dp:false,ap:false,prompt:null};
   app.innerHTML=`<section class="game">
     <div class="hud">
       <button class="btn" id="quit">Map</button>
-      <span class="pill">${esc(world.name)}</span>
+      <span class="pill">${final?"The Quiz 1 Run":(story?"Chapter "+world.num+" · ":"Trial · ")+esc(world.name)}</span>
       <span class="spacer"></span>
-      ${isFinal?`<span class="pill mono" id="clock">15:00</span>`:""}
-      <span class="hearts" id="hearts" aria-label="Hearts left"></span>
+      ${final?`<span class="pill mono" id="clock">15:00</span>`:""}
+      <span class="hearts" id="hearts" aria-label="Resolve"></span>
+      <span class="pchips" id="pchips"></span>
       <span class="pill mono" id="gates"></span>
-      <span class="pill mono" id="coins"></span>
+      <span class="pill mono" id="shards"></span>
     </div>
-    <div class="stage"><canvas id="cv" width="${W}" height="${H}" aria-label="Platformer game. Walk right to reach question gates."></canvas></div>
+    <div class="stage" id="stage" style="--wacc:${pal.acc}">
+      <canvas id="cv" width="${VW}" height="${VH}" aria-label="Platformer. Move right, read lore stones, and answer at the gates."></canvas>
+      <div class="dlg" id="dlg" hidden></div>
+      <div id="bannerRoot"></div>
+    </div>
     <div class="pad">
       <div class="grp"><button id="bl" aria-label="Move left">◀</button><button id="br" aria-label="Move right">▶</button></div>
-      <button class="jump" id="bj">JUMP</button>
+      <div class="grp"><button id="ba" aria-label="Read or talk">READ</button><button id="bd" aria-label="Dash">DASH</button><button class="j" id="bj" aria-label="Jump">JUMP</button></div>
     </div>
-    <span class="kbd">Walk into the glowing gate to get its question.</span>
+    <span class="kbd">${story?"Walk past a lore stone to read it. Walk into a gate to answer it. Benches save your spot.":"Walk into a gate to answer. Benches save your spot. Falling or spikes cost 1 resolve."}</span>
   </section>`;
   $("#quit").onclick=home;
+  $("#dlg").onclick=()=>advanceDlg();
   const cv=$("#cv"); const dpr=Math.min(2,window.devicePixelRatio||1);
-  cv.width=W*dpr; cv.height=H*dpr; G.ctx=cv.getContext("2d"); G.ctx.scale(dpr,dpr);
+  cv.width=VW*dpr; cv.height=VH*dpr; G.ctx=cv.getContext("2d"); G.ctx.scale(dpr,dpr);
   bindControls(); updateHud();
-  if(isFinal){ timerId=setInterval(()=>{ if(!G) return; const left=Math.max(0,G.end-Date.now()); const el=$("#clock"); if(el){el.textContent=`${Math.floor(left/60000)}:${String(Math.floor(left%60000/1000)).padStart(2,"0")}`; el.classList.toggle("warn",left<120000);} if(left<=0){ finish(false,"Time's up"); } },500); }
-  readColors(); G.last=performance.now(); raf=requestAnimationFrame(loop);
+  if(final){ timerId=setInterval(()=>{ if(!G) return; const left=Math.max(0,G.end-Date.now()); const el=$("#clock"); if(el){el.textContent=`${Math.floor(left/60000)}:${String(Math.floor(left%60000/1000)).padStart(2,"0")}`; el.classList.toggle("warn",left<120000);} if(left<=0) finish(false,"Time's up"); },500); }
+  G.last=performance.now(); raf=requestAnimationFrame(loop);
   window.scrollTo(0,0);
+  if(story){ openDialog([{t:"Chapter "+world.num+" · "+world.name,s:"The Mentor",x:world.intro[0]},...world.intro.slice(1).map(x=>({s:"The Mentor",x}))]); }
+  else banner(final?"The Quiz 1 Run":"Trial · "+world.name, final?"10 gates. 15 minutes. First tries count.":"No lore. Answer cold. Earn your powers.");
 }
 
 function bindControls(){
-  const map={ArrowLeft:"left",KeyA:"left",ArrowRight:"right",KeyD:"right",ArrowUp:"jump",KeyW:"jump",Space:"jump"};
+  const map={ArrowLeft:"left",KeyA:"left",ArrowRight:"right",KeyD:"right",ArrowUp:"jump",KeyW:"jump",Space:"jump",KeyZ:"jump",ShiftLeft:"dash",ShiftRight:"dash",KeyX:"dash",KeyK:"dash",KeyE:"act",ArrowDown:"act",KeyS:"act"};
   document.onkeydown=e=>{
-    if(modalRoot.firstChild){ modalKey(e); return; }
-    const k=map[e.code]; if(k){ keys[k]=true; e.preventDefault(); }
+    if(!G) return;
+    if(G.cur){ modalKey(e); return; }
+    if(G.dlg){ if(["Enter","Space","KeyE","ArrowDown","KeyS"].includes(e.code)){ e.preventDefault(); if(!e.repeat) advanceDlg(); } else if(e.code==="Escape"){ closeDlg(); } return; }
+    const k=map[e.code]; if(!k) return; e.preventDefault(); if(e.repeat){ keys[k]=true; return; }
+    if(k==="jump"&&!keys.jump) G.jp=true;
+    if(k==="dash") G.dp=true;
+    if(k==="act") G.ap=true;
+    keys[k]=true;
   };
-  document.onkeyup=e=>{ const k=map[e.code]; if(k) keys[k]=false; };
+  document.onkeyup=e=>{ const k=map[e.code]; if(!k||!G) return; keys[k]=false; if(k==="jump") G.jr=true; };
   const hold=(id,k)=>{ const b=$(id); if(!b) return;
-    b.onpointerdown=e=>{e.preventDefault();keys[k]=true;};
-    b.onpointerup=b.onpointercancel=b.onpointerleave=()=>{keys[k]=false;}; };
-  hold("#bl","left"); hold("#br","right"); hold("#bj","jump");
+    b.onpointerdown=e=>{ e.preventDefault(); if(!G) return; if(G.dlg){ advanceDlg(); return; } if(k==="jump") G.jp=true; if(k==="dash") G.dp=true; if(k==="act") G.ap=true; keys[k]=true; };
+    b.onpointerup=b.onpointercancel=b.onpointerleave=()=>{ if(keys[k]&&k==="jump"&&G) G.jr=true; keys[k]=false; }; };
+  hold("#bl","left"); hold("#br","right"); hold("#bj","jump"); hold("#bd","dash"); hold("#ba","act");
 }
 
-let C={};
-function readColors(){ const cs=getComputedStyle(document.documentElement); ["sky-top","sky-bot","city","city-2","ground","ground-top","plat","xp","ink","bad","accent","accent-ink","surface","good"].forEach(k=>C[k]=cs.getPropertyValue("--"+k).trim()); }
-try{ matchMedia("(prefers-color-scheme: dark)").addEventListener("change",readColors); new MutationObserver(readColors).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]}); }catch(e){}
-
-function overlap(a,b){ return a.x<b.x+b.w && a.x+a.w>b.x && a.y<b.y+b.h && a.y+a.h>b.y; }
+function tile(cx,cy){ if(cy<0||cy>=ROWS) return "."; if(cx<0||cx>=G.L.cols) return "#"; return G.L.grid[cy][cx]; }
+const ov=(a,b)=>a.x<b.x+b.w && a.x+a.w>b.x && a.y<b.y+b.h && a.y+a.h>b.y;
 
 function loop(now){
   if(!G) return;
-  const dt=Math.min(0.033,(now-G.last)/1000); G.last=now; G.t+=dt;
-  if(!G.paused && !G.done) step(dt);
+  const dt=Math.min(1/30,(now-G.last)/1000); G.last=now; G.t+=dt;
+  const paused=!!(G.dlg||G.cur||G.done);
+  if(!paused) step(dt);
   if(!G) return;
-  G.chasms.forEach(c=>{ if(c.building && c.bridge<1){ c.bridge=Math.min(1,c.bridge+dt*2.2); if(c.bridge>=1){ c.building=false; G.solids.push({x:c.x,y:GY,w:c.w,h:18,t:"bridge"}); } } });
-  G.parts=G.parts.filter(p=>(p.life-=dt)>0); G.parts.forEach(p=>{p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=500*dt;});
+  for(const g of G.L.gates){ if(g.open&&g.openT<1) g.openT=Math.min(1,g.openT+dt*1.4); }
+  G.parts=G.parts.filter(q=>(q.life-=dt)>0); G.parts.forEach(q=>{q.x+=q.vx*dt;q.y+=q.vy*dt;q.vy+=q.g*dt;});
+  G.trail=G.trail.filter(q=>(q.life-=dt)>0);
+  G.motes.forEach(m=>{ m.y-=m.s*dt; m.x+=Math.sin(G.t*.6+m.r*7)*6*dt; if(m.y<-4){m.y=VH+4;m.x=Math.random()*VW;} });
+  if(G.shake>0) G.shake=Math.max(0,G.shake-dt*30);
   draw();
   raf=requestAnimationFrame(loop);
 }
 
 function step(dt){
-  const p=G.p, SPEED=270, GRAV=1900, JUMP=-660;
-  p.vx=(keys.right?SPEED:0)-(keys.left?SPEED:0);
-  if(p.vx) p.face=p.vx>0?1:-1;
-  if(keys.jump && p.on){ p.vy=JUMP; p.on=false; }
-  p.vy=Math.min(p.vy+GRAV*dt,1100);
+  const p=G.p, L=G.L;
+  // moving platforms
+  for(const m of L.mplats){ const ox=m.x,oy=m.y, s=Math.sin(G.t*m.spd+m.ph)*m.range; if(m.axis==="x") m.x=m.bx+s; else m.y=m.by+s; m.dx=m.x-ox; m.dy=m.y-oy; }
+  if(p.plat){ p.x+=p.plat.dx; p.y=p.plat.y-p.h; }
+  // input
+  const dir=(keys.right?1:0)-(keys.left?1:0);
+  if(dir&&p.dashT<=0&&p.kbT<=0) p.face=dir;
+  const spd=has("speed")?325:240;
+  if(G.dp){ G.dp=false; if(has("dash")&&!p.dashUsed&&p.dashT<=0){ p.dashT=.17; p.dashUsed=true; p.plat=null; G.shake=3; } }
+  if(p.dashT>0){ p.dashT-=dt; p.vx=p.face*650; p.vy=0; G.trail.push({x:p.x,y:p.y,face:p.face,life:.25}); }
+  else if(p.kbT>0){ p.kbT-=dt; p.vx=p.kbVx; }
+  else { const target=dir*spd; p.vx+=(target-p.vx)*Math.min(1,dt*(p.on?22:12)); if(!dir&&Math.abs(p.vx)<8) p.vx=0; }
+  if(G.jp){ p.buf=.12; G.jp=false; }
+  if(p.buf>0){ p.buf-=dt;
+    if(p.on||p.coyote>0){ p.vy=-760; p.on=false; p.coyote=0; p.buf=0; p.jumps=1; p.plat=null; p.cut=false; }
+    else if(has("double")&&p.jumps<2&&p.dashT<=0){ p.vy=-690; p.jumps=2; p.buf=0; p.cut=false; puff(p.x+p.w/2,p.y+p.h,G.pal.acc,10); }
+  }
+  if(G.jr){ G.jr=false; if(p.vy<0&&!p.cut){ p.vy*=.45; p.cut=true; } }
+  p.gliding=false;
+  if(p.dashT<=0){ p.vy+=2100*dt; if(has("glide")&&keys.jump&&p.vy>95&&!p.on){ p.vy=95; p.gliding=true; } if(p.vy>1000) p.vy=1000; }
+  const prevBottom=p.y+p.h;
+  // X
   p.x+=p.vx*dt; if(p.x<0) p.x=0;
-  for(const s of G.solids){ if(s.t==="door"&&s.solved) continue; if(overlap(p,s)){
-      if(p.vx>0){ p.x=s.x-p.w; if(s.t==="door") hitDoor(s); } else if(p.vx<0){ p.x=s.x+s.w; } } }
-  p.y+=p.vy*dt; p.on=false;
-  for(const s of G.solids){ if(s.t==="door"&&s.solved) continue; if(overlap(p,s)){
-      if(p.vy>0){ p.y=s.y-p.h; p.vy=0; p.on=true; } else if(p.vy<0){ p.y=s.y+s.h; p.vy=0; } } }
-  if(p.y>H+60){ const last=G.chasms.filter(c=>c.bridge>=1).pop(); p.x=last?last.x+last.w+20:60; p.y=GY-80; p.vy=0; }
-  p.walk+=Math.abs(p.vx)*dt;
-  G.coins.forEach(c=>{ if(!c.got && Math.abs(p.x+p.w/2-c.x)<20 && Math.abs(p.y+p.h/2-c.y)<30){ c.got=true; G.coinsGot++; gain(1); burst(c.x,c.y,C.xp,6); updateHud(); } });
-  const target=p.x-W*0.35; G.cam+=(Math.max(0,Math.min(target,G.len-W))-G.cam)*Math.min(1,dt*8);
-  if(p.x+p.w>G.flagX && !G.done){ finish(true); }
+  { const y0=Math.floor(p.y/TS), y1=Math.floor((p.y+p.h-.01)/TS);
+    if(p.vx>0){ const cx=Math.floor((p.x+p.w-.01)/TS); for(let y=y0;y<=y1;y++) if(tile(cx,y)==="#"){ p.x=cx*TS-p.w; p.vx=0; break; } }
+    else if(p.vx<0){ const cx=Math.floor(p.x/TS); for(let y=y0;y<=y1;y++) if(tile(cx,y)==="#"){ p.x=(cx+1)*TS; p.vx=0; break; } } }
+  for(const g of L.gates){ if(!g.open&&ov(p,g)){ p.x=g.x-p.w; p.vx=0; p.dashT=0; askGate(g); return; } }
+  // Y
+  p.y+=p.vy*dt; p.on=false; p.plat=null;
+  { const x0=Math.floor(p.x/TS), x1=Math.floor((p.x+p.w-.01)/TS);
+    if(p.vy>=0){ const cy=Math.floor((p.y+p.h-.01)/TS); for(let x=x0;x<=x1;x++){ const c=tile(x,cy); if(c==="#"||(c==="="&&prevBottom<=cy*TS+1)){ p.y=cy*TS-p.h; p.vy=0; p.on=true; break; } } }
+    else { const cy=Math.floor(p.y/TS); for(let x=x0;x<=x1;x++) if(tile(x,cy)==="#"){ p.y=(cy+1)*TS; p.vy=0; break; } } }
+  for(const m of L.mplats){ if(p.vy>=0&&prevBottom<=m.y+3&&p.y+p.h>=m.y&&p.x+p.w>m.x+2&&p.x<m.x+m.w-2){ p.y=m.y-p.h; p.vy=0; p.on=true; p.plat=m; } }
+  if(p.on){ p.coyote=.1; p.jumps=0; p.dashUsed=false; } else p.coyote-=dt;
+  if(p.inv>0) p.inv-=dt;
+  // hazards
+  { const x0=Math.floor(p.x/TS), x1=Math.floor((p.x+p.w-.01)/TS), y0=Math.floor(p.y/TS), y1=Math.floor((p.y+p.h-.01)/TS);
+    for(let y=y0;y<=y1;y++) for(let x=x0;x<=x1;x++){ const c=tile(x,y);
+      if(c==="^"&&ov(p,{x:x*TS+5,y:y*TS+13,w:20,h:17})) return hurt(true);
+      if(c==="v"&&ov(p,{x:x*TS+5,y:y*TS,w:20,h:17})) return hurt(true); } }
+  if(p.y>VH+40) return hurt(true);
+  // enemies
+  const espd=final_or_world_speed();
+  for(const e of L.enemies){ if(!e.alive){ e.dieT+=dt; continue; }
+    e.x+=e.vx*espd*dt; if(e.x<e.minX){e.x=e.minX;e.vx=1;} if(e.x>e.maxX){e.x=e.maxX;e.vx=-1;}
+    if(ov(p,e)){
+      if(p.dashT>0||(p.vy>0&&prevBottom<=e.y+10)){ e.alive=false; burst(e.x+11,e.y+11,G.pal.acc,14); G.shards+=2; gain(2); if(p.dashT<=0){ p.vy=-560; p.jumps=1; p.cut=true; } updateHud(); }
+      else if(p.inv<=0){ hurt(false,e); if(!G||G.done) return; }
+    } }
+  // shards
+  for(const s of L.shards){ if(!s.got&&Math.abs(p.x+p.w/2-s.x)<16&&Math.abs(p.y+p.h/2-s.y)<22){ s.got=true; G.shards++; gain(1); puff(s.x,s.y,G.pal.acc,6); updateHud(); } }
+  // benches
+  for(const b of L.benches){ if(ov(p,{x:b.x,y:b.y-30,w:b.w,h:50})){ G.cp={x:b.x+20,y:b.y+20};
+      if(!b.used){ b.used=true; const healed=G.hearts<G.maxHearts; if(healed) G.hearts++; if(has("shield")) G.shieldUp=true; banner("Bench",healed?"You rest. +1 resolve, and your place is saved.":"You rest. Your place is saved."); updateHud(); } } }
+  // interactions
+  G.prompt=null;
+  if(G.story){
+    for(const s of L.stones){ const near=Math.abs(p.x+p.w/2-(s.x+15))<34;
+      if(near){ if(!s.read){ s.read=true; openLore(s.k); return; } G.prompt={x:s.x+15,y:s.y-58,t:"E · read"}; if(G.ap){ G.ap=false; openLore(s.k); return; } } }
+    const n=L.npc; if(n&&Math.abs(p.x+p.w/2-(n.x+15))<40){ G.prompt={x:n.x+15,y:n.y-90,t:"E · talk"}; if(G.ap){ G.ap=false; openDialog(G.world.intro.slice(-1).map(x=>({s:"The Mentor",x})).concat([{s:"The Mentor",x:"Read every stone. The gates ask only what the stones have taught."}])); return; } }
+  }
+  G.ap=false;
+  if(L.flag&&p.x>L.flag.x-6&&!G.flagged){ return reachFlag(); }
+  // camera
+  const target=Math.max(0,Math.min(p.x-VW*.38,L.cols*TS-VW));
+  G.cam+=(target-G.cam)*Math.min(1,dt*7);
+}
+function final_or_world_speed(){ return G.final?95:58+G.wi*9+(G.story?0:8); }
+
+function hurt(respawn,src){
+  const p=G.p;
+  if(!respawn&&p.inv>0) return;
+  if(G.shieldUp){ G.shieldUp=false; banner("Composure","Your shield absorbs the blow."); }
+  else G.hearts--;
+  p.inv=1.3; G.shake=8; burst(p.x+p.w/2,p.y+p.h/2,"#e8e6df",12); updateHud();
+  if(G.hearts<=0) return death();
+  if(respawn){ p.x=G.cp.x; p.y=G.cp.y-p.h-1; p.vx=p.vy=0; p.dashT=0; p.plat=null; G.cam=Math.max(0,p.x-VW*.38); }
+  else { p.kbT=.18; p.kbVx=(src&&src.x+11>p.x+p.w/2)?-320:320; p.vy=-380; p.plat=null; }
+}
+function death(){
+  G.deaths++;
+  if(G.story){
+    const lost=G.shards; G.shards=0; G.hearts=G.maxHearts;
+    const p=G.p; p.x=G.cp.x; p.y=G.cp.y-p.h-1; p.plat=null; p.dashT=0; p.vx=p.vy=0; p.inv=1.5; G.cam=Math.max(0,p.x-VW*.38);
+    updateHud();
+    openDialog([{t:"Your resolve shatters",x:`The dark takes you, and you wake at the last bench. ${lost?lost+" insight shards were lost in the fall.":""} Your awakened arts remain.`}]);
+  } else finish(false,"Burnout");
 }
 
-function hitDoor(d){
-  if(G.paused||d.solved) return;
-  keys.left=keys.right=keys.jump=false;
-  G.paused=true; G.activeDoor=d; G.firstAttempt=true; askQuestion();
-}
-function nextQ(){ if(G.qi>=G.pool.length){ G.pool=shuffle(G.pool); G.qi=0; } return G.pool[G.qi++]; }
+/* ---------- dialogue ---------- */
+function openDialog(pages,onDone){ G.dlg={pages,i:0,onDone}; clearKeys(); renderDlg(); }
+function renderDlg(){ const d=G.dlg, pg=d.pages[d.i], el=$("#dlg");
+  el.hidden=false;
+  el.innerHTML=`<div class="dh">${pg.t?`<span class="dt">${esc(pg.t)}</span>`:"<span></span>"}${pg.s?`<span class="ds">${esc(pg.s)}</span>`:""}</div><p>${pg.html?pg.x:esc(pg.x)}</p><div class="df"><span>${d.i+1} / ${d.pages.length}</span><span>${d.i+1<d.pages.length?"E / Enter / tap ▸":"E / Enter / tap to continue"}</span></div>`; }
+function advanceDlg(){ if(!G||!G.dlg) return; G.dlg.i++; if(G.dlg.i>=G.dlg.pages.length) closeDlg(); else renderDlg(); }
+function closeDlg(){ if(!G||!G.dlg) return; const cb=G.dlg.onDone; G.dlg=null; $("#dlg").hidden=true; clearKeys(); if(cb) cb(); }
+function openLore(k){ const l=G.world.lessons[k]; openDialog(l.lore.map((x,i)=>({t:(i===0?"Lore stone · ":"")+l.title,s:i===0?"The stone reads…":"",x,html:true}))); }
+function banner(t,s){ const r=$("#bannerRoot"); if(!r) return; r.innerHTML=`<div class="banner"><div class="bt">${esc(t)}</div><div class="bs">${esc(s)}</div></div>`; clearTimeout(G&&G.bt); if(G) G.bt=setTimeout(()=>{ if(r) r.innerHTML=""; },3200); }
 
-function askQuestion(){
-  const q=nextQ(); const opts=shuffle(q[2].map((o,i)=>({o,ok:i===0})));
-  const wname=(WORLDS.find(w=>w.id===q[0])||{}).name||"";
+/* ---------- gates & questions ---------- */
+function askGate(g){ G.activeGate=g; G.firstAttempt=!g.tried; clearKeys(); ask(); }
+function nextQ(){
+  const g=G.activeGate;
+  if(G.story){ let pool=G.lessonPools[g.k]; if(!pool.length) pool=G.lessonPools.find(a=>a.length); if(!pool){ G.lessonPools[g.k]=shuffle(G.world.lessons[g.k].qs.map(q=>({w:G.world.id,lk:g.k,text:q[0],opts:q[1],exp:q[2]}))); pool=G.lessonPools[g.k]; } return pool.shift(); }
+  if(G.qi>=G.pool.length){ G.pool=shuffle(G.pool); G.qi=0; } return G.pool[G.qi++];
+}
+function ask(){
+  const q=nextQ(); const opts=shuffle(q.opts.map((o,i)=>({o,ok:i===0})));
+  const W=WORLDS.find(w=>w.id===q.w); const lesson=W.lessons[q.lk];
+  const nextPower=POWERS[G.powers.length];
+  const nG=G.L.gates.length;
   modalRoot.innerHTML=`<div class="modal" role="dialog" aria-modal="true" aria-labelledby="qt"><div class="qbox" id="qbox">
-    <div class="q-topic"><span>Gate ${G.activeDoor.gate+1} of ${G.world.gates} · ${esc(wname)}</span><span>${G.firstAttempt?"first try":"retry"}</span></div>
-    <div class="q-text" id="qt">${esc(q[1])}</div>
+    <div class="q-topic"><span>Gate ${G.activeGate.k+1} of ${nG} · ${esc(lesson.title)}</span><span>${G.firstAttempt?"first try":"retry"}</span></div>
+    <div class="q-text" id="qt">${esc(q.text)}</div>
     <div class="opts">${opts.map((o,k)=>`<button class="opt" data-k="${k}"><span class="k">${k+1}</span><span>${esc(o.o)}</span></button>`).join("")}</div>
+    <div class="stakes">${G.firstAttempt?(nextPower?`First-try reward: <b>${nextPower.name}</b> (${nextPower.how.split(":")[0].toLowerCase()}).`:"First-try reward: +1 resolve."):"Retry: the gate opens, but no power."} A wrong answer costs 1 resolve.</div>
     <div id="fb"></div><div class="actions" id="acts"></div>
   </div></div>`;
   G.cur={q,opts,locked:false};
@@ -428,97 +831,205 @@ function modalKey(e){
 }
 function answer(k){
   const cur=G.cur; if(!cur||cur.locked) return; cur.locked=true;
-  const ok=cur.opts[k].ok, wid=cur.q[0];
-  S.stats[wid].a++; if(ok) S.stats[wid].c++; save();
-  const btns=modalRoot.querySelectorAll(".opt"); btns.forEach((b,j)=>{b.disabled=true; if(cur.opts[j].ok) b.classList.add("right");});
+  const ok=cur.opts[k].ok;
+  S.stats[cur.q.w].a++; if(ok) S.stats[cur.q.w].c++; save();
+  const btns=modalRoot.querySelectorAll(".opt"); btns.forEach((b,j)=>{ b.disabled=true; if(cur.opts[j].ok) b.classList.add("right"); });
   if(G.firstAttempt){ G.answered++; if(ok) G.firstTry++; }
-  if(!ok){ btns[k].classList.add("wrong"); $("#qbox").classList.add("shake"); G.hearts--; G.missed.push({q:cur.q,said:cur.opts[k].o}); updateHud(); }
-  else gain(G.firstAttempt?15:5);
+  let reward="";
+  if(!ok){ G.activeGate.tried=true; btns[k].classList.add("wrong"); $("#qbox").classList.add("shake"); if(G.shieldUp) G.shieldUp=false; else G.hearts--; G.missed.push({q:cur.q,said:cur.opts[k].o}); updateHud(); }
+  else { gain(G.firstAttempt?15:5); if(G.firstAttempt){ const np=POWERS[G.powers.length]; reward=np?`Power awakened: ${np.name}. ${np.how}`:"+1 resolve."; } }
   const dead=G.hearts<=0;
-  $("#fb").innerHTML=`<div class="explain ${ok?"good":"bad"}"><b>${ok?"Correct. The bridge is building.":dead?"Out of hearts.":"Not quite. You lost a heart."}</b> ${esc(cur.q[3])}</div>`;
-  $("#acts").innerHTML=`<button class="btn go" id="cont">${ok?"Cross the bridge":dead?"See results":"Try another question"}</button>`;
+  $("#fb").innerHTML=`<div class="explain ${ok?"good":"bad"}"><b>${ok?(G.firstAttempt?"Correct, first try.":"Correct."):dead?"Your resolve breaks.":"Not quite. −1 resolve."}</b> ${esc(cur.q.exp)}${reward?`<br><b>${esc(reward)}</b>`:""}${!ok&&G.story?" <i>Reread the stone behind you if you need it.</i>":""}</div>`;
+  $("#acts").innerHTML=`<button class="btn go" id="cont">${ok?"Open the gate":dead?"Continue":"Face another question"}</button>`;
   $("#cont").onclick=()=>{
     if(!G) return;
-    if(ok){ closeModal(); const d=G.activeDoor; d.solved=true; G.gatesCleared++; G.chasms[d.gate].building=true; burst(d.x+15,GY-120,C.good,18); G.paused=false; updateHud(); }
-    else if(dead){ closeModal(); finish(false,"Burnout"); }
-    else { G.firstAttempt=false; askQuestion(); }
+    modalRoot.innerHTML=""; const wasFirst=G.firstAttempt; G.cur=null;
+    if(ok){ openGate(wasFirst); }
+    else if(dead){ if(G.story){ G.firstAttempt=false; death(); } else finish(false,"Burnout"); }
+    else { G.firstAttempt=false; ask(); }
   };
   $("#cont").focus();
 }
-function closeModal(){ modalRoot.innerHTML=""; if(G) G.cur=null; }
-function burst(x,y,col,n){ for(let i=0;i<n;i++) G.parts.push({x,y,vx:(Math.random()-.5)*260,vy:-Math.random()*260,life:.6+Math.random()*.4,col}); }
-
+function openGate(first){
+  const g=G.activeGate; g.open=true; G.gatesCleared++;
+  burst(g.x+15,g.h-80,G.pal.acc,26); G.shake=6;
+  G.cp={x:g.x+50,y:g.h};
+  if(first){ const np=POWERS[G.powers.length];
+    if(np){ G.powers.push(np.id); if(np.id==="shield") G.shieldUp=true; banner("Power awakened · "+np.name,np.how); }
+    else { G.hearts=Math.min(G.maxHearts,G.hearts+1); banner("Clarity","+1 resolve."); } }
+  else banner("The gate yields","No power this time. Answer the next gate on the first try.");
+  updateHud(); clearKeys();
+}
 function updateHud(){
   if(!G) return;
-  $("#hearts").innerHTML=[0,1,2].map(k=>`<i class="${k>=G.hearts?"lost":""}"></i>`).join("");
-  $("#gates").textContent=`gates ${G.gatesCleared}/${G.world.gates}`;
-  $("#coins").textContent=`coins ${G.coinsGot}`;
+  $("#hearts").innerHTML=Array.from({length:G.maxHearts},(_,k)=>`<i class="${k>=G.hearts?"lost":""}"></i>`).join("")+(G.shieldUp?`<i class="shield" title="Composure shield"></i>`:"");
+  $("#pchips").innerHTML=POWERS.map(p=>`<b class="${G.powers.includes(p.id)?"on":""}" title="${esc(p.name+": "+p.how)}">${p.short}</b>`).join("");
+  $("#gates").textContent=`gates ${G.gatesCleared}/${G.L.gates.length}`;
+  $("#shards").textContent=`shards ${G.shards}`;
+}
+function reachFlag(){
+  G.flagged=true; G.L.flag.lit=true; G.p.vx=0; clearKeys();
+  if(G.story) openDialog([{t:"The beacon is lit",s:"The Mentor",x:G.world.outro}],()=>finish(true));
+  else finish(true);
 }
 
 function finish(won,reason){
-  if(!G||G.done) return; G.done=true;
-  const g=G; stopGame(); closeModal();
-  let head, verdict, stars=0;
-  if(g.isFinal){
-    const sc=g.firstTry; if(S.bestFinal==null||sc>S.bestFinal) S.bestFinal=sc;
-    if(won) gain(40);
-    save();
+  if(!G) return;
+  const g=G; stopGame(); modalRoot.innerHTML="";
+  const secs=Math.round((performance.now()-g.start)/1000);
+  let head,verdict;
+  if(g.final){
+    const sc=g.firstTry; if(S.bestFinal==null||sc>S.bestFinal) S.bestFinal=sc; if(won) gain(60); save();
     head=`<span class="label">${won?"Run complete":esc(reason)}</span><div class="score-big">${sc}<small>/10 on first try</small></div>`;
-    verdict= !won?`You cleared ${g.gatesCleared} of 10 gates. Replay the worlds where you slipped, then try again.` : sc>=9?"Exam-ready. Go ace it.": sc>=7?"Strong. Review the misses below and run it once more.":"Replay the worlds where you slipped, then come back.";
+    verdict=!won?`You cleared ${g.gatesCleared} of 10 gates. Replay the regions where you slipped, then try again.`:sc>=9?"Exam-ready. Go ace it.":sc>=7?"Strong. Review the misses and run it once more.":"Replay Story mode for the regions you missed, then come back.";
+  } else if(g.story){
+    S.story[g.world.id]=true; gain(40); save();
+    head=`<span class="label">Chapter ${g.world.num} complete · beacon lit</span><div class="score-big">${g.firstTry}<small>/${g.answered} gates on first try</small></div>`;
+    verdict=`${g.powers.length} of 5 powers awakened · ${g.shards} shards · ${g.deaths} ${g.deaths===1?"fall":"falls"}.`;
   } else {
-    if(won){ stars=g.hearts; if(!S.stars[g.world.id]||stars>S.stars[g.world.id]) S.stars[g.world.id]=stars; gain(25); save(); }
-    head=`<span class="label">${won?"World cleared":esc(reason)}</span><div class="score-big">${g.firstTry}<small>/${g.answered} first-try</small></div>`;
-    verdict= won? `${stars} star${stars===1?"":"s"} · ${g.coinsGot} coins.` + (stars===3?" Flawless.":" Clear it without losing a heart for 3 stars.") : `You cleared ${g.gatesCleared} of ${g.world.gates} gates. Read the misses below, then run it again.`;
+    let stars=0; if(won){ stars=g.hearts>=5?3:g.hearts>=3?2:1; if(!S.stars[g.world.id]||stars>S.stars[g.world.id]) S.stars[g.world.id]=stars; gain(30); save(); }
+    head=`<span class="label">${won?"Trial cleared":esc(reason)}</span><div class="score-big">${g.firstTry}<small>/${g.answered} first-try</small></div>`;
+    verdict=won?`${stars} star${stars===1?"":"s"}. Finish with all 5 resolve for 3 stars.`:`You cleared ${g.gatesCleared} of 5 gates. Try Story mode for this region, then retry.`;
   }
-  const review=g.missed.map(m=>`<div class="rv"><span class="mark">MISSED</span><span class="qq">${esc(m.q[1])}</span><span class="aa">You said: ${esc(m.said)}</span><span>Answer: <b>${esc(m.q[2][0])}</b>. ${esc(m.q[3])}</span></div>`).join("");
+  const review=g.missed.map(m=>`<div class="rv"><span class="mark">MISSED · ${esc(WORLDS.find(w=>w.id===m.q.w).lessons[m.q.lk].title)}</span><span class="qq">${esc(m.q.text)}</span><span class="aa">You said: ${esc(m.said)}</span><span>Answer: <b>${esc(m.q.opts[0])}</b>. ${esc(m.q.exp)}</span></div>`).join("");
   app.innerHTML=`<section class="game">
     <div class="card">${head}<div class="verdict">${verdict}</div>
-      <div class="actions" style="justify-content:flex-start"><button class="btn go" id="again">Play again</button><button class="btn" id="back">World map</button></div></div>
+      <div class="statrow"><span class="pill">${g.powers.length}/5 powers</span><span class="pill">${g.shards} shards</span><span class="pill">${Math.floor(secs/60)}m ${secs%60}s</span></div>
+      <div class="actions" style="justify-content:flex-start"><button class="btn go" id="again">Play again</button><button class="btn" id="back">Map</button></div></div>
     ${review?`<div class="section-head"><h2>What to fix</h2><span class="label">${g.missed.length} missed</span></div><div class="review">${review}</div>`:`<p class="kbd">No misses on this run.</p>`}
   </section>`;
-  $("#again").onclick=()=>startGame(g.world.id); $("#back").onclick=home;
+  $("#again").onclick=()=>startGame(g.world.id,g.story); $("#back").onclick=()=>{ homeTab=g.story?"story":"trial"; home(); };
   window.scrollTo(0,0);
 }
 
-/* ================= DRAW ================= */
+/* ---------- particles ---------- */
+function burst(x,y,col,n){ for(let i=0;i<n;i++) G.parts.push({x,y,vx:(Math.random()-.5)*300,vy:-Math.random()*300,g:600,life:.5+Math.random()*.5,col,r:2+Math.random()*2}); }
+function puff(x,y,col,n){ for(let i=0;i<n;i++) G.parts.push({x,y,vx:(Math.random()-.5)*160,vy:Math.random()*40,g:0,life:.35+Math.random()*.3,col,r:1.5+Math.random()*1.5}); }
+
+/* ============================ DRAW ============================ */
+function hash(n){ const s=Math.sin(n*127.1)*43758.5453; return s-Math.floor(s); }
+function rr(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
 function draw(){
-  const ctx=G.ctx, cam=G.cam;
-  const sky=ctx.createLinearGradient(0,0,0,H); sky.addColorStop(0,C["sky-top"]); sky.addColorStop(1,C["sky-bot"]);
-  ctx.fillStyle=sky; ctx.fillRect(0,0,W,H);
-  const city=(col,par,seed,base,hmax)=>{ ctx.fillStyle=col; const off=-((cam*par)%240); const idx0=Math.floor((cam*par)/240);
-    for(let i=-1;i<6;i++){ const bx=off+i*240; const idx=idx0+i;
-      for(let j=0;j<3;j++){ const r=Math.abs(Math.sin((idx*3+j)*seed)); const bw=50+r*40, bh=60+r*hmax; ctx.fillRect(bx+j*80,base-bh,bw,bh); } } };
-  city(C["city-2"],0.15,12.9898,GY+10,120); city(C.city,0.35,78.233,GY+10,80);
-  ctx.save(); ctx.translate(-Math.round(cam),0);
-  G.chasms.forEach(c=>{ if(c.bridge>0){ const n=10, shown=Math.floor(n*c.bridge+0.001); ctx.fillStyle=C.xp; for(let i=0;i<shown;i++){ ctx.fillRect(c.x+i*(c.w/n)+1,GY,c.w/n-3,16); } } });
-  G.solids.forEach(s=>{
-    if(s.x+s.w<cam-20||s.x>cam+W+20) return;
-    if(s.t==="ground"){ ctx.fillStyle=C.ground; ctx.fillRect(s.x,s.y,s.w,s.h); ctx.fillStyle=C["ground-top"]; ctx.fillRect(s.x,s.y,s.w,6); }
-    else if(s.t==="plat"||s.t==="step"){ ctx.fillStyle=C.plat; roundRect(ctx,s.x,s.y,s.w,s.h,5); ctx.fill(); ctx.fillStyle=C["ground-top"]; ctx.fillRect(s.x+4,s.y,s.w-8,3); }
-    else if(s.t==="door"&&!s.solved){
-      const glow=0.5+0.5*Math.sin(G.t*4);
-      ctx.fillStyle=C.xp; ctx.globalAlpha=0.18+glow*0.15; roundRect(ctx,s.x-10,s.y-10,s.w+20,s.h+10,10); ctx.fill(); ctx.globalAlpha=1;
-      ctx.fillStyle=C.xp; roundRect(ctx,s.x,s.y,s.w,s.h,6); ctx.fill();
-      ctx.fillStyle=C.ink; ctx.font="800 22px 'Bricolage Grotesque', system-ui, sans-serif"; ctx.textAlign="center"; ctx.fillText("?",s.x+s.w/2,s.y+40); ctx.fillText("?",s.x+s.w/2,s.y+130);
-      ctx.font="700 11px 'JetBrains Mono', monospace"; ctx.fillText(String(s.gate+1),s.x+s.w/2,s.y+s.h-12);
-    }
-  });
-  G.coins.forEach(c=>{ if(c.got) return; const b=Math.sin(G.t*3+c.x)*3; ctx.fillStyle=C.xp; ctx.beginPath(); ctx.ellipse(c.x,c.y+b,7*Math.abs(Math.cos(G.t*2+c.x*0.1))+2,8,0,0,Math.PI*2); ctx.fill(); });
-  const fx=G.flagX; ctx.fillStyle=C.ink; ctx.fillRect(fx,GY-150,5,150); ctx.fillStyle=C.accent; ctx.beginPath(); ctx.moveTo(fx+5,GY-150); ctx.lineTo(fx+66,GY-132); ctx.lineTo(fx+5,GY-114); ctx.closePath(); ctx.fill();
-  ctx.fillStyle=C["accent-ink"]; ctx.font="700 10px 'JetBrains Mono', monospace"; ctx.textAlign="left"; ctx.fillText(G.isFinal?"QUIZ 1":"CLEAR",fx+9,GY-129);
-  const p=G.p, moving=p.on&&p.vx, bob=moving?Math.sin(p.walk*0.08)*2:0;
-  ctx.save(); ctx.translate(p.x+p.w/2,p.y); ctx.scale(p.face,1);
-  ctx.fillStyle=C.ink; const lg=moving?Math.sin(p.walk*0.08)*3:0; ctx.fillRect(-9,34,7,10+lg); ctx.fillRect(2,34,7,10-lg);
-  ctx.fillStyle=C.accent; roundRect(ctx,-13,14+bob,26,24,6); ctx.fill();
-  ctx.fillStyle=C.bad; ctx.beginPath(); ctx.moveTo(0,16+bob); ctx.lineTo(4,24+bob); ctx.lineTo(0,34+bob); ctx.lineTo(-4,24+bob); ctx.closePath(); ctx.fill();
-  ctx.fillStyle=C.surface; ctx.beginPath(); ctx.arc(0,8+bob,10,0,Math.PI*2); ctx.fill(); ctx.strokeStyle=C.ink; ctx.lineWidth=2; ctx.stroke();
-  ctx.fillStyle=C.ink; ctx.fillRect(3,6+bob,3,3);
-  ctx.fillStyle=C.xp; roundRect(ctx,10,26+bob,12,9,2); ctx.fill();
+  const ctx=G.ctx, pal=G.pal, L=G.L, p=G.p;
+  const sx=G.shake?(Math.random()-.5)*G.shake:0, sy=G.shake?(Math.random()-.5)*G.shake:0;
+  const cam=Math.round(G.cam);
+  // sky
+  const sky=ctx.createLinearGradient(0,0,0,VH); sky.addColorStop(0,pal.top); sky.addColorStop(1,pal.bot);
+  ctx.fillStyle=sky; ctx.fillRect(0,0,VW,VH);
+  // far arches
+  ctx.save(); ctx.fillStyle=pal.far; ctx.strokeStyle=pal.far; ctx.lineWidth=20;
+  { const par=cam*.18, off=-(par%340), i0=Math.floor(par/340);
+    for(let i=-1;i<5;i++){ const x=off+i*340, h=hash(i0+i); const top=120+h*80;
+      ctx.fillRect(x+40,top,28,VH); ctx.fillRect(x+272,top,28,VH);
+      ctx.beginPath(); ctx.arc(x+170,top+14,116,Math.PI,0); ctx.stroke();
+      if(h>.5){ ctx.beginPath(); ctx.moveTo(x+170,top-102); ctx.lineTo(x+164,top-150); ctx.lineTo(x+176,top-150); ctx.fill(); } } }
+  // near hanging roots
+  ctx.fillStyle=pal.near;
+  { const par=cam*.42, off=-(par%180), i0=Math.floor(par/180);
+    for(let i=-1;i<7;i++){ const x=off+i*180, h=hash((i0+i)*3.7); const len=50+h*120;
+      ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x+46,0); ctx.lineTo(x+22+h*8,len); ctx.closePath(); ctx.fill();
+      ctx.fillRect(x+90,0,3,len*.7+30); ctx.beginPath(); ctx.arc(x+91.5,len*.7+34,5,0,Math.PI*2); ctx.fill(); } }
   ctx.restore();
-  G.parts.forEach(q=>{ ctx.globalAlpha=Math.max(0,Math.min(1,q.life)); ctx.fillStyle=q.col; ctx.fillRect(q.x-3,q.y-3,6,6); }); ctx.globalAlpha=1;
+  // motes
+  for(const m of G.motes){ ctx.fillStyle=`rgba(${pal.fog},${m.a*(.6+.4*Math.sin(G.t*2+m.x))})`; ctx.beginPath(); ctx.arc(m.x,m.y,m.r,0,Math.PI*2); ctx.fill(); }
+  // world
+  ctx.save(); ctx.translate(-cam+sx,sy);
+  const c0=Math.max(0,Math.floor(cam/TS)-1), c1=Math.min(L.cols-1,Math.floor((cam+VW)/TS)+1);
+  for(let y=0;y<ROWS;y++) for(let x=c0;x<=c1;x++){ const c=L.grid[y][x]; if(c===".") continue; const X=x*TS,Y=y*TS;
+    if(c==="#"){ ctx.fillStyle=pal.tile; ctx.fillRect(X,Y,TS+.5,TS+.5);
+      if(tile(x,y-1)!=="#"){ ctx.fillStyle=pal.edge; ctx.fillRect(X,Y,TS+.5,3); ctx.fillStyle=`rgba(${pal.fog},.10)`; ctx.fillRect(X,Y+3,TS+.5,5); }
+      if(tile(x-1,y)!=="#"){ ctx.fillStyle=`rgba(${pal.fog},.18)`; ctx.fillRect(X,Y,2,TS); }
+      if(tile(x+1,y)!=="#"){ ctx.fillStyle=`rgba(${pal.fog},.18)`; ctx.fillRect(X+TS-2,Y,2,TS); } }
+    else if(c==="="){ ctx.fillStyle=pal.tile; ctx.fillRect(X,Y,TS+.5,9); ctx.fillStyle=pal.edge; ctx.fillRect(X,Y,TS+.5,2); }
+    else if(c==="^"){ ctx.fillStyle="#d9dce4"; for(let i=0;i<3;i++){ ctx.beginPath(); ctx.moveTo(X+i*10,Y+TS); ctx.lineTo(X+i*10+5,Y+12); ctx.lineTo(X+i*10+10,Y+TS); ctx.fill(); } }
+    else if(c==="v"){ ctx.fillStyle="#d9dce4"; for(let i=0;i<3;i++){ ctx.beginPath(); ctx.moveTo(X+i*10,Y); ctx.lineTo(X+i*10+5,Y+18); ctx.lineTo(X+i*10+10,Y); ctx.fill(); } }
+  }
+  // moving platforms
+  for(const m of L.mplats){ ctx.fillStyle=pal.tile; rr(ctx,m.x,m.y,m.w,m.h,4); ctx.fill(); ctx.fillStyle=pal.edge; ctx.fillRect(m.x+3,m.y,m.w-6,2); ctx.fillStyle=`rgba(${pal.fog},.35)`; ctx.fillRect(m.x+m.w/2-8,m.y+m.h,16,3); }
+  // benches
+  for(const b of L.benches){ if(b.x+60<cam||b.x>cam+VW) continue; const Y=b.y+20;
+    if(b.used){ const gl=ctx.createRadialGradient(b.x+30,Y-10,2,b.x+30,Y-10,60); gl.addColorStop(0,`rgba(${pal.fog},.22)`); gl.addColorStop(1,`rgba(${pal.fog},0)`); ctx.fillStyle=gl; ctx.fillRect(b.x-30,Y-70,120,80); }
+    ctx.fillStyle=pal.edge; ctx.fillRect(b.x+6,Y-14,48,4); ctx.fillRect(b.x+6,Y-26,48,3); ctx.fillRect(b.x+8,Y-26,3,26); ctx.fillRect(b.x+49,Y-26,3,26); ctx.fillRect(b.x+20,Y-10,3,10); ctx.fillRect(b.x+37,Y-10,3,10); }
+  // stones
+  if(G.story) for(const s of L.stones){ if(s.x+40<cam||s.x-20>cam+VW) continue; const Y=s.y, pulse=s.read?.25:.55+.35*Math.sin(G.t*3);
+    const gl=ctx.createRadialGradient(s.x+15,Y-26,2,s.x+15,Y-26,56); gl.addColorStop(0,`rgba(${pal.fog},${.3*pulse})`); gl.addColorStop(1,`rgba(${pal.fog},0)`); ctx.fillStyle=gl; ctx.fillRect(s.x-45,Y-90,120,100);
+    ctx.fillStyle="#12151c"; ctx.beginPath(); ctx.moveTo(s.x,Y); ctx.lineTo(s.x,Y-40); ctx.quadraticCurveTo(s.x+15,Y-56,s.x+30,Y-40); ctx.lineTo(s.x+30,Y); ctx.fill();
+    ctx.strokeStyle=pal.acc; ctx.globalAlpha=.4+pulse*.6; ctx.lineWidth=1.5; for(let i=0;i<4;i++){ ctx.beginPath(); ctx.moveTo(s.x+8,Y-34+i*7); ctx.lineTo(s.x+22-(i%2)*5,Y-34+i*7); ctx.stroke(); } ctx.globalAlpha=1; }
+  // npc (the Mentor)
+  if(G.story&&L.npc){ const n=L.npc, X=n.x, Y=n.y; ctx.fillStyle="#0c0e13"; ctx.beginPath(); ctx.moveTo(X+2,Y); ctx.quadraticCurveTo(X+6,Y-62,X+16,Y-70); ctx.quadraticCurveTo(X+28,Y-62,X+32,Y); ctx.fill();
+    ctx.fillStyle="#d9d6cf"; ctx.beginPath(); ctx.ellipse(X+17,Y-58,6,7,0,0,Math.PI*2); ctx.fill(); ctx.fillStyle="#0c0e13"; ctx.fillRect(X+14,Y-60,2,4); ctx.fillRect(X+18,Y-60,2,4);
+    ctx.strokeStyle="#3b3a36"; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(X+36,Y); ctx.lineTo(X+36,Y-78); ctx.stroke();
+    const gl=ctx.createRadialGradient(X+36,Y-80,1,X+36,Y-80,40); gl.addColorStop(0,`rgba(${pal.fog},.55)`); gl.addColorStop(1,`rgba(${pal.fog},0)`); ctx.fillStyle=gl; ctx.fillRect(X-4,Y-120,80,80); ctx.fillStyle=pal.acc; ctx.beginPath(); ctx.arc(X+36,Y-80,3.5,0,Math.PI*2); ctx.fill(); }
+  // shards
+  for(const s of L.shards){ if(s.got||s.x<cam-20||s.x>cam+VW+20) continue; const b=Math.sin(G.t*3+s.x)*3; ctx.fillStyle=pal.acc; ctx.shadowColor=pal.acc; ctx.shadowBlur=10; ctx.beginPath(); ctx.moveTo(s.x,s.y-7+b); ctx.lineTo(s.x+5,s.y+b); ctx.lineTo(s.x,s.y+7+b); ctx.lineTo(s.x-5,s.y+b); ctx.closePath(); ctx.fill(); ctx.shadowBlur=0; }
+  // gates
+  for(const g of L.gates){ if(g.x+40<cam||g.x-40>cam+VW) continue; if(g.openT>=1) continue;
+    const lift=g.openT*g.h, a=1-g.openT;
+    ctx.globalAlpha=a; ctx.fillStyle=pal.tile; ctx.fillRect(g.x,g.y-lift,g.w,g.h);
+    const glow=.5+.5*Math.sin(G.t*3);
+    ctx.fillStyle=`rgba(${pal.fog},${.08+.08*glow})`; ctx.fillRect(g.x-10,g.y-lift,g.w+20,g.h);
+    ctx.strokeStyle=pal.edge; ctx.lineWidth=2; ctx.strokeRect(g.x+1,g.y-lift+1,g.w-2,g.h-2);
+    ctx.strokeStyle=pal.acc; ctx.lineWidth=1.5; for(let yy=g.h-40;yy>20;yy-=46){ ctx.beginPath(); ctx.moveTo(g.x+8,yy-lift); ctx.lineTo(g.x+15,yy-12-lift); ctx.lineTo(g.x+22,yy-lift); ctx.stroke(); }
+    ctx.fillStyle=pal.acc; ctx.shadowColor=pal.acc; ctx.shadowBlur=14; ctx.font="700 20px Cinzel, Georgia, serif"; ctx.textAlign="center"; ctx.fillText("?",g.x+15,g.h-60-lift); ctx.shadowBlur=0;
+    ctx.font="700 10px 'JetBrains Mono', monospace"; ctx.fillText("GATE "+(g.k+1),g.x+15,g.h-86-lift); ctx.globalAlpha=1; }
+  // enemies
+  ctx.textAlign="center";
+  for(const e of L.enemies){ if(e.x+30<cam||e.x-30>cam+VW) continue;
+    if(!e.alive){ if(e.dieT<.4){ ctx.globalAlpha=1-e.dieT/.4; ctx.fillStyle="#050608"; ctx.beginPath(); ctx.ellipse(e.x+11,e.y+16,12+e.dieT*20,6,0,0,Math.PI*2); ctx.fill(); ctx.globalAlpha=1; } continue; }
+    const bob=Math.sin(G.t*9+e.x)*1.5;
+    ctx.fillStyle="#040507"; ctx.beginPath(); ctx.ellipse(e.x+11,e.y+13+bob*.3,12,10,0,0,Math.PI*2); ctx.fill();
+    ctx.strokeStyle=pal.edge; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.strokeStyle="#040507"; ctx.lineWidth=2; for(let i=0;i<3;i++){ ctx.beginPath(); ctx.moveTo(e.x+4+i*7,e.y+20); ctx.lineTo(e.x+2+i*7+Math.sin(G.t*14+i)*3,e.y+23); ctx.stroke(); }
+    ctx.fillStyle=pal.acc; ctx.shadowColor=pal.acc; ctx.shadowBlur=8; ctx.beginPath(); ctx.arc(e.x+11+e.vx*4,e.y+11+bob*.3,2.6,0,Math.PI*2); ctx.fill(); ctx.shadowBlur=0;
+    if(!e.name) e.name=G.world.enemies[Math.floor(hash(e.x)*G.world.enemies.length)];
+    ctx.fillStyle=`rgba(${pal.fog},.7)`; ctx.font="600 10px 'JetBrains Mono', monospace"; ctx.fillText(e.name.toUpperCase(),e.x+11,e.y-6); }
+  // flag / beacon
+  if(L.flag){ const f=L.flag, X=f.x, Y=f.y; ctx.fillStyle=pal.tile; ctx.fillRect(X,Y-90,24,90); ctx.fillStyle=pal.edge; ctx.fillRect(X-6,Y-96,36,8);
+    const lit=f.lit||G.done; const fl=lit?1:.35+.2*Math.sin(G.t*4);
+    const gl=ctx.createRadialGradient(X+12,Y-110,2,X+12,Y-110,lit?140:60); gl.addColorStop(0,`rgba(${pal.fog},${.6*fl})`); gl.addColorStop(1,`rgba(${pal.fog},0)`); ctx.fillStyle=gl; ctx.fillRect(X-140,Y-260,300,280);
+    ctx.fillStyle=pal.acc; ctx.beginPath(); ctx.moveTo(X+2,Y-96); ctx.quadraticCurveTo(X+12,Y-(lit?150:118),X+22,Y-96); ctx.fill();
+    ctx.fillStyle=`rgba(${pal.fog},.8)`; ctx.font="700 10px 'JetBrains Mono', monospace"; ctx.fillText(G.final?"QUIZ 1":"BEACON",X+12,Y+14); }
+  // dash trail
+  for(const t of G.trail){ ctx.globalAlpha=t.life*1.6; ctx.fillStyle=`rgba(${pal.fog},.5)`; ctx.beginPath(); ctx.ellipse(t.x+10,t.y+18,9,14,0,0,Math.PI*2); ctx.fill(); } ctx.globalAlpha=1;
+  drawPlayer(ctx,p,pal);
+  // prompt
+  if(G.prompt){ ctx.font="700 11px 'JetBrains Mono', monospace"; const w=ctx.measureText(G.prompt.t).width+14; ctx.fillStyle="rgba(6,8,12,.85)"; rr(ctx,G.prompt.x-w/2,G.prompt.y-14,w,20,5); ctx.fill(); ctx.fillStyle=pal.acc; ctx.fillText(G.prompt.t,G.prompt.x,G.prompt.y); }
+  // particles
+  for(const q of G.parts){ ctx.globalAlpha=Math.max(0,Math.min(1,q.life*2)); ctx.fillStyle=q.col; ctx.beginPath(); ctx.arc(q.x,q.y,q.r,0,Math.PI*2); ctx.fill(); } ctx.globalAlpha=1;
   ctx.restore();
+  // lantern vignette
+  const px=p.x-cam+p.w/2, py=p.y+p.h/2;
+  const vg=ctx.createRadialGradient(px,py,90,px,py,600); vg.addColorStop(0,"rgba(0,0,0,0)"); vg.addColorStop(1,"rgba(0,0,0,.5)");
+  ctx.fillStyle=vg; ctx.fillRect(0,0,VW,VH);
+  // fog floor
+  const fg=ctx.createLinearGradient(0,VH-120,0,VH); fg.addColorStop(0,`rgba(${pal.fog},0)`); fg.addColorStop(1,`rgba(${pal.fog},.08)`); ctx.fillStyle=fg; ctx.fillRect(0,VH-120,VW,120);
 }
-function roundRect(ctx,x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+function drawPlayer(ctx,p,pal){
+  const cx=p.x+p.w/2, by=p.y+p.h;
+  // lantern light
+  const gl=ctx.createRadialGradient(cx+p.face*10,by-14,1,cx+p.face*10,by-14,46); gl.addColorStop(0,`rgba(${pal.fog},.35)`); gl.addColorStop(1,`rgba(${pal.fog},0)`); ctx.fillStyle=gl; ctx.fillRect(cx-60,by-70,120,100);
+  ctx.save(); ctx.translate(cx,by); ctx.scale(p.face,1);
+  if(p.inv>0&&Math.floor(G.t*18)%2) ctx.globalAlpha=.4;
+  const run=p.on&&Math.abs(p.vx)>20, ph=G.t*16;
+  const flap=p.gliding?14:(p.on?Math.sin(ph)*1.5:4);
+  // cloak
+  ctx.fillStyle="#171b24";
+  ctx.beginPath(); ctx.moveTo(-6,-24); ctx.lineTo(6,-24); ctx.lineTo(10+(p.gliding?8:0),-3); ctx.lineTo(-12-flap,-1+(p.gliding?-6:0)); ctx.closePath(); ctx.fill();
+  // feet
+  ctx.fillStyle="#0c0e13"; const l=run?Math.sin(ph)*3:0; ctx.fillRect(-5+l,-4,4,4); ctx.fillRect(2-l,-4,4,4);
+  // hood with a single swept tip
+  ctx.fillStyle="#171b24"; ctx.beginPath(); ctx.moveTo(-9,-27); ctx.quadraticCurveTo(-4,-44,6,-38); ctx.quadraticCurveTo(-6,-42,-15,-35); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.arc(0,-29,10,Math.PI*1.05,Math.PI*1.95); ctx.fill();
+  // paper mask
+  ctx.fillStyle="#EEF0F2"; ctx.beginPath(); ctx.ellipse(1,-28,7,8,0,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle="#0b0d12"; ctx.fillRect(-1.5,-31,2,5); ctx.fillRect(3,-31,2,5);
+  ctx.fillStyle="#c9cdd4"; ctx.fillRect(-3,-22,8,1.2);
+  // lantern
+  ctx.strokeStyle="#5b5e66"; ctx.lineWidth=1.2; ctx.beginPath(); ctx.moveTo(7,-16); ctx.lineTo(10,-12); ctx.stroke();
+  ctx.fillStyle=pal.acc; ctx.shadowColor=pal.acc; ctx.shadowBlur=12; rr(ctx,8,-12,5,7,1.5); ctx.fill(); ctx.shadowBlur=0;
+  ctx.restore();
+  if(G.shieldUp){ ctx.strokeStyle=`rgba(${pal.fog},${.45+.2*Math.sin(G.t*5)})`; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(cx,by-18,24,0,Math.PI*2); ctx.stroke(); }
+}
 
 $("#homeBtn").onclick=home;
 renderBar(); home();
