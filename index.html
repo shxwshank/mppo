@@ -93,6 +93,7 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .pw b{font-family:var(--display);font-size:15px}
 .pw span{font-size:13px;color:var(--muted)}
 .pw i{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:700}
+.grouphead{margin-top:22px}
 .link{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:13px;padding:0}
 
 /* game */
@@ -463,6 +464,290 @@ const WORLDS = [
      ["In Roethlisberger's second school of thought, 'Oh yeah!' should be treated as…",["Indeterminate: a chance to find out what the employee means","Proof of poor communication","Agreement","Insubordination"],"The first school explains harder; the second listens."],
      ["Why is listening like Jones more than an intellectual exercise?",["It needs self-awareness and practised face-to-face skill, which is an emotional achievement too","It requires a psychology degree","It only works in writing","It depends on seniority"],"There are too many Smiths and too few Joneses."]]}
   ]}
+,
+{ id:"M1", num:"VI", name:"The Hunger Stair", topic:"Motivation · content theories",
+  pal:{top:"#07120a",bot:"#16301b",far:"#0f220f",near:"#173219",tile:"#060c06",edge:"#6fa35a",acc:"#b8f08a",fog:"184,240,138"},
+  card:["#173219","#07120a","#b8f08a"],
+  enemies:["Hygiene","Stagnation","Frustration","Apathy","Regression"],
+  intro:[
+    "The Hunger Stair. Every worker of Organa once climbed it, step by step, need by need.",
+    "When the stair broke, people stopped asking what moved them. They only asked what they were owed.",
+    "Learn what moves people, and you can move with them."],
+  outro:"The sixth beacon burns. Motivated people are an organisation's key asset. Understand what motivates the people with you, and align what you offer with their needs.",
+  lessons:[
+   {title:"What Moves Us", lore:[
+     "To <strong>motivate</strong> is to move, to activate. Motivation has three elements: <strong>direction</strong> (where effort goes), <strong>intensity</strong> (how hard one tries) and <strong>persistence</strong> (how long one keeps at it).",
+     "It arises where three things meet: the <strong>person</strong>, the <strong>situation</strong> and the <strong>job itself</strong>.",
+     "<strong>Content theories</strong> ask <em>what</em> motivates. They assume people have needs they pursue: Maslow, Alderfer, McClelland, Herzberg, Self-Determination.",
+     "<strong>Process theories</strong> ask <em>how</em> motivation happens: people choose goals and how to reach them through a kind of calculation. These are goal setting, self-efficacy, reinforcement, expectancy, equity and job design."],
+    qs:[
+     ["An analyst works furiously on the right model for an hour, then abandons it at the first error. Which element of motivation is weakest?",["Persistence","Direction","Intensity","Valence"],"He worked hard (intensity) on the right task (direction), but didn't keep going."],
+     ["A theory that asks 'which needs drive employees?' belongs to…",["Content theories","Process theories","Reinforcement theory","Equity theory"],"Content theories ask what motivates; process theories ask how."],
+     ["A strong performer disengages after moving from a creative role to a repetitive one, with the same manager, team and pay. Which source of motivation changed most?",["The job itself","The person","The situation","Her pay"],"The person and her surroundings stayed the same; the work changed."]]},
+   {title:"The Stair of Needs", lore:[
+     "<strong>Maslow</strong> describes five levels, from the bottom: <strong>physiological</strong> (food, water, rest), <strong>safety</strong> (security), <strong>belongingness and love</strong> (relationships), <strong>esteem</strong> (prestige, accomplishment) and <strong>self-actualisation</strong> (reaching your full potential). A lower need must be largely met before the next one motivates.",
+     "<strong>Alderfer's ERG</strong> compresses these into three. <strong>Existence</strong> covers physiological and safety needs. <strong>Relatedness</strong> covers social needs and the outward part of esteem. <strong>Growth</strong> covers inner esteem and self-actualisation.",
+     "ERG differs in a key way: it makes <strong>no assumption that lower needs must be satisfied first</strong>, so several can operate at once. It also adds <strong>frustration–regression</strong>: when a higher need is blocked, people fall back on a lower one. Satisfaction–progression still moves them upward."],
+    qs:[
+     ["After a layoff scare, a designer who used to chase creative stretch projects now cares only about keeping her job. In Maslow's terms…",["An unmet safety need dominates again","She has self-actualised","Her esteem needs are fully met","Her growth need has strengthened"],"A threatened lower need takes priority again."],
+     ["An engineer is repeatedly denied promotion and learning opportunities. He now pushes hard for a bigger bonus and spends more time socialising. Best explanation?",["ERG frustration–regression","Maslow's satisfaction–progression","Herzberg's hygiene factors","Need for power"],"His blocked growth need pushes him back toward existence and relatedness needs."],
+     ["Which observation fits ERG but contradicts strict Maslow?",["A poorly paid artist is driven mainly by creative growth while still worried about rent","People always satisfy safety before belonging","Self-actualisation sits at the top","Physiological needs are most basic"],"ERG allows several needs to operate at once, without strict order."],
+     ["A firm offers free meals, health insurance and job security. In ERG terms these mainly address…",["Existence needs","Relatedness needs","Growth needs","Need for achievement"],"Existence covers physiological and safety needs."]]},
+   {title:"Three Hungers", lore:[
+     "<strong>McClelland</strong> argues that needs are <em>acquired</em> through life experience. Three matter at work.",
+     "<strong>Need for achievement (nAch)</strong>: the drive to excel against a standard. High achievers like personal responsibility, quick feedback and moderately difficult goals.",
+     "<strong>Need for affiliation (nAff)</strong>: the desire for friendly, close relationships. <strong>Need for power (nPow)</strong>: the need to make others behave in ways they otherwise would not.",
+     "Match roles to needs. A high-nAch star can be a superb individual contributor without being a natural manager, a role where influence (power) matters more."],
+    qs:[
+     ["A sales rep tracks her numbers against last quarter, wants weekly feedback, and prefers targets that are hard but reachable. Dominant need?",["Need for achievement","Need for affiliation","Need for power","Existence"],"Standards, feedback and moderately hard goals are the high-nAch profile."],
+     ["A team member turns down a promotion because he'd have to manage his friends and lose his place in the team's social life. Dominant need?",["Need for affiliation","Need for achievement","Need for power","Esteem"],"Close relationships matter more to him than status."],
+     ["A manager loves shaping decisions, persuading the leadership team and controlling which projects get funded. Dominant need?",["Need for power","Need for affiliation","Need for achievement","Safety"],"She wants to influence what others do."],
+     ["A top individual coder is promoted to lead a team and struggles. McClelland would say…",["A high need for achievement doesn't guarantee the influence a manager role needs","He needs more pay","His hygiene factors were removed","His existence needs are unmet"],"Achievement drives personal excellence; managing others draws on power and influence."]]},
+   {title:"The Two Ledgers", lore:[
+     "<strong>Herzberg</strong> split the traditional single scale in two. Satisfaction and dissatisfaction are <strong>not opposites</strong>.",
+     "<strong>Hygiene factors</strong> are extrinsic: company policy, supervision, salary, relationships with peers, working conditions, workspace, status and security. Getting them right yields <strong>no dissatisfaction</strong>. It does not yield motivation.",
+     "<strong>Motivators</strong> are intrinsic: achievement, recognition, the work itself, responsibility, advancement and growth. They create <strong>satisfaction</strong>. Without them you get 'no satisfaction', not dissatisfaction.",
+     "So remove dissatisfaction with hygiene, and build motivation with motivators. Hygiene maps to Maslow's lower needs; motivators map to esteem and self-actualisation."],
+    qs:[
+     ["A company raises salaries and renovates the office. Complaints fall, but engagement doesn't rise. Herzberg would say…",["Hygiene factors removed dissatisfaction but cannot create motivation","Pay is a motivator, so engagement will follow","The office is a motivator","Satisfaction and dissatisfaction are one scale"],"Hygiene factors only take you to 'no dissatisfaction'."],
+     ["Which change is most likely to genuinely motivate a bored analyst, per Herzberg?",["Ownership of a client project, with recognition for results","A better chair and air-conditioning","A clearer leave policy","Friendlier supervision"],"Responsibility and recognition are motivators; the rest are hygiene factors."],
+     ["A demotivated team has below-market pay and a cramped office, and people also feel unrecognised. What's the Herzberg-consistent priority?",["Fix pay and conditions to remove dissatisfaction, then add recognition and growth to motivate","Only add recognition; pay doesn't matter","Only raise pay; it will motivate","Only rewrite company policies"],"The two factors work on different scales, so you need both."],
+     ["Staff grumble about an unfair leave policy and a micromanaging supervisor. These complaints concern…",["Hygiene factors","Motivators","Growth needs","Need for achievement"],"Policy and supervision are extrinsic hygiene factors."]]},
+   {title:"Self-Determination", lore:[
+     "<strong>Self-determination theory</strong> names three basic human needs. <strong>Competence</strong>: being effective in dealing with your environment. <strong>Autonomy</strong>: control over the course of your life. <strong>Relatedness</strong>: close, affectionate relationships with others.",
+     "When work feeds all three, motivation becomes intrinsic: people do the work because they want to. Heavy external control, such as tight monitoring or a reward for every step, can crowd that intrinsic drive out.",
+     "Think of what campus recruiters offer. Pay and perks speak to lower needs and hygiene factors. Learning, ownership and good colleagues speak to growth, motivators and self-determination."],
+    qs:[
+     ["A manager lets an experienced team choose how and when to work, as long as targets are met. Which need is she mainly feeding?",["Autonomy","Competence","Relatedness","Existence"],"Control over how work happens is autonomy."],
+     ["A new hire gets training, stretch tasks matched to her level, and clear feedback that she's improving. Which need is fed?",["Competence","Autonomy","Relatedness","Power"],"She is becoming effective at her work."],
+     ["A volunteer who loved organising events loses interest after the club starts paying per event and logging every hour. Self-determination theory says…",["External control crowded out intrinsic motivation","Pay is a hygiene factor","This is frustration–regression","She has a high need for power"],"Rewards and monitoring shifted her reason for doing the work."],
+     ["Remote workers have high pay and full autonomy but feel isolated and flat. Which need is unmet?",["Relatedness","Competence","Autonomy","Existence"],"They lack close connection with others."]]}
+  ]},
+{ id:"M2", num:"VII", name:"The Clockwork Forge", topic:"Motivation · process theories",
+  pal:{top:"#0c0c0f",bot:"#28201a",far:"#1c1915",near:"#2b241d",tile:"#0a0908",edge:"#b07a3e",acc:"#ffb36b",fog:"255,179,107"},
+  card:["#2b241d","#0c0c0f","#ffb36b"],
+  enemies:["Inequity","Vague Goal","Extinction","Low Valence","Doubt"],
+  intro:[
+    "The Clockwork Forge. Here Organa built the machinery of effort: goals, rewards, comparisons, and the shape of the jobs themselves.",
+    "The Hunger Stair asked what moves people. The Forge asks how. By what process is effort chosen, kept, or given up?"],
+  outro:"The seventh beacon burns. Set clear, hard goals. Build belief. Reward what you want repeated. Link effort to performance to reward. Keep it fair, and design jobs worth doing.",
+  lessons:[
+   {title:"Goals and Belief", lore:[
+     "<strong>Goal-setting theory</strong> (Locke): <strong>specific, difficult</strong> goals, once accepted, beat 'do your best'. Its principles are <strong>clarity</strong>, <strong>challenge</strong>, <strong>commitment</strong>, <strong>feedback</strong> and attention to <strong>task complexity</strong>.",
+     "<strong>Self-efficacy</strong> is your belief that you can do a task. It is built four ways: <strong>enactive mastery</strong> (succeeding yourself, the strongest source), <strong>vicarious experience</strong> (watching someone like you succeed), <strong>verbal persuasion</strong> (encouragement) and <strong>arousal</strong> (an energised emotional state).",
+     "The two reinforce each other. A manager who sets a hard, specific goal signals confidence, which raises self-efficacy. People then set higher goals for themselves and perform better."],
+    qs:[
+     ["Which target best follows goal-setting theory?",["Raise qualified leads from 40 to 55 a month by March, with weekly progress reviews","Do your best on leads this quarter","Get a lot more leads","Be more proactive about leads"],"It's specific and challenging, and it comes with feedback."],
+     ["A manager sets a stretch goal and then gives no progress updates for six months. Which principle is missing?",["Feedback","Clarity","Challenge","Task complexity"],"People need to know how they're tracking."],
+     ["Before her first client pitch, an analyst watches a peer with a similar background nail one. Which source of self-efficacy is this?",["Vicarious experience","Enactive mastery","Verbal persuasion","Arousal"],"Seeing someone like you succeed builds belief."],
+     ["What's the strongest way to build a new hire's confidence in presenting?",["Have her succeed at progressively harder presentations herself","Tell her she's a natural","Show her great TED talks","Get her excited just before"],"Enactive mastery is the most powerful source."]]},
+   {title:"Consequences", lore:[
+     "<strong>Reinforcement theory</strong> (Skinner): behaviour is a function of its consequences. What gets reinforced gets repeated.",
+     "<strong>Positive reinforcement</strong> adds something pleasant after a behaviour. <strong>Negative reinforcement</strong> removes something unpleasant after it. Both <em>increase</em> the behaviour.",
+     "<strong>Punishment</strong> adds something unpleasant, or takes away something pleasant, to <em>decrease</em> a behaviour. <strong>Extinction</strong> withholds all reinforcement, so the behaviour fades.",
+     "Don't confuse them. Negative reinforcement is not punishment: 'negative' means something is <em>removed</em>, and the behaviour goes <em>up</em>."],
+    qs:[
+     ["A manager drops the daily check-in calls once a new hire starts filing reports on time, and on-time filing keeps rising. This is…",["Negative reinforcement","Positive reinforcement","Punishment","Extinction"],"Removing something unpleasant increased the behaviour."],
+     ["A team member keeps cracking off-topic jokes in meetings. Everyone stops reacting at all, and the jokes fade. This is…",["Extinction","Punishment","Negative reinforcement","Positive reinforcement"],"Withholding all reinforcement let the behaviour die out."],
+     ["An employee who files expenses late has her reimbursement held for a month, to cut late filing. This is…",["Punishment","Negative reinforcement","Extinction","Positive reinforcement"],"Taking away something pleasant to reduce a behaviour is punishment."],
+     ["A sales team gets a spot bonus right after every closed deal, and closing rises. This is…",["Positive reinforcement","Negative reinforcement","Extinction","Punishment"],"Adding something pleasant increased the behaviour."]]},
+   {title:"The Three Links", lore:[
+     "<strong>Expectancy theory</strong> (Vroom) assumes people consciously choose among alternatives to maximise pleasure and minimise pain.",
+     "Motivation = <strong>Expectancy × Instrumentality × Valence</strong>. <strong>Expectancy</strong> (effort → performance): can I hit the target if I work hard? <strong>Instrumentality</strong> (performance → reward): will hitting it get me the reward? <strong>Valence</strong>: do I actually want that reward?",
+     "The terms <strong>multiply</strong>, so if any one is near zero, motivation collapses, however strong the others."],
+    qs:[
+     ["Targets were raised so high that no one believes they can be hit, even with maximum effort. Which link is broken?",["Expectancy","Instrumentality","Valence","Equity"],"The effort-to-performance belief has gone."],
+     ["Last year's promised bonus for top performers was quietly cancelled. This year effort is down. Which link broke?",["Instrumentality","Expectancy","Valence","Self-efficacy"],"Performance no longer leads to the reward."],
+     ["Top performers win an all-expenses-paid offsite abroad. For an employee who hates travel and has young kids, motivation stays low. Which term is near zero?",["Valence","Expectancy","Instrumentality","Equity"],"He doesn't value the reward."],
+     ["Expectancy is high and the reward is attractive, but promotions are seen as decided by politics, not performance. Predicted motivation?",["Low, because instrumentality is near zero and the terms multiply","High, because two of three are strong","Moderate, the average of the three","Unaffected; only valence matters"],"A zero in a product makes the whole product zero."]]},
+   {title:"The Scales of Fairness", lore:[
+     "We are social beings, and we compare. <strong>Adams' equity theory</strong>: people compare their own <strong>outcome-to-input ratio</strong> with a referent's. The fairer it seems, the more motivated they are.",
+     "If someone is underpaid relative to a peer doing the same job, they may cut effort, ask for more, reinterpret the comparison, switch referents, or leave, all to restore balance.",
+     "<strong>Organisational justice</strong> has three parts. <strong>Distributive</strong> justice is the fairness of outcomes (equity, equality, need), and it drives outcome satisfaction. <strong>Procedural</strong> justice is the fairness of the policies and processes used, and it drives system satisfaction. <strong>Interactional</strong> justice is respectful, dignified treatment, and it drives relationship satisfaction.",
+     "In practice, pay bands rest on equity theory, and codes of conduct rest on organisational justice."],
+    qs:[
+     ["Riya learns a new hire doing exactly her job earns 20% more. She starts leaving on time and stops volunteering for extra work. Best explanation?",["Equity theory","Reinforcement theory","Goal setting","ERG"],"She is restoring balance by reducing her inputs."],
+     ["Two employees get the same small raise. One is told in a respectful meeting with clear reasons; the other learns it from a curt email and is far angrier. Which justice is at stake?",["Interactional","Distributive","Procedural","Equity of inputs"],"The outcome is the same; the treatment differs."],
+     ["Staff accept a disappointing bonus because the criteria were transparent, applied consistently, and open to appeal. This reflects…",["Procedural justice","Distributive justice","Interactional justice","Valence"],"A fair process makes a poor outcome easier to accept."],
+     ["A promotion goes to the manager's friend over a clearly stronger candidate. Staff object that the result itself is unfair. Which justice?",["Distributive","Procedural","Interactional","Instrumentality"],"The objection is to the fairness of the outcome."]]},
+   {title:"The Shape of the Work", lore:[
+     "Some jobs are inherently more motivating. The <strong>Job Characteristics Model</strong> names five core characteristics.",
+     "<strong>Skill variety</strong>, <strong>task identity</strong> (doing a whole, identifiable piece of work) and <strong>task significance</strong> (impact on others) create <strong>experienced meaningfulness</strong>. <strong>Autonomy</strong> creates <strong>experienced responsibility</strong> for outcomes. <strong>Feedback</strong> from the job gives <strong>knowledge of actual results</strong>.",
+     "Those states lead to high internal motivation, high-quality work, high satisfaction, and low absenteeism and turnover. Individual differences moderate the effect: knowledge and skill, <strong>growth need strength</strong>, and satisfaction with the context.",
+     "Compare a primary school teacher (high significance, variety and autonomy) with a quick-commerce delivery rider (little variety, little autonomy, a tightly scripted job)."],
+    qs:[
+     ["A loan officer checks one form in a 12-step process and never learns whether loans are approved. Which characteristics are weakest?",["Task identity and feedback","Only skill variety","Only task significance","Growth need strength"],"He never does a whole piece of work, and he never sees the results."],
+     ["Which change most raises a delivery rider's experienced responsibility for outcomes?",["Letting him plan his own routes and schedule","A public leaderboard","A talk on the company mission","More types of parcels"],"Autonomy drives experienced responsibility."],
+     ["Job enrichment energises some employees but barely moves others. The model explains this with…",["Growth need strength, a moderator","Hygiene factors","Instrumentality","Self-serving bias"],"Enrichment works best for people with strong growth needs."],
+     ["Which job scores highest on task significance?",["A paediatric nurse","A data-entry clerk","A warehouse packer","A night-shift security guard at a quiet site"],"The nurse's work directly affects others' lives."]]}
+  ]},
+{ id:"CF", num:"VIII", name:"The Fractured Span", topic:"Conflict",
+  pal:{top:"#110810",bot:"#2c1424",far:"#200e1a",near:"#301a29",tile:"#0c060a",edge:"#a85a86",acc:"#ff9ad5",fog:"255,154,213"},
+  card:["#301a29","#110810","#ff9ad5"],
+  enemies:["Avoidance","Escalation","Hostility","Rivalry","Ultimatum"],
+  intro:[
+    "The Fractured Span. A great bridge once joined Organa's two halves. Now it hangs in pieces, and each side is certain the other broke it.",
+    "Conflict is not the enemy. Unmanaged conflict is. Learn when to stir it, how to read it, and how to mend it."],
+  outro:"The eighth beacon burns. Let go of needing to be liked. Keep the big picture in view. Don't confuse disagreement with unkindness.",
+  lessons:[
+   {title:"Three Views", lore:[
+     "<strong>Conflict</strong> is a process that begins when one party perceives that another has negatively affected, or is about to negatively affect, something the first party cares about.",
+     "There are three views. <strong>Traditional</strong>: conflict is bad and should be avoided. <strong>Behavioural</strong>: conflict is natural and unavoidable, and it may even help. <strong>Interactionist</strong>: encourage a <strong>minimum desirable level</strong> of conflict to keep a group vibrant, self-critical and creative.",
+     "Performance traces an inverted U. Too little conflict (point A) brings apathy and stagnation. An optimal level (B) brings peak performance. Too much (C) brings chaos.",
+     "<strong>Functional</strong> conflict supports the group's goals and improves performance. <strong>Dysfunctional</strong> conflict hinders it."],
+    qs:[
+     ["A leadership team agrees on everything, nobody has challenged a decision in a year, and market share is slipping. An interactionist would say…",["Conflict is below the optimal level, so stimulate constructive debate","Perfect, because conflict is bad","They're at the optimal point","Conflict is unavoidable, so do nothing"],"Too little conflict sits at the left of the inverted U."],
+     ["Two designers argue hard over which prototype better meets users' needs, and the final product improves. This conflict is…",["Functional","Dysfunctional","Annihilatory","Status conflict"],"It served the group's goal and improved performance."],
+     ["A manager treats every disagreement as a sign of poor leadership and shuts debate down. Which view does he hold?",["Traditional","Behavioural","Interactionist","Integrative"],"The traditional view says conflict is bad and should be avoided."]]},
+   {title:"Kinds of Conflict", lore:[
+     "By content: <strong>task</strong> conflict is over the content and goals of the work. <strong>Relationship</strong> conflict is interpersonal. <strong>Process</strong> conflict is over how work gets done. <strong>Status</strong> conflict is over who does it and who ranks where.",
+     "Low-to-moderate task conflict can be functional. Relationship conflict is almost always dysfunctional, because it breeds hostility and erodes trust.",
+     "By locus: <strong>dyadic</strong> conflict is between two people, <strong>intragroup</strong> conflict is within a team, and <strong>intergroup</strong> conflict is between teams or groups."],
+    qs:[
+     ["Two analysts agree on the goal but clash over weekly sprints versus one big deadline. This is…",["Process conflict","Task conflict","Relationship conflict","Status conflict"],"It's about how the work gets done."],
+     ["Two managers can't sit in the same meeting because of personal dislike, and their teams are taking sides. This is…",["Relationship conflict, likely dysfunctional","Task conflict, likely functional","Process conflict","Status conflict only"],"Interpersonal hostility rarely helps performance."],
+     ["In the Jugaad case, Boston and Mumbai engineers blame each other for missed deadlines. By locus this is…",["Intergroup","Dyadic","Intrapersonal","Intragroup only"],"It runs between two groups at different sites."],
+     ["A senior engineer is furious that a junior was chosen to present the team's work to the client. This is mainly…",["Status conflict","Task conflict","Process conflict","Functional conflict"],"It's about who gets to do the work, and rank."]]},
+   {title:"Roots and Signs", lore:[
+     "<strong>Causes</strong> of conflict: differing task goals, differing process goals, interpersonal differences, resource constraints, change, differing values, poor communication and <strong>task interdependence</strong>.",
+     "<strong>Symptoms</strong>: poor communication, intergroup hostility and jealousy, interpersonal friction, escalation to arbitration, a proliferation of rules and regulations, and low morale.",
+     "The <strong>conflict process</strong> has five stages: (1) potential opposition or incompatibility, arising from communication, structure or personal variables; (2) cognition and personalisation, where conflict is perceived and felt; (3) intentions; (4) behaviour; (5) outcomes, which can mean better or worse group performance.",
+     "<strong>Intensity</strong> runs from minor misunderstandings, through overt questioning, assertive verbal attacks, and threats and ultimatums, up to physical attacks and efforts to destroy the other party, which is <strong>annihilatory conflict</strong>."],
+    qs:[
+     ["Two departments share one data team, and they fight over its time every quarter. The root cause is mainly…",["Resource constraints, with task interdependence","Differing values","Change","Personality"],"Scarce shared resources plus dependence on each other create conflict."],
+     ["In one division every dispute now goes to HR for a ruling, and new rules keep being added to stop repeats. These are…",["Symptoms: escalation to arbitration and a proliferation of rules","Causes of conflict","Signs of functional conflict","Outcomes of collaboration"],"Both appear on the list of symptoms."],
+     ["Two colleagues feel tense and anxious about each other but haven't acted on it yet. Which stage of the conflict process are they in?",["Cognition and personalisation (felt conflict)","Behaviour","Outcomes","Intentions already acted on"],"The conflict is perceived and felt, but not yet acted on."],
+     ["A disagreement goes from 'Could you explain your numbers?' to 'Fix it by Friday or I go to the CEO.' On the intensity continuum it moved from…",["Overt questioning to threats and ultimatums","No conflict to annihilatory conflict","Assertive attacks to minor misunderstandings","Physical attacks to questioning"],"It escalated two rungs up the scale."]]},
+   {title:"The Five Animals", lore:[
+     "Conflict-handling intentions sit on two axes: how much your own needs matter, and how much the relationship matters.",
+     "The <strong>shark competes</strong>: my needs matter and the relationship doesn't. The <strong>owl collaborates</strong>: both matter, so find a solution that fully satisfies both. The <strong>fox compromises</strong>: each side gives something up. The <strong>turtle avoids</strong>: it withdraws. The <strong>teddy bear accommodates</strong>: the relationship comes first, so it gives way.",
+     "Culture shapes conflict too. Hofstede calls culture 'the collective programming of the mind'. His dimensions are <strong>power distance</strong>, <strong>uncertainty avoidance</strong>, <strong>individualism–collectivism</strong> and <strong>masculinity–femininity</strong>, later joined by <strong>long-term orientation</strong> and <strong>indulgence–restraint</strong>. India scores higher than the USA on power distance (77 vs 40) and long-term orientation (51 vs 26). The USA is far more individualist (91 vs 48) and indulgent (68 vs 26).",
+     "In the <strong>Jugaad case</strong>, Boston feels that Mumbai hides bad news and misses deadlines. Mumbai feels disrespected, buried in requests it never agreed to, and addressed too casually. Beneath this lie differences in power distance and communication style, plus a work split that cut Mumbai off from the client."],
+    qs:[
+     ["A manager works with two feuding leads to find a solution that fully meets each one's core needs, even though it takes longer. This intention is…",["Collaborating (owl)","Compromising (fox)","Accommodating (teddy bear)","Competing (shark)"],"Both sides' needs and the relationship are kept whole."],
+     ["To protect a key client relationship, a manager concedes a point he cares little about. This is…",["Accommodating (teddy bear)","Avoiding (turtle)","Competing (shark)","Collaborating (owl)"],"He put the relationship above his own need."],
+     ["Mumbai engineers rarely flag bad news directly to Boston, and they expect seniors to be addressed as 'sir'. Which Hofstede dimension best explains this?",["Higher power distance in India","Higher indulgence in India","Masculinity","Lower long-term orientation in India"],"Deference to hierarchy shapes how bad news travels."],
+     ["What is the deepest structural cause of the Boston–Mumbai conflict in the Jugaad case?",["The work split kept Mumbai away from clients while Boston passed on requests and deadlines Mumbai never agreed to","Mumbai engineers were less qualified","Boston had too few engineers","The suggestion box"],"The structure created task interdependence without shared ownership. The case notes that Mumbai's engineers were the more qualified."]]},
+   {title:"Mending", lore:[
+     "Resolution techniques: <strong>problem solving</strong> (meet face to face and openly work it through); <strong>superordinate goals</strong> (a shared goal neither side can reach alone); <strong>expansion of resources</strong> (grow the scarce thing); <strong>avoidance</strong> (withdraw or suppress); <strong>smoothing</strong> (play down differences and stress common interests); <strong>compromise</strong> (each side gives up something of value).",
+     "Also: <strong>authoritative command</strong> (management decides, using formal authority); <strong>altering the human variable</strong> (training to change attitudes and behaviour); and <strong>altering structural variables</strong> (job redesign, transfers, coordinating roles).",
+     "Managed well, conflict brings better work, chances to learn and grow, better relationships, higher job satisfaction and a more inclusive workplace (Gallo, HBR 2018). Her advice: let go of needing to be liked, focus on the big picture, don't equate disagreement with unkindness, and find a role model."],
+    qs:[
+     ["Sales and operations keep fighting over delivery promises. The CEO sets a joint target, 'zero missed customer deadlines this quarter', that neither can hit alone. This technique is…",["Superordinate goals","Smoothing","Authoritative command","Expansion of resources"],"A shared goal that requires cooperation."],
+     ["Two teams fight over one shared meeting room, so the company leases a second. This is…",["Expansion of resources","Compromise","Avoidance","Problem solving"],"The scarce resource grew."],
+     ["Which resolution in the Jugaad case tackles the structure that caused the conflict?",["Create a liaison role and give Mumbai client contact and a say in deadlines","Tell both sides to get along","Wait until the project ends","Let Boston decide everything"],"This alters structural variables, which removes the root cause."],
+     ["A manager keeps saying, 'Let's focus on what we agree on,' and never addresses the real disagreement. This is…",["Smoothing","Problem solving","A superordinate goal","Collaborating"],"It plays down differences instead of resolving them."],
+     ["A new manager avoids disagreeing with her team because she wants to be liked. Gallo's advice is to…",["Let go of needing to be liked, and don't equate disagreement with unkindness","Avoid conflict until trust is built","Use authoritative command","Agree in public and disagree in private"],"Disagreement handled well is not unkind."]]}
+  ]},
+{ id:"NG", num:"IX", name:"The Bargain Market", topic:"Negotiation",
+  pal:{top:"#0a0e15",bot:"#1c2638",far:"#141c2b",near:"#1f2a3e",tile:"#070a10",edge:"#c79a4b",acc:"#ffd27a",fog:"255,210,122"},
+  card:["#1f2a3e","#0a0e15","#ffd27a"],
+  enemies:["Fixed Pie","Anchor","Bluff","Lowball","Positional"],
+  intro:[
+    "The Bargain Market. Every stall in Organa once traded here. Now each merchant guards a fixed pie and trusts no one.",
+    "Negotiation is a process in which parties exchange goods or services and try to agree on the rate of exchange. See the real pie, and you will never fight over the wrong one."],
+  outro:"The ninth beacon burns. Focus on interests, not positions. Create value before you claim it. And remember: effective negotiation is about beating your fallback.",
+  lessons:[
+   {title:"The Five Steps", lore:[
+     "Negotiation has five steps: <strong>preparation and planning</strong>, <strong>definition of ground rules</strong>, <strong>clarification and justification</strong>, <strong>bargaining and problem solving</strong>, and <strong>closure and implementation</strong>.",
+     "Why did the jacket deals vary so much between pairs? Because of anchoring, opening offers and how people responded to them, aspirations, how concessions were made, framing, justification, how information was gathered, and lies and deception. Outcomes depend on skill plus strategy."],
+    qs:[
+     ["Before a salary talk, a candidate researches market pay, lists her alternatives and sets her walk-away number. Which step is she in?",["Preparation and planning","Clarification and justification","Bargaining and problem solving","Closure and implementation"],"All of this happens before the negotiation starts."],
+     ["Two buyers negotiate for the same jacket from the same seller. One aims high and opens first with a well-justified price; the other just asks, 'What's your best price?' The first pays far less. What mainly explains the gap?",["Aspirations, anchoring and justification","Luck","The seller's BATNA changed","Integrative bargaining"],"These are the variance drivers from the jacket exercise."],
+     ["After agreeing a vendor contract, the team spells out who delivers what, by when, and how disputes will be handled. Which step?",["Closure and implementation","Definition of ground rules","Preparation","Clarification"],"The deal is formalised and put into practice."]]},
+   {title:"Walk-Away", lore:[
+     "<strong>BATNA</strong> stands for Best Alternative To a Negotiated Agreement: what you'll do if there's no deal. Assessing it is the <strong>first step</strong>. List your alternatives, value each one, and the best becomes your BATNA.",
+     "Your <strong>reservation value</strong> (walk-away or resistance point) comes from your BATNA, your reality if there's no deal. It is not what you aspire to, not what feels fair, and not set by sunk costs.",
+     "The <strong>ZOPA</strong> (zone of possible agreement, or settlement range) covers every deal between the two sides' resistance points. If the seller's minimum is above the buyer's maximum, there is no ZOPA. Each side also has a <strong>target point</strong>: its aspiration.",
+     "Knowing your own BATNA stops you accepting a bad deal or walking away from a good one. Estimating <em>theirs</em> tells you how far you can push."],
+    qs:[
+     ["You hold a ₹20L offer and are negotiating with a second firm. Your reservation value with the second firm should rest on…",["The value of the ₹20L offer, your BATNA","What feels fair","What your MBA cost","Your dream salary"],"Your walk-away point is your reality without this deal."],
+     ["The seller won't go below ₹50,000 and the buyer can't go above ₹62,000. The ZOPA is…",["₹50,000 to ₹62,000","₹0 to ₹50,000","Above ₹62,000","There is none"],"It's every deal between the two resistance points."],
+     ["The seller's minimum is ₹70,000 and the buyer's maximum is ₹62,000, with nothing else on the table. What should happen?",["No ZOPA exists, so both should take their BATNAs","Split the difference at ₹66,000","The buyer must pay ₹70,000","Anchor harder"],"With no overlap, any deal leaves one side worse off than walking away."],
+     ["A supplier keeps pressing you because it knows no other vendor can deliver in time. What is it exploiting?",["Your weak BATNA","Its own reservation value","Integrative potential","Your target point"],"A poor alternative limits how far you can push back."]]},
+   {title:"Claiming", lore:[
+     "<strong>Distributive</strong> bargaining divides a fixed pie. It is win–lose, focused on positions ('I can't go beyond this'), with opposed interests, little information sharing and a short-term relationship.",
+     "<strong>Integrative</strong> bargaining expands the pie so both sides are satisfied. It is win–win, focused on interests ('Can you explain why this matters to you?'), with congruent interests, a lot of information sharing and a long-term relationship.",
+     "Skilled negotiators sequence the two. First <strong>clarify needs</strong>, <strong>articulate interests</strong> rather than positions, and <strong>avoid early compromise</strong>. Then <strong>set high goals</strong>, and <strong>slice the pie</strong> with progressively smaller concessions.",
+     "First offers anchor. If you make one, base it on the ZOPA and your aspirations, justify it, and mind the relationship. Faced with an aggressive offer, ignore it, ask for justification, or counter. Faced with a generous one, accept, counter, or ask why."],
+    qs:[
+     ["A one-time buyer at a flea market haggles only on price, reveals nothing about why he wants the item, and will never see the seller again. This is…",["Distributive bargaining","Integrative bargaining","Collaborating","A superordinate goal"],"Fixed pie, positions, no information shared, short term."],
+     ["A firm cares most about delivery speed and its supplier about volume certainty. They sign a longer contract with faster delivery. This is…",["Integrative bargaining","Distributive bargaining","Compromise","Avoiding"],"Each side's interests were met, so the pie grew."],
+     ["A recruiter opens a salary talk with an unexpectedly aggressive low offer. A sensible response is to…",["Avoid anchoring on it: ask for justification, or counter with your own justified number","Accept fast before it gets worse","Split the difference with your target","Walk out immediately"],"Don't let an extreme anchor set the range."],
+     ["Why should integrative negotiators avoid compromising early?",["Early compromise often leaves value on the table before both sides' interests are understood","Compromise is always unethical","It weakens their BATNA","It creates a ZOPA"],"Explore interests first; then slice the pie."]]},
+   {title:"Pitfalls", lore:[
+     "Common pitfalls: <strong>premature judgement</strong>, <strong>searching for a single answer</strong>, <strong>assuming a fixed pie</strong>, and <strong>thinking that solving their problem is their problem</strong>.",
+     "Individual differences shape outcomes too: personality, moods and emotions, cultural differences and gender.",
+     "From <em>Getting to Yes</em>: craft agreements by focusing on <strong>interests, not positions</strong>. A position is what someone says they want; an interest is why they want it.",
+     "Two siblings fight over one orange and cut it in half. One wanted the juice, the other only the peel for baking. They assumed a fixed pie and never asked about interests."],
+    qs:[
+     ["A buyer insists on a 15% price cut. Asked why, she explains that her real problem is cash flow this quarter. The seller offers 90-day payment terms at full price, and she agrees. What happened?",["Moving from her position to her interest unlocked a better deal","Distributive bargaining","The seller lowered his reservation value","Anchoring"],"Interests, not positions."],
+     ["A negotiator thinks, 'Their budget-approval problem isn't my concern.' Which pitfall is this?",["Thinking that solving their problem is their problem","Premature judgement","Searching for a single answer","Fixed pie"],"Helping them solve their problem can make the deal possible."],
+     ["Management walks into wage talks sure that any gain for the union must be a loss for the company. Which pitfall?",["Assuming a fixed pie","Searching for a single answer","Premature judgement","Lies and deception"],"It blinds them to trades that could create value for both sides."]]},
+   {title:"Split the Pie", lore:[
+     "Nalebuff and Brandenburger (HBR, 2021): the <strong>pie</strong> is not the total value. It is the <strong>extra value created by agreeing</strong>, over and above the sum of both sides' BATNAs.",
+     "Both sides are <strong>equally essential</strong> to that pie: without either one, it vanishes. So it should be <strong>split equally</strong>, whatever each side's size or fallback. Each side gets its BATNA plus half the pie.",
+     "Take a pizza. Without a deal, Alice gets 4 slices and Bob 2. Together they get 12. The pie is 12 − 6 = 6, so Alice gets 4 + 3 = <strong>7</strong> and Bob 2 + 3 = <strong>5</strong>. Not 8:4 (the power view), and not 6:6 (the naive fairness view).",
+     "Splitting in proportion to size, as in a merger of equals, is wrong, and so is splitting the difference between a fair offer and an unfair one: halfway between unfair and fair is still unfair. If the pie's size is uncertain, split it as it's created, per unit. Caring more doesn't change the split. Effective negotiation is about <strong>beating your fallback</strong>."],
+    qs:[
+     ["Anju can earn $50 on her own and Bharat $400. Pooled, they earn $750. Under the split-the-pie principle, Anju should get…",["$200","$150","$375","$50"],"Pie = 750 − 450 = 300. Anju gets 50 + 150 = 200; Bharat gets 400 + 150 = 550."],
+     ["Firm A (worth 60) and Firm B (worth 40) merge, creating 30 in synergies. A banker proposes splitting the synergies 60:40. Nalebuff would say…",["Split them 15:15, because both firms are equally needed to create them","60:40 is fair because A is bigger","A deserves all of it","Split by headcount"],"Either side walking away kills the whole 30."],
+     ["A giant beverage firm can cut a start-up's bottle cost from 19¢ to 11¢, but future volume is uncertain. How should they split the savings?",["Price at 15¢ a bottle, so each gains 4¢ whatever the volume","11¢, because the giant has more power","Keep it at 19¢","Make one payment based on a volume guess"],"Splitting per unit handles the uncertainty."],
+     ["One side offers a fair split, the other an unfair one, and someone suggests meeting in the middle. The article's answer is…",["Halfway between unfair and fair is still unfair","Meeting in the middle is always fair","The larger party should decide","Whoever cares less should get more"],"Anju rejected Bharat's split-the-difference offer of $175 for exactly this reason."]]}
+  ]},
+{ id:"GT", num:"X", name:"The Desert of Many", topic:"Groups & teams",
+  pal:{top:"#130b0b",bot:"#33201b",far:"#261613",near:"#3a241e",tile:"#100807",edge:"#d08a6a",acc:"#ffc2a1",fog:"255,194,161"},
+  card:["#3a241e","#130b0b","#ffc2a1"],
+  enemies:["Social Loafing","Groupthink","Free Rider","Withdrawal","Conformity"],
+  intro:[
+    "The Desert of Many. Here Organa's people learned they could not survive alone, and then that simply being together was not enough.",
+    "Teams don't happen. They need to be made to happen."],
+  outro:"The tenth beacon burns, and all of Organa glows. People, performance, motivation, conflict, negotiation and teams: none of it is random. Understand it, design for it, and lead. Your quiz awaits.",
+  lessons:[
+   {title:"The Desert Trial", lore:[
+     "In the Desert Survival exercise, members ranked 15 items alone, then agreed on one group ranking by consensus, with no voting, and compared both against an expert's ranking.",
+     "The expert's logic: <strong>stay put and get found</strong>, and protect yourself from heat and dehydration. So the cosmetic mirror (for signalling) and the top coats (to slow water loss) rank highest, and the water third. The pistol, compass and air map matter far less.",
+     "The lessons: teams usually reach better decisions than individuals; <strong>influence</strong> is key to team effectiveness; teams run on interpersonal processes (communication, influence, conflict resolution and negotiation); and each member plays a different role.",
+     "Team roles include the <strong>creator</strong> (initiates ideas), <strong>promoter</strong> (champions them), <strong>assessor</strong> (analyses options), <strong>organiser</strong> (provides structure), <strong>producer</strong> (provides direction and follow-through), <strong>controller</strong> (checks details and enforces rules), <strong>maintainer</strong> (fights external battles), <strong>adviser</strong> (encourages the search for more information) and <strong>linker</strong> (coordinates and integrates)."],
+    qs:[
+     ["In the desert exercise, a team's consensus ranking lands closer to the expert's than most members' individual rankings. This shows…",["Teams often decide better by integrating diverse information","Social loafing","Groupthink","Process losses"],"Pooling information beats most individuals."],
+     ["One member keeps urging the group to dig for more information before deciding. Which team role is this?",["Adviser","Controller","Promoter","Producer"],"The adviser encourages the search for more information."],
+     ["A member makes sure the plan gets carried out on time and chases every action item. Which role?",["Producer","Creator","Assessor","Linker"],"The producer provides direction and follow-through."],
+     ["Why does the expert rank the cosmetic mirror first?",["Signalling for rescue matters most, because the strategy is to stay put and get found","It's lightweight","To check for sunburn","To start a cooking fire"],"Being found fast is what saves lives."]]},
+   {title:"Synergy", lore:[
+     "<strong>Actual group effectiveness = potential effectiveness + process gains − process losses.</strong> Positive synergy means the team does better than any of its individuals.",
+     "Synergy comes from integrating information from diverse views, complementary skills, and open communication with active listening.",
+     "Process losses come from conflict, withdrawal, disengagement, a lack of psychological safety, groupthink and social loafing. Manage these and the whole becomes greater than the sum of its parts."],
+    qs:[
+     ["A team of five stars underperforms its best individual, because members talk over each other and quiet experts are never heard. In synergy terms…",["Process losses exceeded process gains","Potential effectiveness was low","This is positive synergy","This is social facilitation"],"Talent was there; the process wasted it."],
+     ["Which change most directly creates process gains?",["Structured turn-taking, so diverse views are heard and integrated","Adding more members","Removing all disagreement","Letting the boss decide alone"],"Integrating diverse information is a source of synergy."],
+     ["Members stop raising concerns after one was mocked in a meeting. Which source of process loss is this?",["Lack of psychological safety","Social loafing","Complementary skills","A superordinate goal"],"People withhold input when speaking up feels unsafe."]]},
+   {title:"The Effective Team", lore:[
+     "The <strong>team effectiveness model</strong> groups its factors into three sets.",
+     "<strong>Context</strong>: adequate resources, leadership and structure, a climate of trust, and performance evaluation and reward systems.",
+     "<strong>Composition</strong>: members' abilities, personality, allocation of roles, diversity, cultural differences, team size and member preferences.",
+     "<strong>Process</strong>: common purpose, specific goals, team efficacy, team identity, cohesion, shared mental models, conflict levels and social loafing. Trust underpins it all, and both leadership and followership matter."],
+    qs:[
+     ["A team has talented, well-matched members and a clear purpose, but rewards are based only on individual sales, so nobody helps anybody. Which part of the model is failing?",["Context: performance evaluation and reward systems","Composition: abilities","Process: mental models","Composition: size"],"The reward system undercuts teamwork."],
+     ["A project team has 22 members and coordination is chaos. Which factor should change?",["Composition: team size","Context: resources","Process: team identity","Context: trust"],"Large teams struggle to coordinate, and loafing rises."],
+     ["Members share a common purpose but disagree on what 'done' means and how the system works. Which process factor is weak?",["Shared mental models","Team identity","Climate of trust","Member preferences"],"They hold different pictures of the work."]]},
+   {title:"The Idle Hand", lore:[
+     "<strong>Social loafing</strong> is the tendency of some members to put in less effort in a group than they would working alone.",
+     "Reduce it by: identifying individual performance in a measurable way, forming smaller work groups, stating expectations and goals clearly, giving direct and immediate feedback, and building cohesion by restating the larger purpose."],
+    qs:[
+     ["In a 9-member class project, two members rarely contribute because the team gets one shared grade. Best fix?",["Make each member's contribution visible and measurable, with owned sections and peer evaluation","Add more members","Keep the single shared grade","Let the leader do it all"],"Measurable individual output reduces loafing."],
+     ["Why does splitting a 12-person team into three pods of four often reduce loafing?",["In smaller groups, individual effort is more visible and harder to hide","Smaller groups have less talent","It creates groupthink","It removes goals"],"Visibility drives accountability."],
+     ["A member says, 'My bit won't change the outcome anyway.' This mindset is at the core of…",["Social loafing","Groupthink","Status conflict","Equity theory"],"Felt dispensability invites free riding."]]},
+   {title:"One Voice", lore:[
+     "<strong>Groupthink</strong>: well-intentioned people make faulty decisions because group pressure and conformity make it hard to dissent.",
+     "To reduce it: don't state a preferred solution early; regularly split into subgroups, then bring everyone back together; invite outsiders to challenge the group's ideas; get feedback from different stakeholders; and role-play how others will react.",
+     "Group behaviour differs from individual behaviour. Teams don't happen; they need to be designed to happen."],
+    qs:[
+     ["A CEO opens a strategy meeting with, 'I'm leaning strongly toward option B. Thoughts?' What risk has she raised?",["Groupthink, by stating a preference early","Social loafing","Distributive bargaining","Inequity"],"An early preference from the leader chills dissent."],
+     ["Which practice best counters groupthink in a cohesive leadership team?",["Work in independent subgroups, then reconvene, and invite an outsider to challenge","Hold one long meeting to reach consensus fast","Invite only senior members","Let the leader speak first"],"Both practices are on the list of remedies."],
+     ["A tight-knit team dismisses a junior's warning about a product flaw because 'we always get this right'. Which phenomenon?",["Groupthink","Social loafing","Process gains","Trait activation"],"Cohesion plus overconfidence silences dissent."]]}
+  ]}
+
 ];
 const POWERS=[
   {id:"double",short:"2×JUMP",name:"Second Look",how:"Double jump: press jump again in mid-air."},
@@ -472,10 +757,13 @@ const POWERS=[
   {id:"glide",short:"GLIDE",name:"Outside View",how:"Hold jump while falling to glide."}
 ];
 const FINAL_PAL={top:"#0b0b10",bot:"#1d1a14",far:"#16140f",near:"#211d15",tile:"#08080a",edge:"#b9a16a",acc:"#f0dca0",fog:"240,220,160"};
+const FINAL_PAL2={top:"#0a0a12",bot:"#1a1a2c",far:"#14142a",near:"#1e1e36",tile:"#07070c",edge:"#9c94d8",acc:"#e2dcff",fog:"226,220,255"};
+const SETS=[{key:"FINAL",quiz:"Quiz 1",sessions:"Sessions 1–5",from:0,to:5,best:"bestFinal",pal:FINAL_PAL,enemies:["Anchor","Halo","Hijack","Groupthink","Smith","Typecast","Blame"]},
+            {key:"FINAL2",quiz:"Quiz 2",sessions:"Sessions 6–10",from:5,to:10,best:"bestFinal2",pal:FINAL_PAL2,enemies:["Inequity","Fixed Pie","Social Loafing","Escalation","Hygiene","Lowball","Groupthink"]}];
 
 /* ============================ STATE ============================ */
 const RANKS=[["Intern",0],["Associate",150],["Team Lead",400],["Manager",750],["Senior Manager",1200],["Director",1800],["CHRO",2600]];
-let S={xp:0,stars:{},story:{},stats:{},bestFinal:null};
+let S={xp:0,stars:{},story:{},stats:{},bestFinal:null,bestFinal2:null};
 try{const raw=localStorage.getItem("mppo-arcade-v3"); if(raw) S=Object.assign(S,JSON.parse(raw));}catch(e){}
 WORLDS.forEach(w=>{ if(!S.stats[w.id]) S.stats[w.id]={a:0,c:0}; });
 function save(){ try{localStorage.setItem("mppo-arcade-v3",JSON.stringify(S));}catch(e){} }
@@ -496,18 +784,20 @@ function home(){
   const starRow=n=>`<div class="stars">${[0,1,2].map(k=>`<i class="${k<n?"on":""}"></i>`).join("")}</div>`;
   app.innerHTML=`
   <section class="hero">
-    <span class="label">MPPO · Quiz 1 · Sessions 1–5 + readings</span>
+    <span class="label">MPPO · Quiz 1 &amp; Quiz 2 · Sessions 1–10 + readings &amp; cases</span>
     <h1>Relight Organa. <em>Understanding opens every gate.</em></h1>
     <p>A platformer about the course. Story mode teaches through lore stones along the path; each gate then asks a scenario question on what the stone taught. Answer on the first try and you awaken a power that makes the rest of the level easier. Trials drop the lore and test you cold.</p>
     <div class="chips"><span>← → / A D move</span><span>Space / W / Z jump</span><span>X / Shift dash</span><span>E / ↓ read · talk</span><span>1–4 answer</span></div>
   </section>
-  <div class="tabs" role="tablist"><button role="tab" id="tStory" class="${homeTab==="story"?"on":""}">Story · ${done}/5</button><button role="tab" id="tTrial" class="${homeTab==="trial"?"on":""}">Trials</button></div>
+  <div class="tabs" role="tablist"><button role="tab" id="tStory" class="${homeTab==="story"?"on":""}">Story · ${done}/${WORLDS.length}</button><button role="tab" id="tTrial" class="${homeTab==="trial"?"on":""}">Trials</button></div>
+  ${SETS.map(set=>{ const ws=WORLDS.slice(set.from,set.to); const dn=ws.filter(w=>S.story[w.id]).length; return `
+  <div class="section-head grouphead"><h2>${set.quiz} · ${set.sessions}</h2><span class="label">${homeTab==="story"?dn+"/"+ws.length+" beacons lit":"5 trials + final run"}</span></div>
   <div class="map">${homeTab==="story"
-    ? WORLDS.map(w=>`<button class="world story" data-s="${w.id}" style="--c1:${w.card[0]};--c2:${w.card[1]};--c3:${w.card[2]}"><span class="num">CHAPTER ${w.num} · ${esc(w.topic)}</span><h3>${esc(w.name)}</h3><p>${esc(w.intro[0])}</p><span class="done">${S.story[w.id]?"Beacon lit":"5 stones · 5 gates"}</span></button>`).join("")
-      + (done===5?`<div class="lorecard" style="--wacc:#f0dca0"><span class="dt">Epilogue</span><p>Every beacon burns. The halls of Organa remember how to see, decide, know themselves, feel and listen. Now take the Quiz 1 Run in Trials.</p></div>`:"")
-    : WORLDS.map(w=>`<button class="world" data-t="${w.id}"><span class="num">TRIAL ${w.num} · 5 gates</span><h3>${esc(w.name)}</h3><p>${esc(w.topic)}. No lore; harder terrain.</p>${starRow(S.stars[w.id]||0)}</button>`).join("")
-      + `<button class="world boss" data-t="FINAL"><span class="num">FINAL · 10 gates · 15:00</span><h3>The Quiz 1 Run</h3><p>Mixed questions from every region against the real exam clock. Only first-try answers count.${S.bestFinal!=null?` Best: ${S.bestFinal}/10.`:""}</p></button>`}
-  </div>
+    ? ws.map(w=>`<button class="world story" data-s="${w.id}" style="--c1:${w.card[0]};--c2:${w.card[1]};--c3:${w.card[2]}"><span class="num">CHAPTER ${w.num} · ${esc(w.topic)}</span><h3>${esc(w.name)}</h3><p>${esc(w.intro[0])}</p><span class="done">${S.story[w.id]?"Beacon lit":"5 stones · 5 gates"}</span></button>`).join("")
+      + (dn===ws.length?`<div class="lorecard" style="--wacc:${set.pal.acc}"><span class="dt">${set.quiz} · epilogue</span><p>Every beacon of this realm burns. Now take the ${set.quiz} Run in Trials.</p></div>`:"")
+    : ws.map(w=>`<button class="world" data-t="${w.id}"><span class="num">TRIAL ${w.num} · 5 gates</span><h3>${esc(w.name)}</h3><p>${esc(w.topic)}. No lore; harder terrain.</p>${starRow(S.stars[w.id]||0)}</button>`).join("")
+      + `<button class="world boss" data-t="${set.key}"><span class="num">FINAL · 10 gates · 15:00</span><h3>The ${set.quiz} Run</h3><p>Mixed questions from ${set.sessions} against the real exam clock. Only first-try answers count.${S[set.best]!=null?` Best: ${S[set.best]}/10.`:""}</p></button>`}
+  </div>`; }).join("")}
   <section class="section">
     <div class="section-head"><h2>Powers</h2><span class="label">earned in order, one per first-try answer · reset each level</span></div>
     <div class="powers-legend">${POWERS.map((p,i)=>`<div class="pw"><i>GATE ${i+1}</i><b>${p.name}</b><span>${p.how}</span></div>`).join("")}</div>
@@ -522,7 +812,7 @@ function home(){
   app.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>startGame(b.dataset.s,true));
   app.querySelectorAll("[data-t]").forEach(b=>b.onclick=()=>startGame(b.dataset.t,false));
   let armed=false;
-  $("#reset").onclick=()=>{if(!armed){armed=true;$("#resetMsg").textContent="Click again to confirm.";return;}S={xp:0,stars:{},story:{},stats:{},bestFinal:null};WORLDS.forEach(w=>S.stats[w.id]={a:0,c:0});save();renderBar();home();};
+  $("#reset").onclick=()=>{if(!armed){armed=true;$("#resetMsg").textContent="Click again to confirm.";return;}S={xp:0,stars:{},story:{},stats:{},bestFinal:null,bestFinal2:null};WORLDS.forEach(w=>S.stats[w.id]={a:0,c:0});save();renderBar();home();};
   window.scrollTo(0,0);
 }
 
@@ -609,14 +899,15 @@ const has=id=>G&&G.powers.includes(id);
 
 function startGame(id,story){
   stopGame(); modalRoot.innerHTML="";
-  const final=id==="FINAL";
+  const set=SETS.find(x=>x.key===id); const final=!!set;
   const wi=final?4:WORLDS.findIndex(w=>w.id===id);
-  const world=final?{id:"FINAL",name:"The Quiz 1 Run",num:"",pal:FINAL_PAL,enemies:["Anchor","Halo","Hijack","Groupthink","Smith","Typecast","Blame"]}:WORLDS[wi];
-  const L=buildLevel(wi,story,final);
+  const d=final?4:(wi<5?wi:Math.min(4,wi-4));
+  const world=final?{id:set.key,name:"The "+set.quiz+" Run",quiz:set.quiz,best:set.best,num:"",pal:set.pal,enemies:set.enemies}:WORLDS[wi];
+  const L=buildLevel(d,story,final);
   let pool=[], lessonPools=null;
   const qobj=(w,lk,q)=>({w,lk,text:q[0],opts:q[1],exp:q[2]});
   if(final){
-    const by=WORLDS.map(w=>shuffle(w.lessons.flatMap((l,lk)=>l.qs.map(q=>qobj(w.id,lk,q)))));
+    const by=WORLDS.slice(set.from,set.to).map(w=>shuffle(w.lessons.flatMap((l,lk)=>l.qs.map(q=>qobj(w.id,lk,q)))));
     for(let r=0;r<6;r++) by.forEach(a=>{ if(a.length) pool.push(a.shift()); });
     pool=shuffle(pool.slice(0,10)).concat(shuffle(by.flat()));
   } else if(story){
@@ -625,7 +916,7 @@ function startGame(id,story){
     pool=shuffle(world.lessons.flatMap((l,lk)=>l.qs.map(q=>qobj(world.id,lk,q))));
   }
   const pal=world.pal;
-  G={world,story,final,wi,pal,L,pool,qi:0,lessonPools,
+  G={world,story,final,wi,d,pal,L,pool,qi:0,lessonPools,
      p:{x:L.spawn.x,y:L.spawn.y-35,w:20,h:34,vx:0,vy:0,on:false,face:1,coyote:0,buf:0,jumps:0,dashT:0,dashUsed:false,inv:0,kbT:0,kbVx:0,plat:null,cut:false,gliding:false},
      cp:{x:L.spawn.x,y:L.spawn.y},cam:0,t:0,hearts:5,maxHearts:5,shieldUp:false,powers:[],shards:0,
      firstTry:0,answered:0,missed:[],gatesCleared:0,deaths:0,done:false,dlg:null,cur:null,
@@ -634,7 +925,7 @@ function startGame(id,story){
   app.innerHTML=`<section class="game">
     <div class="hud">
       <button class="btn" id="quit">Map</button>
-      <span class="pill">${final?"The Quiz 1 Run":(story?"Chapter "+world.num+" · ":"Trial · ")+esc(world.name)}</span>
+      <span class="pill">${final?esc(world.name):(story?"Chapter "+world.num+" · ":"Trial · ")+esc(world.name)}</span>
       <span class="spacer"></span>
       ${final?`<span class="pill mono" id="clock">15:00</span>`:""}
       <span class="hearts" id="hearts" aria-label="Resolve"></span>
@@ -662,7 +953,7 @@ function startGame(id,story){
   G.last=performance.now(); raf=requestAnimationFrame(loop);
   window.scrollTo(0,0);
   if(story){ openDialog([{t:"Chapter "+world.num+" · "+world.name,s:"The Mentor",x:world.intro[0]},...world.intro.slice(1).map(x=>({s:"The Mentor",x}))]); }
-  else banner(final?"The Quiz 1 Run":"Trial · "+world.name, final?"10 gates. 15 minutes. First tries count.":"No lore. Answer cold. Earn your powers.");
+  else banner(final?world.name:"Trial · "+world.name, final?"10 gates. 15 minutes. First tries count.":"No lore. Answer cold. Earn your powers.");
 }
 
 function bindControls(){
@@ -770,7 +1061,7 @@ function step(dt){
   const target=Math.max(0,Math.min(p.x-VW*.38,L.cols*TS-VW));
   G.cam+=(target-G.cam)*Math.min(1,dt*7);
 }
-function final_or_world_speed(){ return G.final?95:58+G.wi*9+(G.story?0:8); }
+function final_or_world_speed(){ return G.final?95:58+G.d*9+(G.story?0:8); }
 
 function hurt(respawn,src){
   const p=G.p;
@@ -879,7 +1170,7 @@ function finish(won,reason){
   const secs=Math.round((performance.now()-g.start)/1000);
   let head,verdict;
   if(g.final){
-    const sc=g.firstTry; if(S.bestFinal==null||sc>S.bestFinal) S.bestFinal=sc; if(won) gain(60); save();
+    const sc=g.firstTry, bk=g.world.best; if(S[bk]==null||sc>S[bk]) S[bk]=sc; if(won) gain(60); save();
     head=`<span class="label">${won?"Run complete":esc(reason)}</span><div class="score-big">${sc}<small>/10 on first try</small></div>`;
     verdict=!won?`You cleared ${g.gatesCleared} of 10 gates. Replay the regions where you slipped, then try again.`:sc>=9?"Exam-ready. Go ace it.":sc>=7?"Strong. Review the misses and run it once more.":"Replay Story mode for the regions you missed, then come back.";
   } else if(g.story){
@@ -988,7 +1279,7 @@ function draw(){
     const lit=f.lit||G.done; const fl=lit?1:.35+.2*Math.sin(G.t*4);
     const gl=ctx.createRadialGradient(X+12,Y-110,2,X+12,Y-110,lit?140:60); gl.addColorStop(0,`rgba(${pal.fog},${.6*fl})`); gl.addColorStop(1,`rgba(${pal.fog},0)`); ctx.fillStyle=gl; ctx.fillRect(X-140,Y-260,300,280);
     ctx.fillStyle=pal.acc; ctx.beginPath(); ctx.moveTo(X+2,Y-96); ctx.quadraticCurveTo(X+12,Y-(lit?150:118),X+22,Y-96); ctx.fill();
-    ctx.fillStyle=`rgba(${pal.fog},.8)`; ctx.font="700 10px 'JetBrains Mono', monospace"; ctx.fillText(G.final?"QUIZ 1":"BEACON",X+12,Y+14); }
+    ctx.fillStyle=`rgba(${pal.fog},.8)`; ctx.font="700 10px 'JetBrains Mono', monospace"; ctx.fillText(G.final?G.world.quiz.toUpperCase():"BEACON",X+12,Y+14); }
   // dash trail
   for(const t of G.trail){ ctx.globalAlpha=t.life*1.6; ctx.fillStyle=`rgba(${pal.fog},.5)`; ctx.beginPath(); ctx.ellipse(t.x+10,t.y+18,9,14,0,0,Math.PI*2); ctx.fill(); } ctx.globalAlpha=1;
   drawPlayer(ctx,p,pal);
